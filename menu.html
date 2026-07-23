@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu — Hamza Coffee Shop</title>
+  <meta name="description" content="Explore our complete coffee menu: Espresso, Hot Brews, Cold Coffee, Specialty Matcha, and fresh French Pastries.">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i data-lucide="coffee"></i></div>
+        <span>Hamza</span> Coffee
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link active">Menu</a>
+        <a href="story.html" class="nav-link">Our Story</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="locations.html" class="nav-link">Locations</a>
+        <a href="offers.html" class="nav-link">Offers</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="search.html" class="icon-btn"><i data-lucide="search"></i></a>
+        <a href="wishlist.html" class="icon-btn">
+          <i data-lucide="heart"></i>
+          <span class="icon-badge wishlist-count-badge" style="display:none;">0</span>
+        </a>
+        <button class="icon-btn open-cart-btn">
+          <i data-lucide="shopping-bag"></i>
+          <span class="icon-badge cart-count-badge" style="display:none;">0</span>
+        </button>
+        <a href="order.html" class="btn btn-primary btn-sm">Order Ahead</a>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top:7rem;">
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="subtitle">Artisan Menu</span>
+          <h1 class="title-lg">Handcrafted Drinks & Pastries</h1>
+          <p>Filtered by single-origin coffee beans, velvety organic milk, and freshly baked daily treats.</p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-container reveal">
+          <button class="filter-btn active" onclick="filterCategory('all', this)">All Items</button>
+          <button class="filter-btn" onclick="filterCategory('Espresso', this)">Espresso</button>
+          <button class="filter-btn" onclick="filterCategory('Hot Coffee', this)">Hot Coffee</button>
+          <button class="filter-btn" onclick="filterCategory('Cold Coffee', this)">Cold Coffee</button>
+          <button class="filter-btn" onclick="filterCategory('Specialty Drinks', this)">Specialty</button>
+          <button class="filter-btn" onclick="filterCategory('Pastries', this)">Pastries</button>
+        </div>
+
+        <!-- Search & Sort Controls -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2.5rem; flex-wrap:wrap; gap:1rem;" class="reveal">
+          <div style="position:relative; width:100%; max-width:320px;">
+            <input type="text" id="menuSearchInput" placeholder="Search drinks or food..." oninput="renderMenuGrid()" style="width:100%; padding:0.75rem 1rem 0.75rem 2.5rem; border-radius:var(--radius-full); background:var(--color-surface-card); border:1px solid var(--color-border-dark); color:var(--color-cream); font-size:0.9rem;">
+            <i data-lucide="search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); width:16px; color:var(--color-text-dim);"></i>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <label style="font-size:0.875rem; color:var(--color-text-dim);">Sort By:</label>
+            <select id="menuSortSelect" onchange="renderMenuGrid()" style="padding:0.6rem 1rem; border-radius:var(--radius-full); background:var(--color-surface-card); border:1px solid var(--color-border-dark); color:var(--color-cream); font-size:0.875rem; cursor:pointer;">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="menuGrid" class="grid grid-4"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border:none; padding:0;">
+      <p>© 2026 Hamza Coffee Shop. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Side Cart Drawer -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="cart-drawer-header">
+      <h3>Your Coffee Cart</h3>
+      <button id="closeCartBtn" class="icon-btn"><i data-lucide="x"></i></button>
+    </div>
+    <div id="cartDrawerItems" class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-weight:700;">
+        <span>Total:</span>
+        <span id="cartDrawerTotal" style="color:var(--color-caramel);">$0.00</span>
+      </div>
+      <a href="checkout.html" class="btn btn-primary" style="width:100%;">Proceed to Checkout</a>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+
+  <script>
+    let activeCategory = 'all';
+
+    function filterCategory(cat, btn) {
+      activeCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMenuGrid();
+    }
+
+    function renderMenuGrid() {
+      const grid = document.getElementById('menuGrid');
+      const searchVal = (document.getElementById('menuSearchInput')?.value || '').toLowerCase();
+      const sortVal = document.getElementById('menuSortSelect')?.value || 'featured';
+
+      let list = PRODUCTS_DATA.filter(p => {
+        const matchesCat = activeCategory === 'all' || p.category === activeCategory;
+        const matchesSearch = p.name.toLowerCase().includes(searchVal) || p.description.toLowerCase().includes(searchVal);
+        return matchesCat && matchesSearch;
+      });
+
+      if (sortVal === 'price-asc') list.sort((a,b) => a.price - b.price);
+      if (sortVal === 'price-desc') list.sort((a,b) => b.price - a.price);
+      if (sortVal === 'rating') list.sort((a,b) => b.rating - a.rating);
+
+      if (list.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:4rem 1rem; color:var(--color-text-dim);"><p>No items found matching your filters.</p></div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map(prod => `
+        <div class="product-card">
+          <div class="card-media">
+            <img src="${prod.image}" alt="${prod.name}">
+            ${prod.badge ? `<span class="badge badge-gold card-badge">${prod.badge}</span>` : ''}
+            <button class="wishlist-toggle ${AppState.wishlist.includes(prod.id) ? 'active' : ''}" data-wishlist-id="${prod.id}" onclick="AppState.toggleWishlist('${prod.id}')">
+              <i data-lucide="heart" style="font-size:1rem;"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="card-header-flex">
+              <h3 class="product-title">${prod.name}</h3>
+              <span class="product-price">$${prod.price.toFixed(2)}</span>
+            </div>
+            <p class="product-desc">${prod.description}</p>
+            <div class="card-footer-flex">
+              <div class="rating-badge"><i data-lucide="star" style="fill:var(--color-gold); width:14px; height:14px;"></i> ${prod.rating}</div>
+              <a href="product.html?id=${prod.id}" class="btn btn-outline btn-sm">Customize</a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderMenuGrid();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+/* ==========================================================================
+   HAMZA COFFEE SHOP — Reference Exact Components & Layout
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. TOP NAVBAR (BEIGE BAR MATCHING REFERENCE)
+   -------------------------------------------------------------------------- */
+.navbar-ref {
+  background-color: #EADCCF;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(59, 35, 23, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.nav-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-ref {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--dark-espresso);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-ref span {
+  color: var(--caramel-accent);
+}
+
+.nav-links-ref {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.nav-link-ref {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--dark-espresso);
+  padding: 0.2rem 0;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link-ref:hover,
+.nav-link-ref.active {
+  color: var(--caramel-accent);
+}
+
+.nav-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO SECTION MATCHING REFERENCE
+   -------------------------------------------------------------------------- */
+.hero-ref {
+  position: relative;
+  min-height: 85vh;
+  background: url('../images/hero_coffee.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-ref::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(25, 12, 6, 0.85) 0%, rgba(25, 12, 6, 0.4) 50%, rgba(0,0,0,0.1) 100%);
+}
+
+.hero-content-ref {
+  position: relative;
+  z-index: 10;
+  max-width: 580px;
+  color: #FFFFFF;
+  padding: 4rem 0;
+}
+
+.hero-title-ref {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  color: #FFFFFF;
+}
+
+.hero-desc-ref {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 2.25rem;
+  line-height: 1.6;
+}
+
+.hero-btns-ref {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. FEATURES ROW (4 CIRCULAR BADGES WITH VERTICAL DIVIDERS)
+   -------------------------------------------------------------------------- */
+.features-section-ref {
+  background-color: var(--bg-cream);
+  padding: 4.5rem 0;
+  text-align: center;
+}
+
+.features-title-ref {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--dark-espresso);
+  margin-bottom: 3rem;
+}
+
+.features-grid-ref {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+
+.feature-item-ref {
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.feature-item-ref:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background-color: rgba(59, 35, 23, 0.15);
+}
+
+.feature-circle-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #7D492A 0%, #3B2317 100%);
+  border: 3px solid #C87A2A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 6px 18px rgba(59, 35, 23, 0.25);
+}
+
+.feature-item-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--dark-espresso);
+  margin-bottom: 0.5rem;
+}
+
+.feature-item-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  max-width: 220px;
+}
+
+/* --------------------------------------------------------------------------
+   4. DUAL SPLIT BANNER ("WHY CHOOSE US?" & "20% OFF FROM 7-10 AM")
+   -------------------------------------------------------------------------- */
+.dual-split-ref {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 380px;
+}
+
+.split-left-ref {
+  background-color: #3B2317;
+  color: #FFFFFF;
+  padding: 3.5rem 4rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.split-left-content {
+  max-width: 360px;
+  z-index: 2;
+}
+
+.split-left-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.split-left-desc {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.split-left-img {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 8px solid rgba(255,255,255,0.08);
+}
+
+.split-right-ref {
+  background-color: #EADCCF;
+  color: var(--dark-espresso);
+  padding: 3.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.split-right-subtitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--caramel-accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem;
+}
+
+.split-right-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--dark-espresso);
+}
+
+.split-right-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 400px;
+  margin-bottom: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   5. MORNING HAPPY & VISIT US TODAY SECTION
+   -------------------------------------------------------------------------- */
+.happy-visit-section-ref {
+  padding: 5rem 0;
+  background-color: var(--bg-cream);
+}
+
+.visit-grid-ref {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.happy-left-block {
+  padding-right: 1.5rem;
+}
+
+.happy-subtitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--caramel-accent);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.happy-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--dark-espresso);
+  margin-bottom: 1rem;
+}
+
+.happy-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.cards-4-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.visit-card-ref {
+  background: #FFFFFF;
+  border-radius: var(--radius-card);
+  padding: 0.85rem;
+  box-shadow: 0 4px 16px rgba(59, 35, 23, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.visit-card-ref:hover {
+  transform: translateY(-6px);
+}
+
+.visit-card-img {
+  width: 100%;
+  height: 130px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+}
+
+.visit-card-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--dark-espresso);
+  margin-bottom: 0.25rem;
+}
+
+.visit-card-price {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--caramel-accent);
+}
+
+/* --------------------------------------------------------------------------
+   6. WIN YOUR HEART FULL WIDTH BANNER
+   -------------------------------------------------------------------------- */
+.win-heart-ref {
+  background: url('../images/cafe_interior.png') center/cover no-repeat;
+  position: relative;
+  padding: 5rem 0;
+  color: #FFFFFF;
+}
+
+.win-heart-ref::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(37, 20, 11, 0.88) 0%, rgba(37, 20, 11, 0.5) 100%);
+}
+
+.win-heart-content {
+  position: relative;
+  z-index: 5;
+  max-width: 500px;
+}
+
+.win-heart-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.win-heart-desc {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   7. TESTIMONIALS SECTION
+   -------------------------------------------------------------------------- */
+.testimonials-section-ref {
+  padding: 4rem 0;
+  background-color: var(--bg-cream);
+}
+
+.reviews-grid-ref {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.review-card-ref {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.review-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--caramel-accent);
+}
+
+.review-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--dark-espresso);
+}
+
+.review-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   8. FOOTER MATCHING REFERENCE
+   -------------------------------------------------------------------------- */
+.footer-ref {
+  background-color: #28170D;
+  color: var(--bg-cream);
+  padding: 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-flex-ref {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.social-pill {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.social-pill:hover {
+  background: var(--caramel-accent);
+}
+
+@media (max-width: 992px) {
+  .features-grid-ref { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .feature-item-ref:not(:last-child)::after { display: none; }
+  .dual-split-ref { grid-template-columns: 1fr; }
+  .visit-grid-ref { grid-template-columns: 1fr; }
+  .cards-4-row { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid-ref { grid-template-columns: 1fr; }
+}

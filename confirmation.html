@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmed — Hamza Coffee Shop</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .status-stepper {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 3rem 0;
+    }
+
+    .status-stepper::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: var(--color-border-dark);
+      z-index: 1;
+    }
+
+    .status-progress-line {
+      position: absolute;
+      top: 24px;
+      left: 10%;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-caramel) 0%, var(--color-gold) 100%);
+      z-index: 2;
+      transition: width 0.8s ease;
+    }
+
+    .step-item {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .step-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--color-surface-dark);
+      border: 2px solid var(--color-border-dark);
+      color: var(--color-text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.5s ease;
+    }
+
+    .step-item.active .step-icon {
+      background: var(--color-caramel);
+      border-color: var(--color-gold);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(200, 134, 10, 0.6);
+    }
+
+    .step-item.completed .step-icon {
+      background: #2E7D32;
+      border-color: #4CAF50;
+      color: #fff;
+    }
+
+    .step-label {
+      font-family: var(--font-accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text-dim);
+    }
+
+    .step-item.active .step-label {
+      color: var(--color-caramel);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
+      <nav class="nav-links"><a href="index.html" class="nav-link">Home</a></nav>
+    </div>
+  </header>
+
+  <main style="padding-top:7rem;" class="section">
+    <div class="container" style="max-width:800px;">
+      
+      <!-- Confirmation Banner -->
+      <div style="text-align:center; background:var(--color-surface-card); padding:3rem 2rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark); margin-bottom:2rem; box-shadow:var(--shadow-lg);">
+        <div style="width:72px; height:72px; border-radius:50%; background:rgba(76, 175, 80, 0.15); border:2px solid #4CAF50; color:#4CAF50; display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem auto; font-size:2.2rem;">
+          <i data-lucide="check-circle"></i>
+        </div>
+        <h1 class="title-lg" style="margin-bottom:0.5rem;">Your Order Is Confirmed!</h1>
+        <p style="color:var(--color-text-dim); font-size:1.1rem;">Thank you for ordering with Hamza Coffee Shop.</p>
+
+        <div style="display:flex; justify-content:center; gap:2rem; margin-top:1.5rem; flex-wrap:wrap;">
+          <div>
+            <div style="font-size:0.8rem; color:var(--color-text-dim);">ORDER NUMBER</div>
+            <div id="confOrderNum" style="font-family:var(--font-heading); font-size:1.4rem; color:var(--color-caramel); font-weight:700;">#HCS-10245</div>
+          </div>
+          <div>
+            <div style="font-size:0.8rem; color:var(--color-text-dim);">ESTIMATED PICKUP</div>
+            <div id="confPickupTime" style="font-family:var(--font-heading); font-size:1.4rem; color:var(--color-cream); font-weight:700;">15–20 minutes</div>
+          </div>
+          <div>
+            <div style="font-size:0.8rem; color:var(--color-text-dim);">PICKUP BRANCH</div>
+            <div id="confBranch" style="font-size:1rem; color:var(--color-cream); font-weight:600;">Main Flagship Branch</div>
+          </div>
+        </div>
+
+        <!-- SIMULATED ORDER PROGRESS TRACKER -->
+        <div class="status-stepper">
+          <div id="progressLine" class="status-progress-line"></div>
+          
+          <div id="step-1" class="step-item active">
+            <div class="step-icon"><i data-lucide="file-check"></i></div>
+            <div class="step-label">Order Received</div>
+          </div>
+
+          <div id="step-2" class="step-item">
+            <div class="step-icon"><i data-lucide="flame"></i></div>
+            <div class="step-label">Brewing Coffee</div>
+          </div>
+
+          <div id="step-3" class="step-item">
+            <div class="step-icon"><i data-lucide="shopping-bag"></i></div>
+            <div class="step-label">Ready for Pickup</div>
+          </div>
+
+          <div id="step-4" class="step-item">
+            <div class="step-icon"><i data-lucide="smile"></i></div>
+            <div class="step-label">Completed</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03); padding:1rem; border-radius:var(--radius-md); font-size:0.85rem; color:var(--color-text-dim); display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+          <i data-lucide="sparkles" style="color:var(--color-gold);"></i>
+          <span id="trackerStatusNote">Baristas have received your ticket and are grinding fresh beans now...</span>
+        </div>
+
+        <!-- Demo Progress Controls -->
+        <div style="margin-top:1.5rem; display:flex; justify-content:center; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-outline btn-sm" onclick="setOrderStatus(1)">Step 1: Received</button>
+          <button class="btn btn-outline btn-sm" onclick="setOrderStatus(2)">Step 2: Brewing</button>
+          <button class="btn btn-outline btn-sm" onclick="setOrderStatus(3)">Step 3: Ready</button>
+          <button class="btn btn-outline btn-sm" onclick="setOrderStatus(4)">Step 4: Completed</button>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display:flex; justify-content:center; gap:1rem;">
+        <a href="index.html" class="btn btn-primary"><i data-lucide="home"></i> Back to Home</a>
+        <a href="menu.html" class="btn btn-secondary">Order Something Else</a>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      const order = AppState.activeOrder;
+      if (order) {
+        document.getElementById('confOrderNum').textContent = order.orderNumber;
+        document.getElementById('confPickupTime').textContent = order.pickupTime;
+        document.getElementById('confBranch').textContent = order.branch.split('–')[1] || order.branch;
+      }
+
+      // Auto progression simulation
+      setTimeout(() => setOrderStatus(2), 5000);
+      setTimeout(() => setOrderStatus(3), 11000);
+      setTimeout(() => setOrderStatus(4), 18000);
+    });
+
+    function setOrderStatus(step) {
+      const line = document.getElementById('progressLine');
+      const note = document.getElementById('trackerStatusNote');
+
+      const s1 = document.getElementById('step-1');
+      const s2 = document.getElementById('step-2');
+      const s3 = document.getElementById('step-3');
+      const s4 = document.getElementById('step-4');
+
+      [s1, s2, s3, s4].forEach(s => s.className = 'step-item');
+
+      if (step === 1) {
+        s1.className = 'step-item active';
+        line.style.width = '0%';
+        note.textContent = "Order received by café terminal. Preparing espresso station.";
+      } else if (step === 2) {
+        s1.className = 'step-item completed';
+        s2.className = 'step-item active';
+        line.style.width = '33%';
+        note.textContent = "Barista is pulling fresh espresso shots and steaming organic milk!";
+      } else if (step === 3) {
+        s1.className = 'step-item completed';
+        s2.className = 'step-item completed';
+        s3.className = 'step-item active';
+        line.style.width = '66%';
+        note.textContent = "Order is hot, packaged, and waiting at the Express Pickup Counter!";
+      } else if (step === 4) {
+        s1.className = 'step-item completed';
+        s2.className = 'step-item completed';
+        s3.className = 'step-item completed';
+        s4.className = 'step-item completed';
+        line.style.width = '80%';
+        note.textContent = "Order picked up! Enjoy your handcrafted Hamza Coffee!";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Offers — Hamza Coffee Shop</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <header class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="offers.html" class="nav-link active">Offers</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn open-cart-btn"><i data-lucide="shopping-bag"></i><span class="icon-badge cart-count-badge" style="display:none;">0</span></button>
+        <a href="order.html" class="btn btn-primary btn-sm">Order Ahead</a>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top:7rem;" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="subtitle">Exclusive Promotions</span>
+        <h1 class="title-lg">Special Café Offers & Promo Codes</h1>
+        <p>Copy your code below and apply it at checkout to enjoy discounts on your favorite brews.</p>
+      </div>
+
+      <div class="grid grid-2" style="gap:2.5rem;">
+        ${OFFERS_DATA.map(off => `
+          <div style="background:var(--color-surface-card); padding:2rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark); position:relative; overflow:hidden;">
+            <span class="badge badge-gold" style="position:absolute; top:20px; right:20px;">${off.badge}</span>
+            <div style="font-family:var(--font-heading); font-size:2.2rem; font-weight:700; color:var(--color-caramel); margin-bottom:0.4rem;">${off.discount}</div>
+            <h3 style="font-size:1.3rem; margin-bottom:0.5rem;">${off.title}</h3>
+            <p style="color:var(--color-text-dim); margin-bottom:1.5rem; font-size:0.95rem;">${off.description}</p>
+            
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.05); padding:0.75rem 1.25rem; border-radius:var(--radius-md); border:1.5px dashed var(--color-caramel);">
+              <div style="font-family:monospace; font-size:1.1rem; font-weight:700; color:var(--color-cream);">${off.code}</div>
+              <button class="btn btn-outline btn-sm" onclick="copyPromoCode('${off.code}')"><i data-lucide="copy" style="width:14px;"></i> Copy Code</button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+
+    function copyPromoCode(code) {
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(`Promo Code "${code}" copied to clipboard!`);
+      });
+    }
+  </script>
+</body>
+</html>

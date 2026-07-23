@@ -1,0 +1,138 @@
+/* ==========================================================================
+   HAMZA COFFEE SHOP — Reference-Exact Design System
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
+:root {
+  /* Color Palette matching reference image */
+  --bg-cream: #F5ECE1;
+  --bg-cream-light: #FAF4EB;
+  --bg-cream-card: #EFE4D6;
+  
+  --dark-espresso: #3B2317;
+  --dark-espresso-deep: #25140B;
+  --coffee-brown: #5C3825;
+  --caramel-accent: #B8681B;
+  --caramel-hover: #D47B22;
+  
+  --text-dark: #2B180C;
+  --text-muted: #6E5C50;
+  --text-light: #FFFFFF;
+  --text-cream: #F5ECE1;
+  
+  --border-light: rgba(59, 35, 23, 0.12);
+  --border-gold: rgba(184, 104, 27, 0.25);
+  
+  /* Fonts */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  --radius-pill: 9999px;
+  --radius-card: 16px;
+  --radius-lg: 24px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Reference Exact Buttons */
+.btn-white {
+  background: #FFFFFF;
+  color: var(--dark-espresso);
+  padding: 0.75rem 1.8rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-white:hover {
+  background: var(--bg-cream-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.btn-brown {
+  background: var(--caramel-accent);
+  color: #FFFFFF;
+  padding: 0.75rem 1.8rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(184, 104, 27, 0.3);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-brown:hover {
+  background: var(--caramel-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(184, 104, 27, 0.45);
+}
+
+.btn-dark {
+  background: var(--dark-espresso);
+  color: #FFFFFF;
+  padding: 0.75rem 1.8rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-dark:hover {
+  background: var(--dark-espresso-deep);
+  transform: translateY(-2px);
+}

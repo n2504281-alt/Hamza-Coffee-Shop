@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — Hamza Coffee Shop</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .faq-item {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-dark);
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .faq-header {
+      padding: 1.25rem 1.5rem;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--color-cream);
+    }
+
+    .faq-body {
+      padding: 0 1.5rem 1.25rem 1.5rem;
+      color: var(--color-text-dim);
+      font-size: 0.95rem;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .faq-item.open .faq-body {
+      display: block;
+    }
+
+    .faq-item.open .faq-header {
+      color: var(--color-caramel);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="faq.html" class="nav-link active">FAQ</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn open-cart-btn"><i data-lucide="shopping-bag"></i><span class="icon-badge cart-count-badge" style="display:none;">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top:7rem;" class="section">
+    <div class="container" style="max-width:800px;">
+      <div class="section-header reveal">
+        <span class="subtitle">Frequently Asked Questions</span>
+        <h1 class="title-lg">Everything You Need to Know</h1>
+        <p>Answers to common questions regarding ordering ahead, dietary options, and table reservations.</p>
+      </div>
+
+      <div>
+        ${FAQS_DATA.map((faq, idx) => `
+          <div class="faq-item ${idx===0?'open':''}">
+            <div class="faq-header" onclick="this.parentElement.classList.toggle('open')">
+              <span>${faq.question}</span>
+              <i data-lucide="chevron-down" style="width:18px;"></i>
+            </div>
+            <div class="faq-body">${faq.answer}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+</body>
+</html>

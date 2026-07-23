@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart — Hamza Coffee Shop</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <header class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="order.html" class="nav-link">Order Ahead</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn open-cart-btn"><i data-lucide="shopping-bag"></i><span class="icon-badge cart-count-badge" style="display:none;">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top:7rem;" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="subtitle">Review Items</span>
+        <h1 class="title-lg">Your Coffee Cart</h1>
+      </div>
+
+      <div class="grid grid-3" style="gap:2.5rem; align-items:start;">
+        <!-- Cart Items List (Span 2) -->
+        <div style="grid-column: span 2;">
+          <div id="cartPageList" style="display:flex; flex-direction:column; gap:1.25rem;"></div>
+          
+          <div style="display:flex; justify-content:space-between; margin-top:2rem;">
+            <a href="menu.html" class="btn btn-secondary btn-sm"><i data-lucide="arrow-left"></i> Continue Shopping</a>
+            <button class="btn btn-outline btn-sm" onclick="AppState.cart=[]; AppState.saveCart(); renderCartPage();">Clear Cart</button>
+          </div>
+        </div>
+
+        <!-- Order Summary Card -->
+        <div style="background:var(--color-surface-card); padding:2rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark);">
+          <h2 style="font-size:1.3rem; margin-bottom:1.5rem;">Order Summary</h2>
+          
+          <!-- Promo Code Input -->
+          <div style="margin-bottom:1.5rem;">
+            <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Promo Code (Try WELCOME10 or COFFEE20):</label>
+            <div style="display:flex; gap:0.5rem;">
+              <input type="text" id="promoInput" placeholder="Enter code" style="flex:1; padding:0.6rem 0.9rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream); font-size:0.85rem; text-transform:uppercase;">
+              <button class="btn btn-outline btn-sm" onclick="applyPromoCode()">Apply</button>
+            </div>
+            <div id="promoMsg" style="font-size:0.8rem; margin-top:0.4rem;"></div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.95rem; margin-bottom:1.5rem; border-top:1px solid var(--color-border-dark); padding-top:1rem;">
+            <div style="display:flex; justify-content:space-between; color:var(--color-text-dim);"><span>Subtotal:</span><span id="summarySubtotal">$0.00</span></div>
+            <div style="display:flex; justify-content:space-between; color:#4CAF50;"><span>Discount:</span><span id="summaryDiscount">-$0.00</span></div>
+            <div style="display:flex; justify-content:space-between; color:var(--color-text-dim);"><span>Estimated Tax (8%):</span><span id="summaryTax">$0.00</span></div>
+            <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.2rem; color:var(--color-cream); border-top:1px solid var(--color-border-dark); padding-top:0.75rem; margin-top:0.25rem;">
+              <span>Total:</span>
+              <span id="summaryTotal" style="color:var(--color-caramel);">$0.00</span>
+            </div>
+          </div>
+
+          <a href="checkout.html" class="btn btn-primary btn-lg" style="width:100%;">Proceed to Checkout</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+
+  <script>
+    function renderCartPage() {
+      const container = document.getElementById('cartPageList');
+      if (!container) return;
+
+      if (AppState.cart.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:4rem 1rem; background:var(--color-surface-card); border-radius:var(--radius-lg); border:1px solid var(--color-border-dark);">
+            <i data-lucide="shopping-bag" style="font-size:3.5rem; opacity:0.3; margin-bottom:1rem;"></i>
+            <h3 style="margin-bottom:0.5rem;">Your cart is empty</h3>
+            <p style="color:var(--color-text-dim); margin-bottom:1.5rem;">Explore our menu to add artisanal coffee & treats.</p>
+            <a href="menu.html" class="btn btn-primary">Browse Menu</a>
+          </div>
+        `;
+        updateSummary();
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = AppState.cart.map(item => `
+        <div style="display:flex; gap:1.5rem; padding:1.25rem; background:var(--color-surface-card); border-radius:var(--radius-md); border:1px solid var(--color-border-dark); align-items:center;">
+          <img src="${item.image}" alt="${item.name}" style="width:90px; height:90px; border-radius:var(--radius-md); object-fit:cover;">
+          <div style="flex:1;">
+            <h3 style="font-size:1.1rem; margin-bottom:0.25rem;">${item.name}</h3>
+            <div style="font-size:0.85rem; color:var(--color-text-dim); margin-bottom:0.5rem;">${item.size} • ${item.temp} • ${item.milk} ${item.extras.length>0 ? '• '+item.extras.map(e=>e.name).join(', '):''}</div>
+            <div style="font-weight:700; color:var(--color-caramel);">$${item.price.toFixed(2)} each</div>
+          </div>
+          <div class="qty-control" style="background:rgba(255,255,255,0.06); padding:0.4rem 0.8rem; border-radius:var(--radius-full);">
+            <button class="qty-btn" onclick="AppState.updateQuantity('${item.cartItemId}', ${item.quantity-1}); renderCartPage();">-</button>
+            <span style="font-weight:700; width:24px; text-align:center;">${item.quantity}</span>
+            <button class="qty-btn" onclick="AppState.updateQuantity('${item.cartItemId}', ${item.quantity+1}); renderCartPage();">+</button>
+          </div>
+          <div style="font-weight:700; font-size:1.1rem; min-width:80px; text-align:right;">$${(item.price * item.quantity).toFixed(2)}</div>
+          <button onclick="AppState.removeFromCart('${item.cartItemId}'); renderCartPage();" class="icon-btn" style="width:32px; height:32px;"><i data-lucide="trash-2" style="font-size:0.9rem;"></i></button>
+        </div>
+      `).join('');
+
+      updateSummary();
+      lucide.createIcons();
+    }
+
+    function applyPromoCode() {
+      const code = (document.getElementById('promoInput').value || '').trim().toUpperCase();
+      const msg = document.getElementById('promoMsg');
+
+      if (code === 'WELCOME10') {
+        AppState.appliedPromo = { code: 'WELCOME10', discountPercent: 10 };
+        msg.style.color = '#4CAF50';
+        msg.textContent = '10% Welcome Discount Applied!';
+      } else if (code === 'COFFEE20') {
+        AppState.appliedPromo = { code: 'COFFEE20', discountPercent: 20 };
+        msg.style.color = '#4CAF50';
+        msg.textContent = '20% Roaster Discount Applied!';
+      } else {
+        AppState.appliedPromo = null;
+        msg.style.color = '#EF5350';
+        msg.textContent = 'Invalid promo code.';
+      }
+
+      localStorage.setItem('hcs_promo', JSON.stringify(AppState.appliedPromo));
+      updateSummary();
+    }
+
+    function updateSummary() {
+      document.getElementById('summarySubtotal').textContent = `$${AppState.getCartSubtotal().toFixed(2)}`;
+      document.getElementById('summaryDiscount').textContent = `-$${AppState.getCartDiscount().toFixed(2)}`;
+      document.getElementById('summaryTax').textContent = `$${AppState.getCartTax().toFixed(2)}`;
+      document.getElementById('summaryTotal').textContent = `$${AppState.getCartTotal().toFixed(2)}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => renderCartPage());
+  </script>
+</body>
+</html>

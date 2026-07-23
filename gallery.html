@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Hamza Coffee Shop</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      height: 280px;
+      border: 1px solid var(--color-border-dark);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.25rem;
+      color: #fff;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="story.html" class="nav-link">Our Story</a>
+        <a href="gallery.html" class="nav-link active">Gallery</a>
+        <a href="locations.html" class="nav-link">Locations</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn open-cart-btn"><i data-lucide="shopping-bag"></i><span class="icon-badge cart-count-badge" style="display:none;">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top:7rem;" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="subtitle">Visual Moments</span>
+        <h1 class="title-lg">Café Gallery</h1>
+        <p>A glimpse into our daily coffee crafting, warm ambiance, and delicious freshly baked delicacies.</p>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="filter-container reveal">
+        <button class="filter-btn active" onclick="filterGallery('all', this)">All Photos</button>
+        <button class="filter-btn" onclick="filterGallery('coffee', this)">Coffee</button>
+        <button class="filter-btn" onclick="filterGallery('food', this)">Pastries & Food</button>
+        <button class="filter-btn" onclick="filterGallery('cafe', this)">Café Interior</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div id="galleryGrid" class="gallery-grid">
+        <!-- Item 1 -->
+        <div class="gallery-item" data-cat="coffee" onclick="openLightbox('images/hero_coffee.png', 'Artisan Latte Art')">
+          <img src="images/hero_coffee.png" alt="Latte Art">
+          <div class="gallery-overlay">
+            <h4 style="font-family:var(--font-heading);">Artisan Latte Art</h4>
+            <span style="font-size:0.8rem; color:var(--color-caramel);">Click to Expand</span>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="gallery-item" data-cat="coffee" onclick="openLightbox('images/iced_coffee.png', 'Iced Caramel Macchiato')">
+          <img src="images/iced_coffee.png" alt="Iced Coffee">
+          <div class="gallery-overlay">
+            <h4 style="font-family:var(--font-heading);">Iced Caramel Macchiato</h4>
+            <span style="font-size:0.8rem; color:var(--color-caramel);">Click to Expand</span>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="gallery-item" data-cat="food" onclick="openLightbox('images/pastry_croissant.png', 'Freshly Baked Croissants')">
+          <img src="images/pastry_croissant.png" alt="Pastry">
+          <div class="gallery-overlay">
+            <h4 style="font-family:var(--font-heading);">Fresh French Butter Croissants</h4>
+            <span style="font-size:0.8rem; color:var(--color-caramel);">Click to Expand</span>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="gallery-item" data-cat="cafe" onclick="openLightbox('images/cafe_interior.png', 'Flagship Café Interior')">
+          <img src="images/cafe_interior.png" alt="Cafe Interior">
+          <div class="gallery-overlay">
+            <h4 style="font-family:var(--font-heading);">Luxury Cozy Interior</h4>
+            <span style="font-size:0.8rem; color:var(--color-caramel);">Click to Expand</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Fullscreen Lightbox Modal -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="icon-btn" style="position:absolute; top:20px; right:20px; z-index:2010;"><i data-lucide="x"></i></button>
+    <div style="text-align:center;" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="" alt="Expanded View" class="lightbox-img">
+      <div id="lightboxCaption" style="margin-top:1rem; font-family:var(--font-heading); font-size:1.2rem; color:var(--color-cream);"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        if (cat === 'all' || item.getAttribute('data-cat') === cat) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function openLightbox(src, caption) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxCaption').textContent = caption;
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — Hamza Coffee Shop</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <header class="navbar scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
+      <nav class="nav-links"><a href="index.html" class="nav-link">Home</a><a href="menu.html" class="nav-link">Menu</a></nav>
+      <div class="nav-actions">
+        <button class="icon-btn open-cart-btn"><i data-lucide="shopping-bag"></i><span class="icon-badge cart-count-badge" style="display:none;">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top:7rem;" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="subtitle">Global Search</span>
+        <h1 class="title-lg">Find Drinks, Treats & Guides</h1>
+      </div>
+
+      <div style="max-width:600px; margin:0 auto 3rem auto; position:relative;">
+        <input type="text" id="globalSearchInput" placeholder="Type to search (e.g., Caramel, Cappuccino, Matcha)..." oninput="performGlobalSearch()" style="width:100%; padding:1rem 1.25rem 1rem 3rem; border-radius:var(--radius-full); background:var(--color-surface-card); border:1px solid var(--color-border-dark); color:var(--color-cream); font-size:1.1rem;">
+        <i data-lucide="search" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--color-caramel);"></i>
+      </div>
+
+      <div id="searchResultsGrid" class="grid grid-4"></div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      performGlobalSearch();
+    });
+
+    function performGlobalSearch() {
+      const q = (document.getElementById('globalSearchInput')?.value || '').toLowerCase();
+      const grid = document.getElementById('searchResultsGrid');
+      if (!grid) return;
+
+      const matches = PRODUCTS_DATA.filter(p => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+
+      if (matches.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--color-text-dim);"><p>No items found for "${q}". Try searching for Caramel, Cappuccino, or Matcha.</p></div>`;
+        return;
+      }
+
+      grid.innerHTML = matches.map(prod => `
+        <div class="product-card">
+          <div class="card-media">
+            <img src="${prod.image}" alt="${prod.name}">
+            <button class="wishlist-toggle ${AppState.wishlist.includes(prod.id) ? 'active' : ''}" data-wishlist-id="${prod.id}" onclick="AppState.toggleWishlist('${prod.id}')">
+              <i data-lucide="heart" style="font-size:1rem;"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <h3 class="product-title" style="margin-bottom:0.25rem;">${prod.name}</h3>
+            <div style="font-size:0.8rem; color:var(--color-caramel); margin-bottom:0.5rem;">${prod.category}</div>
+            <p class="product-desc">${prod.description}</p>
+            <div class="card-footer-flex">
+              <span class="product-price">$${prod.price.toFixed(2)}</span>
+              <a href="product.html?id=${prod.id}" class="btn btn-outline btn-sm">Customize</a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
