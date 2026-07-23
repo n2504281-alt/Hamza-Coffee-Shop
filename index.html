@@ -219,12 +219,46 @@
          ====================================================================== -->
     <section id="offers" style="padding: 5rem 0; background-color: var(--bg-cream); scroll-margin-top: 80px;">
       <div class="container">
-        <div class="section-header-center reveal">
+        <div class="section-header-center">
           <span class="section-eyebrow">Exclusive Deals</span>
           <h2 class="section-title-dark">Current Special Offers</h2>
         </div>
 
-        <div id="homeOffersGrid" class="grid-container grid-2-cols"></div>
+        <div id="homeOffersGrid" class="grid-container grid-2-cols" style="margin-top:2.5rem;">
+          <div class="form-card-ref" style="display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <span style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:var(--caramel-accent);">20% OFF</span>
+                <span class="status-pill open" style="font-size:0.75rem;">Active Offer</span>
+              </div>
+              <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin-bottom:0.5rem;">Early Bird Morning Special</h3>
+              <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:1.5rem;">Get 20% off all hot coffees, espresso drinks, and pastries every morning between 7:00 AM and 10:00 AM.</p>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-light); padding-top:1rem;">
+              <div style="font-size:0.85rem; font-weight:700; color:var(--dark-espresso);">
+                Code: <code style="background:rgba(184,104,27,0.15); color:var(--caramel-accent); padding:0.2rem 0.5rem; border-radius:4px; font-weight:800;">COFFEE20</code>
+              </div>
+              <a href="order.html" class="btn-brown" style="padding:0.4rem 1rem; font-size:0.8rem;">Use Offer</a>
+            </div>
+          </div>
+
+          <div class="form-card-ref" style="display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <span style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:var(--caramel-accent);">10% OFF</span>
+                <span class="status-pill open" style="font-size:0.75rem;">Active Offer</span>
+              </div>
+              <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin-bottom:0.5rem;">Welcome New Member Discount</h3>
+              <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:1.5rem;">First time at Hamza Coffee Shop? Enjoy 10% off your entire first order ahead.</p>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-light); padding-top:1rem;">
+              <div style="font-size:0.85rem; font-weight:700; color:var(--dark-espresso);">
+                Code: <code style="background:rgba(184,104,27,0.15); color:var(--caramel-accent); padding:0.2rem 0.5rem; border-radius:4px; font-weight:800;">WELCOME10</code>
+              </div>
+              <a href="order.html" class="btn-brown" style="padding:0.4rem 1rem; font-size:0.8rem;">Use Offer</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -236,7 +270,7 @@
 
         <!-- Top Row: Morning Happy -->
         <div style="margin-bottom:4rem;">
-          <div class="happy-left-block reveal" style="max-width:100%;">
+          <div class="happy-left-block" style="max-width:100%;">
             <div class="happy-subtitle">
               <i data-lucide="coffee" style="width:14px;"></i> Special Morning
             </div>
@@ -252,7 +286,7 @@
         </div>
 
         <!-- Section Title: Locations -->
-        <div class="visit-header-row reveal" style="margin-bottom: 2rem;">
+        <div class="visit-header-row" style="margin-bottom: 2rem;">
           <div>
             <span class="section-eyebrow" style="text-align:left;">Our Flagships</span>
             <h2 class="visit-heading">Visit Our Café Locations</h2>
@@ -260,8 +294,50 @@
           <span class="open-status-widget status-pill open"></span>
         </div>
 
-        <!-- Dynamic Locations Cards Grid -->
-        <div id="homeLocationsGrid" class="grid-container grid-2-cols"></div>
+        <!-- Locations Cards Grid -->
+        <div id="homeLocationsGrid" class="grid-container grid-2-cols">
+          <div class="card-ref">
+            <div class="card-img-wrap" style="height:220px;">
+              <img src="images/hero_coffee.png" alt="Downtown Flagship">
+            </div>
+            <div class="card-content">
+              <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:0.75rem;">
+                <h3 class="card-title" style="font-size:1.2rem;">Downtown Flagship</h3>
+                <span class="open-status-widget status-pill open"></span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:0.5rem; color:var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">
+                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin" style="color:var(--caramel-accent); width:16px;"></i> 742 Grand Avenue, Downtown Cultural District</div>
+                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="phone" style="color:var(--caramel-accent); width:16px;"></i> +1 (555) 234-5678</div>
+                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="clock" style="color:var(--caramel-accent); width:16px;"></i> Mon - Sat: 7:00 AM - 11:00 PM | Sun: 8:00 AM - 10:00 PM</div>
+              </div>
+              <div style="display:flex; gap:0.75rem; margin-top:auto;">
+                <a href="order.html" class="btn-brown" style="flex:1; text-align:center; padding:0.5rem 1rem; font-size:0.85rem;">Order From Here</a>
+                <a href="tel:+15552345678" class="btn-white" style="padding:0.5rem 1rem; font-size:0.85rem;">Call</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-ref">
+            <div class="card-img-wrap" style="height:220px;">
+              <img src="images/cafe_interior.png" alt="Westside Artisanal Lounge">
+            </div>
+            <div class="card-content">
+              <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:0.75rem;">
+                <h3 class="card-title" style="font-size:1.2rem;">Westside Artisanal Lounge</h3>
+                <span class="open-status-widget status-pill open"></span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:0.5rem; color:var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">
+                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin" style="color:var(--caramel-accent); width:16px;"></i> 1209 Ocean Parkway, Westside District</div>
+                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="phone" style="color:var(--caramel-accent); width:16px;"></i> +1 (555) 876-5432</div>
+                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="clock" style="color:var(--caramel-accent); width:16px;"></i> Mon - Sat: 7:00 AM - 11:00 PM | Sun: 8:00 AM - 10:00 PM</div>
+              </div>
+              <div style="display:flex; gap:0.75rem; margin-top:auto;">
+                <a href="order.html" class="btn-brown" style="flex:1; text-align:center; padding:0.5rem 1rem; font-size:0.85rem;">Order From Here</a>
+                <a href="tel:+15558765432" class="btn-white" style="padding:0.5rem 1rem; font-size:0.85rem;">Call</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </section>
@@ -476,57 +552,6 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-
-      // Render Offers Grid on Home Page
-      const offersGrid = document.getElementById('homeOffersGrid');
-      if (offersGrid && typeof OFFERS_DATA !== 'undefined') {
-        offersGrid.innerHTML = OFFERS_DATA.map(o => `
-          <div class="form-card-ref reveal" style="display:flex; flex-direction:column; justify-content:space-between;">
-            <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-                <span style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:var(--caramel-accent);">${o.discount}</span>
-                <span class="status-pill open" style="font-size:0.75rem;">Active Offer</span>
-              </div>
-              <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin-bottom:0.5rem;">${o.title}</h3>
-              <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:1.5rem;">${o.description}</p>
-            </div>
-            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-light); padding-top:1rem;">
-              <div style="font-size:0.85rem; font-weight:700; color:var(--dark-espresso);">
-                Code: <code style="background:rgba(184,104,27,0.15); color:var(--caramel-accent); padding:0.2rem 0.5rem; border-radius:4px; font-weight:800;">${o.code}</code>
-              </div>
-              <a href="order.html" class="btn-brown" style="padding:0.4rem 1rem; font-size:0.8rem;">Use Offer</a>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      // Render Locations Grid on Home Page
-      const locGrid = document.getElementById('homeLocationsGrid');
-      if (locGrid && typeof LOCATIONS_DATA !== 'undefined') {
-        locGrid.innerHTML = LOCATIONS_DATA.map(loc => `
-          <div class="card-ref reveal">
-            <div class="card-img-wrap" style="height:220px;">
-              <img src="${loc.image}" alt="${loc.name}">
-            </div>
-            <div class="card-content">
-              <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:0.75rem;">
-                <h3 class="card-title" style="font-size:1.2rem;">${loc.name}</h3>
-                <span class="open-status-widget status-pill open"></span>
-              </div>
-              <div style="display:flex; flex-direction:column; gap:0.5rem; color:var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">
-                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin" style="color:var(--caramel-accent); width:16px;"></i> ${loc.address}</div>
-                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="phone" style="color:var(--caramel-accent); width:16px;"></i> ${loc.phone}</div>
-                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="clock" style="color:var(--caramel-accent); width:16px;"></i> ${loc.hours}</div>
-              </div>
-              <div style="display:flex; gap:0.75rem; margin-top:auto;">
-                <a href="order.html" class="btn-brown" style="flex:1; text-align:center; padding:0.5rem 1rem; font-size:0.85rem;">Order From Here</a>
-                <a href="tel:${loc.phone.replace(/[^0-9+]/g,'')}" class="btn-white" style="padding:0.5rem 1rem; font-size:0.85rem;">Call</a>
-              </div>
-            </div>
-          </div>
-        `).join('');
-        lucide.createIcons();
-      }
     });
   </script>
 
