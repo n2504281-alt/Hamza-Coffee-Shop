@@ -12,19 +12,53 @@
 <body>
 
   <!-- NAVBAR -->
+  <!-- HEADER NAVBAR -->
   <header class="navbar-ref">
     <div class="container nav-flex">
-      <a href="index.html" class="logo-ref"><i data-lucide="coffee" style="color:var(--caramel-accent);"></i><span>Coffee</span></a>
+      <a href="index.html" class="logo-ref">
+        <i data-lucide="coffee" style="color:var(--caramel-accent);"></i>
+        <span>Coffee</span>
+      </a>
+
       <nav class="nav-links-ref">
         <a href="index.html" class="nav-link-ref">Home</a>
         <a href="menu.html" class="nav-link-ref active">Menu</a>
+        <a href="story.html" class="nav-link-ref">Our Story</a>
+        <a href="gallery.html" class="nav-link-ref">Gallery</a>
+        <a href="locations.html" class="nav-link-ref">Locations</a>
+        <a href="offers.html" class="nav-link-ref">Offers</a>
+        <a href="blog.html" class="nav-link-ref">Blog</a>
+        <a href="contact.html" class="nav-link-ref">Contact</a>
       </nav>
+
       <div class="nav-right-actions">
-        <button class="icon-btn-ref open-cart-btn"><i data-lucide="shopping-bag"></i><span class="badge-count cart-count-badge" style="display:none;">0</span></button>
-        <a href="order.html" class="btn-brown" style="padding:0.5rem 1.2rem; font-size:0.85rem;">Order Ahead</a>
+        <a href="wishlist.html" class="icon-btn" title="Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="icon-badge wishlist-count-badge" style="display:none;">0</span>
+        </a>
+        <button class="icon-btn open-cart-btn" title="Cart">
+          <i data-lucide="shopping-bag"></i>
+          <span class="icon-badge cart-count-badge" style="display:none;">0</span>
+        </button>
+        <a href="order.html" class="btn-brown" style="padding:0.6rem 1.4rem; font-size:0.85rem;">Order Ahead</a>
+        <div class="hamburger-ref">
+          <span></span><span></span><span></span>
+        </div>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Menu Drawer -->
+  <div class="mobile-menu-ref">
+    <a href="index.html" class="nav-link-ref">Home</a>
+    <a href="menu.html" class="nav-link-ref active">Menu</a>
+    <a href="story.html" class="nav-link-ref">Our Story</a>
+    <a href="gallery.html" class="nav-link-ref">Gallery</a>
+    <a href="locations.html" class="nav-link-ref">Locations</a>
+    <a href="offers.html" class="nav-link-ref">Offers</a>
+    <a href="blog.html" class="nav-link-ref">Blog</a>
+    <a href="contact.html" class="nav-link-ref">Contact</a>
+  </div>
 
   <main style="padding: 4rem 0 6rem 0;">
     <div class="container">
