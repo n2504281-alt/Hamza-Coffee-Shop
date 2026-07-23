@@ -12,9 +12,9 @@
 </head>
 <body>
 
-  <!-- ==========================================================================
-       1. TOP NAVBAR (MATCHING REFERENCE IMAGE)
-       ========================================================================== -->
+  <!-- ======================================================================
+       NAVBAR
+       ====================================================================== -->
   <header class="navbar-ref">
     <div class="container nav-flex">
       <a href="index.html" class="logo-ref">
@@ -23,153 +23,223 @@
       </a>
 
       <nav class="nav-links-ref">
-        <a href="index.html" class="nav-link-ref active">Home</a>
-        <a href="menu.html" class="nav-link-ref">Menu</a>
-        <a href="story.html" class="nav-link-ref">Our Story</a>
+        <a href="index.html"   class="nav-link-ref active">Home</a>
+        <a href="menu.html"    class="nav-link-ref">Menu</a>
+        <a href="story.html"   class="nav-link-ref">Our Story</a>
         <a href="gallery.html" class="nav-link-ref">Gallery</a>
         <a href="locations.html" class="nav-link-ref">Locations</a>
-        <a href="offers.html" class="nav-link-ref">Offers</a>
-        <a href="blog.html" class="nav-link-ref">Blog</a>
+        <a href="offers.html"  class="nav-link-ref">Offers</a>
+        <a href="blog.html"    class="nav-link-ref">Blog</a>
         <a href="contact.html" class="nav-link-ref">Contact</a>
       </nav>
 
       <div class="nav-right-actions">
-        <a href="wishlist.html" class="icon-btn" title="Wishlist" style="color:var(--dark-espresso);">
+        <a href="wishlist.html" class="icon-btn" title="Wishlist">
           <i data-lucide="heart"></i>
           <span class="icon-badge wishlist-count-badge" style="display:none;">0</span>
         </a>
-        <button class="icon-btn open-cart-btn" title="Cart" style="color:var(--dark-espresso);">
+        <button class="icon-btn open-cart-btn" title="Cart">
           <i data-lucide="shopping-bag"></i>
           <span class="icon-badge cart-count-badge" style="display:none;">0</span>
         </button>
         <a href="order.html" class="btn-brown" style="padding:0.6rem 1.4rem; font-size:0.85rem;">Order Ahead</a>
+        <div class="hamburger-ref">
+          <span></span><span></span><span></span>
+        </div>
       </div>
     </div>
   </header>
 
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-menu-ref">
+    <a href="index.html" class="nav-link-ref active">Home</a>
+    <a href="menu.html" class="nav-link-ref">Menu</a>
+    <a href="story.html" class="nav-link-ref">Our Story</a>
+    <a href="gallery.html" class="nav-link-ref">Gallery</a>
+    <a href="locations.html" class="nav-link-ref">Locations</a>
+    <a href="offers.html" class="nav-link-ref">Offers</a>
+    <a href="blog.html" class="nav-link-ref">Blog</a>
+    <a href="contact.html" class="nav-link-ref">Contact</a>
+  </div>
+
   <main>
-    <!-- ==========================================================================
-         2. HERO SECTION WITH GLOWING COFFEE STEAM (MATCHING REFERENCE)
-         ========================================================================== -->
+
+    <!-- ======================================================================
+         1. HERO — Dark split: text left | coffee image right
+         ====================================================================== -->
     <section class="hero-ref">
-      <div class="container">
-        <div class="hero-content-ref reveal">
+      <!-- Steam Canvas Overlay -->
+      <canvas id="heroSteamCanvas"></canvas>
+
+      <div class="container hero-grid">
+
+        <!-- Left: Text -->
+        <div class="hero-text-col reveal">
+          <div class="hero-eyebrow">
+            <i data-lucide="coffee" style="width:14px;"></i> Artisan Coffee Since 2018
+          </div>
           <h1 class="hero-title-ref">
-            Savor the Perfect <br>Brew!
+            Savor the <br><span class="hero-title-accent">Perfect Brew!</span>
           </h1>
           <p class="hero-desc-ref">
             Crafted with passion, brewed to perfection. Experience single-origin beans, hand-poured artisan lattes, and golden pastries in a cozy luxury atmosphere.
           </p>
           <div class="hero-btns-ref">
             <a href="menu.html" class="btn-white">Explore Menu</a>
-            <a href="order.html" class="btn-brown">Order Ahead</a>
+            <a href="order.html" class="btn-brown glow-pulse">Order Ahead</a>
+          </div>
+
+          <!-- Stats Row -->
+          <div class="hero-stats-row">
+            <div class="hero-stat">
+              <span class="hero-stat-num">500+</span>
+              <span class="hero-stat-lbl">Guests / Day</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+              <span class="hero-stat-num">4.9★</span>
+              <span class="hero-stat-lbl">Avg Rating</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+              <span class="hero-stat-num">8+</span>
+              <span class="hero-stat-lbl">Varieties</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Glowing Steam Particle Overlay Canvas -->
-      <canvas id="heroSteamCanvas"></canvas>
+        <!-- Right: Coffee Image -->
+        <div class="hero-image-col">
+          <div class="hero-img-wrapper">
+            <img src="images/hero_coffee.png" alt="Steaming Artisan Latte" class="hero-coffee-img ken-burns">
+            <div class="hero-img-badge floating-slow">
+              <i data-lucide="star" style="width:14px; fill:currentColor;"></i>
+              Freshly Brewed
+            </div>
+            <div class="hero-img-tag floating-fast">
+              <img src="images/pastry_croissant.png" alt="Pastry" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+              <div>
+                <div style="font-weight:800;font-size:0.78rem;color:var(--dark-espresso);">Butter Croissant</div>
+                <div style="font-size:0.68rem;color:var(--caramel-accent);">$3.90 · Fresh Daily</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
 
-    <!-- ==========================================================================
-         3. FEATURES SECTION (4 CIRCULAR BADGES WITH VERTICAL DIVIDERS)
-         ========================================================================== -->
+    <!-- ======================================================================
+         2. FEATURES — 4 circular icons with vertical dividers
+         ====================================================================== -->
     <section class="features-section-ref">
       <div class="container">
         <h2 class="features-title-ref reveal">Features</h2>
-        
         <div class="features-grid-ref">
+
           <div class="feature-item-ref reveal delay-1">
-            <div class="feature-circle-icon"><i data-lucide="coffee"></i></div>
+            <div class="feature-circle-icon">
+              <i data-lucide="coffee"></i>
+            </div>
             <h3 class="feature-item-title">Espresso</h3>
-            <p class="feature-item-desc">Rich 9-bar pulled double espresso with thick crema.</p>
+            <p class="feature-item-desc">Rich 9-bar pulled double espresso with thick golden crema from Ethiopian micro-lots.</p>
           </div>
 
           <div class="feature-item-ref reveal delay-2">
-            <div class="feature-circle-icon"><i data-lucide="sun"></i></div>
+            <div class="feature-circle-icon">
+              <i data-lucide="sun"></i>
+            </div>
             <h3 class="feature-item-title">Latte</h3>
-            <p class="feature-item-desc">Silky steamed organic oat milk poured over espresso.</p>
+            <p class="feature-item-desc">Silky steamed organic oat milk poured over fresh espresso with beautiful latte art.</p>
           </div>
 
           <div class="feature-item-ref reveal delay-3">
-            <div class="feature-circle-icon"><i data-lucide="sparkles"></i></div>
+            <div class="feature-circle-icon">
+              <i data-lucide="sparkles"></i>
+            </div>
             <h3 class="feature-item-title">Cappuccino</h3>
-            <p class="feature-item-desc">Equal parts velvet espresso and airy foam dusting.</p>
+            <p class="feature-item-desc">Equal parts velvet espresso and deep airy foam dusted with organic cocoa powder.</p>
           </div>
 
           <div class="feature-item-ref reveal delay-4">
-            <div class="feature-circle-icon"><i data-lucide="snowflake"></i></div>
+            <div class="feature-circle-icon">
+              <i data-lucide="snowflake"></i>
+            </div>
             <h3 class="feature-item-title">Cold Brew</h3>
-            <p class="feature-item-desc">Slow 20-hour cold steeped single origin steep.</p>
+            <p class="feature-item-desc">Slow 20-hour cold steeped single-origin beans for a smooth, refreshing finish.</p>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         4. DUAL SPLIT BANNER ("WHY CHOOSE US?" & "20% OFF FROM 7-10 AM")
-         ========================================================================== -->
+    <!-- ======================================================================
+         3. DUAL SPLIT BANNER — Why Choose Us | 20% Off
+         ====================================================================== -->
     <section>
       <div class="dual-split-ref">
-        <!-- Left Dark Split -->
+
+        <!-- Left: Dark "Why Choose Us?" -->
         <div class="split-left-ref reveal-left">
           <div class="split-left-content">
             <h2 class="split-left-title">Why Choose Us?</h2>
             <p class="split-left-desc">
-              We source directly from high-altitude Ethiopian micro-lots. Every cup is ground fresh upon ordering to preserve natural aromatic oils.
+              We source directly from high-altitude Ethiopian micro-lots. Every cup is ground fresh upon ordering to preserve natural aromatic oils and complex flavor notes.
             </p>
             <a href="story.html" class="btn-white">Our Story</a>
           </div>
-          <img src="images/hero_coffee.png" alt="Espresso Cup" class="split-left-img">
+          <img src="images/hero_coffee.png" alt="Espresso" class="split-left-img">
         </div>
 
-        <!-- Right Beige Split -->
+        <!-- Right: Cream "20% Off" -->
         <div class="split-right-ref reveal-right">
           <span class="split-right-subtitle">Opposite Happy Hours</span>
-          <h2 class="split-right-title">20% Off from 7 - 10 am</h2>
+          <h2 class="split-right-title">20% Off from<br>7 – 10 AM</h2>
           <p class="split-right-desc">
             Start your early mornings right. Enjoy 20% off all artisan lattes and warm butter croissants before 10 AM. Use promo code <strong>WELCOME10</strong> or <strong>COFFEE20</strong>.
           </p>
           <a href="offers.html" class="btn-dark">Order Now</a>
         </div>
+
       </div>
     </section>
 
-    <!-- ==========================================================================
-         5. MORNING HAPPY & VISIT US TODAY SECTION
-         ========================================================================== -->
+    <!-- ======================================================================
+         4. MORNING HAPPY  +  VISIT US TODAY
+         ====================================================================== -->
     <section class="happy-visit-section-ref">
       <div class="container visit-grid-ref">
-        <!-- Left Block -->
+
+        <!-- Left: Morning Happy -->
         <div class="happy-left-block reveal">
-          <div class="happy-subtitle"><i data-lucide="coffee" style="width:16px;"></i> Special Morning</div>
-          <h2 class="happy-title">Morning Happy -</h2>
+          <div class="happy-subtitle">
+            <i data-lucide="coffee" style="width:14px;"></i> Special Morning
+          </div>
+          <h2 class="happy-title">Morning Happy —</h2>
           <p class="happy-desc">
-            Indulge in freshly baked pastries combined with our signature caramel macchiatos. Prepared fresh by our master baristas every morning.
+            Indulge in freshly baked pastries combined with our signature caramel macchiatos. Prepared fresh by our master baristas every morning before the rush.
           </p>
-          <div style="display:flex; gap:1rem;">
+          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
             <a href="menu.html" class="btn-white">Explore Menu</a>
             <a href="order.html" class="btn-brown">Buy Now</a>
           </div>
         </div>
 
-        <!-- Right 4 Product Cards Grid -->
+        <!-- Right: Visit Cards -->
         <div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;" class="reveal">
-            <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:800; color:var(--dark-espresso);">Visit Us TODAY</h2>
+          <div class="visit-header-row reveal">
+            <h2 class="visit-heading">Visit Us TODAY</h2>
             <span class="open-status-widget status-pill open"></span>
           </div>
-
-          <div id="visitCardsRow" class="cards-4-row">
-            <!-- Populated via JS -->
-          </div>
+          <div id="visitCardsRow" class="cards-4-row"></div>
         </div>
+
       </div>
     </section>
 
-    <!-- ==========================================================================
-         6. WIN YOUR HEART FULL WIDTH BANNER
-         ========================================================================== -->
+    <!-- ======================================================================
+         5. WIN YOUR HEART — Full-width dark banner
+         ====================================================================== -->
     <section class="win-heart-ref">
       <div class="container">
         <div class="win-heart-content reveal">
@@ -177,65 +247,158 @@
           <p class="win-heart-desc">
             Single-origin espresso poured over rich artisan chocolate ganache and roasted hazelnut syrup. A cup guaranteed to make you fall in love.
           </p>
-          <a href="menu.html" class="btn-brown">Order Your Cup</a>
+          <a href="menu.html" class="btn-brown glow-pulse">Order Your Cup</a>
         </div>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         7. CUSTOMER TESTIMONIALS REVIEWS
-         ========================================================================== -->
+    <!-- ======================================================================
+         6. TESTIMONIALS — 3 review cards
+         ====================================================================== -->
     <section class="testimonials-section-ref">
       <div class="container">
+        <div class="section-header-center reveal">
+          <span class="section-eyebrow">What People Say</span>
+          <h2 class="section-title-dark">Customer Reviews</h2>
+        </div>
         <div class="reviews-grid-ref">
           <div class="review-card-ref reveal delay-1">
-            <img src="images/hero_coffee.png" alt="Customer" class="review-avatar">
+            <img src="images/hero_coffee.png" alt="Oliver R." class="review-avatar">
             <div>
+              <div class="review-stars">★★★★★</div>
               <div class="review-name">Oliver R.</div>
-              <div class="review-text">"Best Caramel Macchiato in the city. The glowing steam ambiance and taste are unmatched."</div>
+              <div class="review-text">"Best Caramel Macchiato in the city. The glowing steam ambiance and taste are completely unmatched."</div>
             </div>
           </div>
-
           <div class="review-card-ref reveal delay-2">
-            <img src="images/iced_coffee.png" alt="Customer" class="review-avatar">
+            <img src="images/iced_coffee.png" alt="Sophia M." class="review-avatar">
             <div>
+              <div class="review-stars">★★★★★</div>
               <div class="review-name">Sophia M.</div>
-              <div class="review-text">"The Order Ahead feature saved my morning commute! 5-star coffee and French croissants."</div>
+              <div class="review-text">"The Order Ahead feature saved my morning commute! 5-star coffee and French croissants every single day."</div>
             </div>
           </div>
-
           <div class="review-card-ref reveal delay-3">
-            <img src="images/cafe_interior.png" alt="Customer" class="review-avatar">
+            <img src="images/cafe_interior.png" alt="Alexander K." class="review-avatar">
             <div>
+              <div class="review-stars">★★★★★</div>
               <div class="review-name">Alexander K.</div>
-              <div class="review-text">"Luxury café vibe, fast order status tracking, and exceptional single-origin roast."</div>
+              <div class="review-text">"Luxury café vibe, fast order status tracking, and an exceptional single-origin roast experience."</div>
             </div>
           </div>
         </div>
       </div>
     </section>
+
   </main>
 
-  <!-- ==========================================================================
-       8. FOOTER (MATCHING REFERENCE IMAGE)
-       ========================================================================== -->
-  <footer class="footer-ref">
-    <div class="container footer-flex-ref">
-      <div>
-        <h4 style="font-family:var(--font-heading); font-size:1.2rem; font-weight:800; color:#FFF;">Hamza Coffee Shop</h4>
-        <p style="font-size:0.85rem; color:rgba(255,255,255,0.7); margin-top:4px;">© 2026 Hamza Coffee Shop. All rights reserved.</p>
+  <!-- ======================================================================
+       MASTER PERFECT FOOTER (CUSTOM DESIGNED)
+       ====================================================================== -->
+  <footer class="master-footer-ref">
+    <div class="container">
+      
+      <!-- Newsletter Card -->
+      <div class="footer-newsletter-card reveal">
+        <div class="newsletter-text">
+          <h3>Join The Coffee Club</h3>
+          <p>Get 10% off your first order ahead! Receive early access to rare Ethiopian micro-lots &amp; morning discount codes.</p>
+        </div>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Welcome to the Coffee Club! Check your inbox.');">
+          <input type="email" placeholder="Enter your email address" required class="newsletter-input">
+          <button type="submit" class="btn-brown" style="white-space:nowrap; padding:0.75rem 1.4rem;">Join Now</button>
+        </form>
       </div>
 
-      <div class="footer-socials">
-        <a href="#" class="social-pill" title="Instagram"><i data-lucide="instagram"></i></a>
-        <a href="#" class="social-pill" title="Facebook"><i data-lucide="facebook"></i></a>
-        <a href="#" class="social-pill" title="Twitter"><i data-lucide="twitter"></i></a>
+      <!-- Main Footer Columns -->
+      <div class="footer-top-grid">
+        
+        <!-- Col 1: Brand -->
+        <div>
+          <a href="index.html" class="footer-brand-title">
+            <i data-lucide="coffee" style="color:var(--caramel-accent);"></i>
+            Hamza Coffee Shop
+          </a>
+          <p class="footer-brand-desc">
+            Savor the Perfect Brew. Crafted with passion from Ethiopian high-altitude beans, hand-poured lattes, and golden French butter pastries brewed to perfection.
+          </p>
+          <div style="margin-bottom:1.25rem;">
+            <span class="open-status-widget status-pill open"></span>
+          </div>
+          <div class="footer-socials">
+            <a href="#" class="social-pill" title="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="#" class="social-pill" title="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="#" class="social-pill" title="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="#" class="social-pill" title="YouTube"><i data-lucide="youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div>
+          <h4 class="footer-column-title">Quick Explore</h4>
+          <div class="footer-links-list">
+            <a href="index.html"><i data-lucide="chevron-right" style="width:14px;"></i> Home</a>
+            <a href="menu.html"><i data-lucide="chevron-right" style="width:14px;"></i> Handcrafted Menu</a>
+            <a href="story.html"><i data-lucide="chevron-right" style="width:14px;"></i> Our Story</a>
+            <a href="gallery.html"><i data-lucide="chevron-right" style="width:14px;"></i> Photo Gallery</a>
+            <a href="locations.html"><i data-lucide="chevron-right" style="width:14px;"></i> Café Locations</a>
+            <a href="offers.html"><i data-lucide="chevron-right" style="width:14px;"></i> Promo Offers</a>
+            <a href="blog.html"><i data-lucide="chevron-right" style="width:14px;"></i> Coffee Journal</a>
+          </div>
+        </div>
+
+        <!-- Col 3: Customer Care -->
+        <div>
+          <h4 class="footer-column-title">Customer Care</h4>
+          <div class="footer-links-list">
+            <a href="order.html"><i data-lucide="chevron-right" style="width:14px;"></i> Order Ahead</a>
+            <a href="reservations.html"><i data-lucide="chevron-right" style="width:14px;"></i> Book a Table</a>
+            <a href="faq.html"><i data-lucide="chevron-right" style="width:14px;"></i> FAQ &amp; Help</a>
+            <a href="wishlist.html"><i data-lucide="chevron-right" style="width:14px;"></i> Your Wishlist</a>
+            <a href="contact.html"><i data-lucide="chevron-right" style="width:14px;"></i> Contact Us</a>
+          </div>
+        </div>
+
+        <!-- Col 4: Location & Contact -->
+        <div>
+          <h4 class="footer-column-title">Visit Flagship Branch</h4>
+          <div class="footer-contact-info">
+            <div class="footer-contact-item">
+              <i data-lucide="map-pin"></i>
+              <span>742 Grand Avenue, Downtown Cultural District</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="phone"></i>
+              <span>+1 (555) 234-5678</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="mail"></i>
+              <span>hello@hamzacoffee.com</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="clock"></i>
+              <span>Mon - Sat: 7am - 11pm<br>Sun: 8am - 10pm</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div style="display:flex; gap:0.75rem;">
-        <a href="reservations.html" class="btn-white" style="font-size:0.8rem; padding:0.5rem 1.2rem;">Book a Table</a>
-        <a href="order.html" class="btn-brown" style="font-size:0.8rem; padding:0.5rem 1.2rem;">Order Ahead</a>
+      <!-- Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <p>© 2026 Hamza Coffee Shop. All rights reserved. Crafted with Passion &amp; Precision.</p>
+        <div class="footer-legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <a href="refund.html">Refund Policy</a>
+        </div>
+        <div class="payment-badges">
+          <span class="payment-badge">VISA</span>
+          <span class="payment-badge">MC</span>
+          <span class="payment-badge">Apple Pay</span>
+        </div>
       </div>
+
     </div>
   </footer>
 
@@ -243,25 +406,27 @@
   <div id="cartOverlay" class="cart-overlay"></div>
   <div id="cartDrawer" class="cart-drawer">
     <div class="cart-drawer-header">
-      <h3 style="font-family:var(--font-heading); color:var(--color-cream);">Your Coffee Cart</h3>
-      <button id="closeCartBtn" class="icon-btn"><i data-lucide="x"></i></button>
+      <h3 style="font-family:var(--font-heading); color:#FFF;">Your Coffee Cart</h3>
+      <button id="closeCartBtn" class="icon-btn" style="color:#FFF; background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.2);">
+        <i data-lucide="x"></i>
+      </button>
     </div>
     <div id="cartDrawerItems" class="cart-drawer-items"></div>
     <div class="cart-drawer-footer">
-      <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-weight:700;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-weight:700; color:var(--dark-espresso);">
         <span>Total:</span>
-        <span id="cartDrawerTotal" style="color:var(--color-caramel);">$0.00</span>
+        <span id="cartDrawerTotal" style="color:var(--caramel-accent);">$0.00</span>
       </div>
-      <a href="checkout.html" class="btn-brown" style="width:100%; text-align:center;">Proceed to Checkout</a>
+      <a href="checkout.html" class="btn-brown" style="width:100%; text-align:center; display:block;">Proceed to Checkout</a>
     </div>
   </div>
 
   <!-- Mobile Bottom Nav -->
   <div class="mobile-bottom-nav">
     <a href="index.html" class="mobile-nav-item active"><i data-lucide="home"></i><span>Home</span></a>
-    <a href="menu.html" class="mobile-nav-item"><i data-lucide="coffee"></i><span>Menu</span></a>
+    <a href="menu.html"  class="mobile-nav-item"><i data-lucide="coffee"></i><span>Menu</span></a>
     <a href="order.html" class="mobile-nav-item"><i data-lucide="clock"></i><span>Order</span></a>
-    <a href="#" class="mobile-nav-item open-cart-btn"><i data-lucide="shopping-bag"></i><span>Cart</span></a>
+    <a href="#"          class="mobile-nav-item open-cart-btn"><i data-lucide="shopping-bag"></i><span>Cart</span></a>
     <a href="wishlist.html" class="mobile-nav-item"><i data-lucide="heart"></i><span>Wishlist</span></a>
   </div>
 
@@ -275,16 +440,16 @@
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
 
-      // Render 4 product cards for "Visit Us TODAY" section matching reference layout
+      // Render 4 product cards for "Visit Us TODAY"
       const row = document.getElementById('visitCardsRow');
       if (row && typeof PRODUCTS_DATA !== 'undefined') {
         row.innerHTML = PRODUCTS_DATA.slice(0, 4).map(prod => `
           <div class="visit-card-ref">
             <img src="${prod.image}" alt="${prod.name}" class="visit-card-img">
             <div class="visit-card-title">${prod.name}</div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:0 0.75rem 0.7rem;">
               <span class="visit-card-price">$${prod.price.toFixed(2)}</span>
-              <a href="product.html?id=${prod.id}" class="btn-brown" style="padding:0.3rem 0.8rem; font-size:0.75rem;">View</a>
+              <a href="product.html?id=${prod.id}" class="btn-brown" style="padding:0.25rem 0.65rem; font-size:0.7rem;">View</a>
             </div>
           </div>
         `).join('');
@@ -292,5 +457,6 @@
       }
     });
   </script>
+
 </body>
 </html>
