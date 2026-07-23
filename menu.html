@@ -154,8 +154,8 @@
   <div id="cartOverlay" class="cart-overlay"></div>
   <div id="cartDrawer" class="cart-drawer">
     <div class="cart-drawer-header">
-      <h3 style="font-family:var(--font-heading); color:var(--dark-espresso);">Your Coffee Cart</h3>
-      <button id="closeCartBtn" class="icon-btn-ref"><i data-lucide="x"></i></button>
+      <h3 style="font-family:var(--font-heading); color:#FFFFFF;">Your Coffee Cart</h3>
+      <button id="closeCartBtn" class="icon-btn" style="color:#FFF; background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.2);"><i data-lucide="x"></i></button>
     </div>
     <div id="cartDrawerItems" class="cart-drawer-items"></div>
     <div class="cart-drawer-footer">
@@ -175,9 +175,16 @@
     let activeCat = 'all';
     function filterCategory(cat, btn) {
       activeCat = cat;
-      document.querySelectorAll('.active-filter').forEach(b => b.style.background = '#FFFFFF');
+      document.querySelectorAll('.btn-white').forEach(b => {
+        b.style.background = '#FFFFFF';
+        b.style.color = 'var(--dark-espresso)';
+        b.style.borderColor = 'rgba(59, 35, 23, 0.15)';
+      });
       btn.style.background = 'var(--caramel-accent)';
       btn.style.color = '#FFFFFF';
+      btn.style.borderColor = 'var(--caramel-accent)';
+      renderMenuGrid();
+    }
       renderMenuGrid();
     }
 

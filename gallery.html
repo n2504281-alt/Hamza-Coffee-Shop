@@ -31,15 +31,18 @@
       </nav>
 
       <div class="nav-right-actions">
-        <a href="wishlist.html" class="icon-btn-ref" title="Wishlist">
+        <a href="wishlist.html" class="icon-btn" title="Wishlist">
           <i data-lucide="heart"></i>
-          <span class="badge-count wishlist-count-badge" style="display:none;">0</span>
+          <span class="icon-badge wishlist-count-badge" style="display:none;">0</span>
         </a>
-        <button class="icon-btn-ref open-cart-btn" title="Cart">
+        <button class="icon-btn open-cart-btn" title="Cart">
           <i data-lucide="shopping-bag"></i>
-          <span class="badge-count cart-count-badge" style="display:none;">0</span>
+          <span class="icon-badge cart-count-badge" style="display:none;">0</span>
         </button>
-        <a href="order.html" class="btn-brown" style="padding:0.5rem 1.2rem; font-size:0.85rem;">Order Ahead</a>
+        <a href="order.html" class="btn-brown" style="padding:0.6rem 1.4rem; font-size:0.85rem;">Order Ahead</a>
+        <div class="hamburger-ref">
+          <span></span><span></span><span></span>
+        </div>
       </div>
     </div>
   </header>
@@ -157,6 +160,14 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
     function filterGallery(cat, btn) {
+      document.querySelectorAll('section button.btn-white').forEach(b => {
+        b.style.background = '#FFFFFF';
+        b.style.color = 'var(--dark-espresso)';
+        b.style.borderColor = 'rgba(59, 35, 23, 0.15)';
+      });
+      btn.style.background = 'var(--caramel-accent)';
+      btn.style.color = '#FFFFFF';
+      btn.style.borderColor = 'var(--caramel-accent)';
       document.querySelectorAll('.gallery-card-ref').forEach(item => {
         item.style.display = (cat === 'all' || item.getAttribute('data-cat') === cat) ? 'block' : 'none';
       });

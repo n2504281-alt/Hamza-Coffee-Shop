@@ -1329,6 +1329,65 @@
 }
 
 /* --------------------------------------------------------------------------
+   14. FLOATING TICKER BANNER (SLIDING EMAIL / PHONE BAR)
+   -------------------------------------------------------------------------- */
+.ticker-banner {
+  background: linear-gradient(90deg, #2B180C 0%, #4A2B1B 50%, #2B180C 100%);
+  color: #FFFFFF;
+  padding: 0.55rem 0;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 10;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ticker-track {
+  display: inline-flex;
+  gap: 2.5rem;
+  animation: tickerScroll 32s linear infinite;
+  align-items: center;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.4px;
+}
+
+.ticker-item svg {
+  color: var(--caramel-accent);
+}
+
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.payment-badge-dark {
+  background: var(--bg-cream-light);
+  border: 1px solid var(--border-light);
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--dark-espresso);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* --------------------------------------------------------------------------
    14. RESPONSIVE BREAKPOINTS FOR ALL PAGES
    -------------------------------------------------------------------------- */
 @media (max-width: 992px) {

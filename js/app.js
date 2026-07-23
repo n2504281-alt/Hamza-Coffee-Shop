@@ -153,26 +153,22 @@ function checkCaféOpenStatus() {
 
   let isOpen = false;
   let opensAt = "7:00 AM";
-
-  // Mon-Thu (1-4): 7:00 AM to 10:00 PM (7.0 - 22.0)
-  // Fri-Sat (5-6): 7:00 AM to 11:00 PM (7.0 - 23.0)
-  // Sun (0): 8:00 AM to 10:00 PM (8.0 - 22.0)
+  let closesAt = "11:00 PM";
 
   if (day === 0) { // Sunday
     isOpen = currentTimeVal >= 8.0 && currentTimeVal < 22.0;
     opensAt = "8:00 AM";
-  } else if (day >= 1 && day <= 4) { // Mon - Thu
-    isOpen = currentTimeVal >= 7.0 && currentTimeVal < 22.0;
-    opensAt = "7:00 AM";
-  } else if (day === 5 || day === 6) { // Fri - Sat
+    closesAt = "10:00 PM";
+  } else { // Mon - Sat (1 to 6)
     isOpen = currentTimeVal >= 7.0 && currentTimeVal < 23.0;
     opensAt = "7:00 AM";
+    closesAt = "11:00 PM";
   }
 
   return {
     isOpen,
     statusText: isOpen ? "Open Now" : "Closed Now",
-    subText: isOpen ? "Closing at 10:00 PM" : `Opens tomorrow at ${opensAt}`
+    subText: isOpen ? `Closing at ${closesAt}` : `Opens at ${opensAt}`
   };
 }
 
