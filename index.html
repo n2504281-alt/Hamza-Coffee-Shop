@@ -13,7 +13,7 @@
 <body>
 
   <!-- ======================================================================
-       NAVBAR
+       HEADER NAVBAR
        ====================================================================== -->
   <header class="navbar-ref">
     <div class="container nav-flex">
@@ -23,14 +23,14 @@
       </a>
 
       <nav class="nav-links-ref">
-        <a href="index.html"   class="nav-link-ref active">Home</a>
-        <a href="menu.html"    class="nav-link-ref">Menu</a>
-        <a href="story.html"   class="nav-link-ref">Our Story</a>
-        <a href="gallery.html" class="nav-link-ref">Gallery</a>
-        <a href="locations.html" class="nav-link-ref">Locations</a>
-        <a href="offers.html"  class="nav-link-ref">Offers</a>
-        <a href="blog.html"    class="nav-link-ref">Blog</a>
-        <a href="contact.html" class="nav-link-ref">Contact</a>
+        <a href="index.html"           class="nav-link-ref active">Home</a>
+        <a href="menu.html"            class="nav-link-ref">Menu</a>
+        <a href="index.html#story"     class="nav-link-ref">Our Story</a>
+        <a href="gallery.html"         class="nav-link-ref">Gallery</a>
+        <a href="index.html#locations" class="nav-link-ref">Locations</a>
+        <a href="index.html#offers"    class="nav-link-ref">Offers</a>
+        <a href="blog.html"            class="nav-link-ref">Blog</a>
+        <a href="contact.html"         class="nav-link-ref">Contact</a>
       </nav>
 
       <div class="nav-right-actions">
@@ -52,20 +52,20 @@
 
   <!-- Mobile Drawer Menu -->
   <div class="mobile-menu-ref">
-    <a href="index.html" class="nav-link-ref active">Home</a>
-    <a href="menu.html" class="nav-link-ref">Menu</a>
-    <a href="story.html" class="nav-link-ref">Our Story</a>
-    <a href="gallery.html" class="nav-link-ref">Gallery</a>
-    <a href="locations.html" class="nav-link-ref">Locations</a>
-    <a href="offers.html" class="nav-link-ref">Offers</a>
-    <a href="blog.html" class="nav-link-ref">Blog</a>
-    <a href="contact.html" class="nav-link-ref">Contact</a>
+    <a href="index.html"           class="nav-link-ref active">Home</a>
+    <a href="menu.html"            class="nav-link-ref">Menu</a>
+    <a href="index.html#story"     class="nav-link-ref">Our Story</a>
+    <a href="gallery.html"         class="nav-link-ref">Gallery</a>
+    <a href="index.html#locations" class="nav-link-ref">Locations</a>
+    <a href="index.html#offers"    class="nav-link-ref">Offers</a>
+    <a href="blog.html"            class="nav-link-ref">Blog</a>
+    <a href="contact.html"         class="nav-link-ref">Contact</a>
   </div>
 
   <main>
 
     <!-- ======================================================================
-         1. HERO — Full Background Image Layout (Matching Sample Image Exactly)
+         1. HERO SECTION — Full Background Coffee Image
          ====================================================================== -->
     <section class="hero-ref">
       <!-- Steam Canvas Overlay -->
@@ -113,7 +113,7 @@
         </span>
         <span class="ticker-item" style="color:var(--caramel-accent);">•</span>
         <span class="ticker-item">
-          🚀 Order Ahead for Pickup in 5 Minutes!
+          Order Ahead for Pickup in 5 Minutes!
         </span>
 
         <!-- Loop duplication for continuous ticker -->
@@ -139,7 +139,7 @@
         </span>
         <span class="ticker-item" style="color:var(--caramel-accent);">•</span>
         <span class="ticker-item">
-          🚀 Order Ahead for Pickup in 5 Minutes!
+          Order Ahead for Pickup in 5 Minutes!
         </span>
       </div>
     </div>
@@ -189,71 +189,91 @@
     </section>
 
     <!-- ======================================================================
-         3. DUAL SPLIT BANNER — Why Choose Us | 20% Off
+         3. SECTION: OUR STORY & CRAFT HERITAGE (#story)
          ====================================================================== -->
-    <section>
+    <section id="story" style="scroll-margin-top: 80px;">
       <div class="dual-split-ref">
 
-        <!-- Left: Dark "Why Choose Us?" -->
+        <!-- Left: Dark "Why Choose Us / Our Heritage" -->
         <div class="split-left-ref reveal-left">
           <div class="split-left-content">
-            <h2 class="split-left-title">Why Choose Us?</h2>
+            <span style="font-size:0.8rem; font-weight:800; color:var(--caramel-accent); text-transform:uppercase; letter-spacing:1px;">Brand Story &amp; Heritage</span>
+            <h2 class="split-left-title" style="margin-top:0.35rem;">Why Choose Us?</h2>
             <p class="split-left-desc">
-              We source directly from high-altitude Ethiopian micro-lots. Every cup is ground fresh upon ordering to preserve natural aromatic oils and complex flavor notes.
+              We travel directly to micro-lot coffee farms in Yirgacheffe and Huila. By paying 35% above fair-trade standards, we ensure local farming families thrive while securing the richest Arabica cherries harvested at peak ripeness. Every cup is ground fresh upon ordering.
             </p>
-            <a href="story.html" class="btn-white">Our Story</a>
+            <a href="menu.html" class="btn-white">Explore Our Blends</a>
           </div>
-          <img src="images/hero_coffee.png" alt="Espresso" class="split-left-img">
+          <img src="images/hero_coffee.png" alt="Direct Trade Coffee" class="split-left-img">
         </div>
 
-        <!-- Right: Cream "20% Off" -->
+        <!-- Right: Cream "Café Atmosphere Sanctuary" -->
         <div class="split-right-ref reveal-right">
-          <span class="split-right-subtitle">Opposite Happy Hours</span>
-          <h2 class="split-right-title">20% Off from<br>7 – 10 AM</h2>
+          <span class="split-right-subtitle">Artisan Sanctuary</span>
+          <h2 class="split-right-title">Crafted for<br>Connoisseurs</h2>
           <p class="split-right-desc">
-            Start your early mornings right. Enjoy 20% off all artisan lattes and warm butter croissants before 10 AM. Use promo code <strong>WELCOME10</strong> or <strong>COFFEE20</strong>.
+            Every detail in our café — from acoustic lighting to bespoke oak tables and velvet seating — is engineered to provide a soothing, elevated atmosphere where every sip is celebrated.
           </p>
-          <a href="offers.html" class="btn-dark">Order Now</a>
+          <a href="reservations.html" class="btn-dark">Book a Table</a>
         </div>
 
       </div>
     </section>
 
     <!-- ======================================================================
-         4. MORNING HAPPY  +  VISIT US TODAY
+         4. SECTION: SPECIAL OFFERS & PROMO CODES (#offers)
          ====================================================================== -->
-    <section class="happy-visit-section-ref">
-      <div class="container visit-grid-ref">
+    <section id="offers" style="padding: 5rem 0; background-color: var(--bg-cream); scroll-margin-top: 80px;">
+      <div class="container">
+        <div class="section-header-center reveal">
+          <span class="section-eyebrow">Exclusive Deals</span>
+          <h2 class="section-title-dark">Current Special Offers</h2>
+        </div>
 
-        <!-- Left: Morning Happy -->
-        <div class="happy-left-block reveal">
-          <div class="happy-subtitle">
-            <i data-lucide="coffee" style="width:14px;"></i> Special Morning
-          </div>
-          <h2 class="happy-title">Morning Happy —</h2>
-          <p class="happy-desc">
-            Indulge in freshly baked pastries combined with our signature caramel macchiatos. Prepared fresh by our master baristas every morning before the rush.
-          </p>
-          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-            <a href="menu.html" class="btn-white">Explore Menu</a>
-            <a href="order.html" class="btn-brown">Buy Now</a>
+        <div id="homeOffersGrid" class="grid-container grid-2-cols"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. MORNING HAPPY + CAFÉ LOCATIONS (#locations)
+         ====================================================================== -->
+    <section id="locations" class="happy-visit-section-ref" style="scroll-margin-top: 80px;">
+      <div class="container">
+
+        <!-- Top Row: Morning Happy -->
+        <div style="margin-bottom:4rem;">
+          <div class="happy-left-block reveal" style="max-width:100%;">
+            <div class="happy-subtitle">
+              <i data-lucide="coffee" style="width:14px;"></i> Special Morning
+            </div>
+            <h2 class="happy-title">Morning Happy Hours — 20% Off from 7 – 10 AM</h2>
+            <p class="happy-desc">
+              Indulge in freshly baked French butter croissants combined with our signature caramel macchiatos. Prepared fresh by our master baristas every morning before the rush.
+            </p>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+              <a href="menu.html" class="btn-white">Explore Menu</a>
+              <a href="order.html" class="btn-brown">Order Ahead</a>
+            </div>
           </div>
         </div>
 
-        <!-- Right: Visit Cards -->
-        <div>
-          <div class="visit-header-row reveal">
-            <h2 class="visit-heading">Visit Us TODAY</h2>
-            <span class="open-status-widget status-pill open"></span>
+        <!-- Section Title: Locations -->
+        <div class="visit-header-row reveal" style="margin-bottom: 2rem;">
+          <div>
+            <span class="section-eyebrow" style="text-align:left;">Our Flagships</span>
+            <h2 class="visit-heading">Visit Our Café Locations</h2>
           </div>
-          <div id="visitCardsRow" class="cards-4-row"></div>
+          <span class="open-status-widget status-pill open"></span>
         </div>
+
+        <!-- Dynamic Locations Cards Grid -->
+        <div id="homeLocationsGrid" class="grid-container grid-2-cols"></div>
 
       </div>
     </section>
 
     <!-- ======================================================================
-         5. WIN YOUR HEART — Full-width dark banner
+         6. WIN YOUR HEART — Full-width dark banner
          ====================================================================== -->
     <section class="win-heart-ref">
       <div class="container">
@@ -268,7 +288,7 @@
     </section>
 
     <!-- ======================================================================
-         6. TESTIMONIALS — 3 review cards
+         7. TESTIMONIALS — 3 review cards
          ====================================================================== -->
     <section class="testimonials-section-ref">
       <div class="container">
@@ -308,7 +328,7 @@
   </main>
 
   <!-- ======================================================================
-       MASTER PERFECT FOOTER (CUSTOM DESIGNED)
+       MASTER PERFECT FOOTER
        ====================================================================== -->
   <footer class="master-footer-ref">
     <div class="container">
@@ -362,10 +382,10 @@
           <div class="footer-links-list">
             <a href="index.html"><i data-lucide="chevron-right" style="width:14px;"></i> Home</a>
             <a href="menu.html"><i data-lucide="chevron-right" style="width:14px;"></i> Handcrafted Menu</a>
-            <a href="story.html"><i data-lucide="chevron-right" style="width:14px;"></i> Our Story</a>
+            <a href="index.html#story"><i data-lucide="chevron-right" style="width:14px;"></i> Our Story</a>
             <a href="gallery.html"><i data-lucide="chevron-right" style="width:14px;"></i> Photo Gallery</a>
-            <a href="locations.html"><i data-lucide="chevron-right" style="width:14px;"></i> Café Locations</a>
-            <a href="offers.html"><i data-lucide="chevron-right" style="width:14px;"></i> Promo Offers</a>
+            <a href="index.html#locations"><i data-lucide="chevron-right" style="width:14px;"></i> Café Locations</a>
+            <a href="index.html#offers"><i data-lucide="chevron-right" style="width:14px;"></i> Promo Offers</a>
             <a href="blog.html"><i data-lucide="chevron-right" style="width:14px;"></i> Coffee Journal</a>
           </div>
         </div>
@@ -400,7 +420,7 @@
             </div>
             <div class="footer-contact-item">
               <i data-lucide="clock"></i>
-              <span>Mon - Sat: 7am - 11pm<br>Sun: 8am - 10pm</span>
+              <span>Mon - Sat: 7:00 AM - 11:00 PM<br>Sun: 8:00 AM - 10:00 PM</span>
             </div>
           </div>
         </div>
@@ -463,16 +483,51 @@
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
 
-      // Render 4 product cards for "Visit Us TODAY"
-      const row = document.getElementById('visitCardsRow');
-      if (row && typeof PRODUCTS_DATA !== 'undefined') {
-        row.innerHTML = PRODUCTS_DATA.slice(0, 4).map(prod => `
-          <div class="visit-card-ref">
-            <img src="${prod.image}" alt="${prod.name}" class="visit-card-img">
-            <div class="visit-card-title">${prod.name}</div>
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:0 0.75rem 0.7rem;">
-              <span class="visit-card-price">$${prod.price.toFixed(2)}</span>
-              <a href="product.html?id=${prod.id}" class="btn-brown" style="padding:0.25rem 0.65rem; font-size:0.7rem;">View</a>
+      // Render Offers Grid on Home Page
+      const offersGrid = document.getElementById('homeOffersGrid');
+      if (offersGrid && typeof OFFERS_DATA !== 'undefined') {
+        offersGrid.innerHTML = OFFERS_DATA.map(o => `
+          <div class="form-card-ref reveal" style="display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <span style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:var(--caramel-accent);">${o.discount}</span>
+                <span class="status-pill open" style="font-size:0.75rem;">Active Offer</span>
+              </div>
+              <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin-bottom:0.5rem;">${o.title}</h3>
+              <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:1.5rem;">${o.description}</p>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-light); padding-top:1rem;">
+              <div style="font-size:0.85rem; font-weight:700; color:var(--dark-espresso);">
+                Code: <code style="background:rgba(184,104,27,0.15); color:var(--caramel-accent); padding:0.2rem 0.5rem; border-radius:4px; font-weight:800;">${o.code}</code>
+              </div>
+              <a href="order.html" class="btn-brown" style="padding:0.4rem 1rem; font-size:0.8rem;">Use Offer</a>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Render Locations Grid on Home Page
+      const locGrid = document.getElementById('homeLocationsGrid');
+      if (locGrid && typeof LOCATIONS_DATA !== 'undefined') {
+        locGrid.innerHTML = LOCATIONS_DATA.map(loc => `
+          <div class="card-ref reveal">
+            <div class="card-img-wrap" style="height:220px;">
+              <img src="${loc.image}" alt="${loc.name}">
+            </div>
+            <div class="card-content">
+              <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:0.75rem;">
+                <h3 class="card-title" style="font-size:1.2rem;">${loc.name}</h3>
+                <span class="open-status-widget status-pill open"></span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:0.5rem; color:var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">
+                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin" style="color:var(--caramel-accent); width:16px;"></i> ${loc.address}</div>
+                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="phone" style="color:var(--caramel-accent); width:16px;"></i> ${loc.phone}</div>
+                <div style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="clock" style="color:var(--caramel-accent); width:16px;"></i> ${loc.hours}</div>
+              </div>
+              <div style="display:flex; gap:0.75rem; margin-top:auto;">
+                <a href="order.html" class="btn-brown" style="flex:1; text-align:center; padding:0.5rem 1rem; font-size:0.85rem;">Order From Here</a>
+                <a href="tel:${loc.phone.replace(/[^0-9+]/g,'')}" class="btn-white" style="padding:0.5rem 1rem; font-size:0.85rem;">Call</a>
+              </div>
             </div>
           </div>
         `).join('');
