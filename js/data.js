@@ -174,6 +174,28 @@ const LOCATIONS_DATA = [
     hours: "Mon-Thu: 7am-10pm | Fri-Sat: 7am-11pm | Sun: 8am-10pm",
     image: "images/cafe_interior.png",
     mapCoords: "37.7833,-122.4167"
+  },
+  {
+    id: "loc-3",
+    name: "Hamza Coffee Shop – Uptown Financial Tower",
+    address: "450 Executive Plaza, 5th Avenue",
+    city: "Uptown Financial",
+    phone: "+1 (555) 456-7890",
+    email: "uptown@hamzacoffee.com",
+    hours: "Mon-Fri: 6:30am-9pm | Sat-Sun: 8am-8pm",
+    image: "images/cafe_interior.png",
+    mapCoords: "37.7900,-122.4000"
+  },
+  {
+    id: "loc-4",
+    name: "Hamza Coffee Shop – Westside Artisanal Lounge",
+    address: "892 Sunset Boulevard, West End",
+    city: "Westside",
+    phone: "+1 (555) 321-7654",
+    email: "westside@hamzacoffee.com",
+    hours: "Mon-Sun: 7:30am-10:30pm",
+    image: "images/cafe_interior.png",
+    mapCoords: "37.7600,-122.4300"
   }
 ];
 
@@ -183,6 +205,7 @@ const OFFERS_DATA = [
     title: "Morning Artisan Coffee Deal",
     code: "WELCOME10",
     discount: "10% OFF",
+    discountPercent: 10,
     description: "Get 10% off your entire first order ahead or online order with us.",
     validUntil: "Dec 31, 2026",
     badge: "Welcome Offer"
@@ -192,9 +215,30 @@ const OFFERS_DATA = [
     title: "Weekend Roaster Special",
     code: "COFFEE20",
     discount: "20% OFF",
+    discountPercent: 20,
     description: "Enjoy 20% off when ordering 2 or more specialty coffee drinks.",
     validUntil: "Every Fri - Sun",
     badge: "Weekend Treat"
+  },
+  {
+    id: "offer-3",
+    title: "Fresh Bakery & Pastry Special",
+    code: "PASTRY15",
+    discount: "15% OFF",
+    discountPercent: 15,
+    description: "Enjoy 15% off all freshly baked Normandy butter croissants and morning scones.",
+    validUntil: "Valid All Month",
+    badge: "Bakery Promo"
+  },
+  {
+    id: "offer-4",
+    title: "Express Order Ahead Saver",
+    code: "EXPRESS5",
+    discount: "$5.00 OFF",
+    discountAmount: 5.00,
+    description: "Get $5 off when you place your pickup order ahead using our express system.",
+    validUntil: "Limited Time",
+    badge: "Express Perk"
   }
 ];
 

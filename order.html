@@ -3,16 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Ahead — Hamza Coffee Shop</title>
+  <title>Express Order Ahead — Hamza Coffee Shop</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .order-summary-bar {
+      background: var(--dark-espresso);
+      color: #FFFFFF;
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 8px 24px rgba(43, 24, 12, 0.15);
+    }
+    .order-status-pill {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .branch-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem;
+      border-radius: 14px;
+      background: #FFFFFF;
+      border: 2px solid var(--border-light);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .branch-card:hover {
+      border-color: var(--caramel-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    }
+    .branch-card.active-branch {
+      border-color: var(--caramel-accent);
+      background: var(--bg-cream-light);
+      box-shadow: 0 6px 20px rgba(184, 104, 27, 0.15);
+    }
+    .time-btn {
+      font-size: 0.85rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: 25px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .quick-drink-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem;
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .quick-drink-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .cart-item-mini {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px dashed var(--border-light);
+    }
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid var(--border-light);
+      background: #FFFFFF;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .qty-btn:hover {
+      background: var(--caramel-accent);
+      color: #FFF;
+      border-color: var(--caramel-accent);
+    }
+  </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <!-- HEADER NAVBAR -->
   <header class="navbar-ref">
     <div class="container nav-flex">
       <a href="index.html" class="logo-ref">
@@ -23,7 +115,10 @@
       <nav class="nav-links-ref">
         <a href="index.html"   class="nav-link-ref">Home</a>
         <a href="menu.html"    class="nav-link-ref">Menu</a>
+        <a href="story.html"   class="nav-link-ref">Our Story</a>
         <a href="gallery.html" class="nav-link-ref">Gallery</a>
+        <a href="locations.html" class="nav-link-ref">Locations</a>
+        <a href="offers.html"  class="nav-link-ref">Offers</a>
         <a href="blog.html"    class="nav-link-ref">Blog</a>
         <a href="contact.html" class="nav-link-ref">Contact</a>
       </nav>
@@ -49,7 +144,10 @@
   <div class="mobile-menu-ref">
     <a href="index.html"   class="nav-link-ref">Home</a>
     <a href="menu.html"    class="nav-link-ref">Menu</a>
+    <a href="story.html"   class="nav-link-ref">Our Story</a>
     <a href="gallery.html" class="nav-link-ref">Gallery</a>
+    <a href="locations.html" class="nav-link-ref">Locations</a>
+    <a href="offers.html"  class="nav-link-ref">Offers</a>
     <a href="blog.html"    class="nav-link-ref">Blog</a>
     <a href="contact.html" class="nav-link-ref">Contact</a>
   </div>
@@ -58,57 +156,152 @@
     <section class="page-header-banner">
       <div class="container">
         <h1 class="page-header-title">Express Order Ahead</h1>
-        <p class="page-header-subtitle">Your coffee is freshly ground and brewed 5 minutes prior to your arrival.</p>
+        <p class="page-header-subtitle">Select your preferred café branch, estimated pickup time, and quick-add your favorite drinks.</p>
       </div>
     </section>
 
     <section class="container" style="padding-bottom:5rem;">
+      
+      <!-- Live Status Summary Header -->
+      <div class="order-summary-bar">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <i data-lucide="clock" style="color:var(--caramel-accent); width:24px; height:24px;"></i>
+          <div>
+            <div style="font-size:0.8rem; color:rgba(255,255,255,0.7); text-transform:uppercase; letter-spacing:0.5px;">Pickup Order Status</div>
+            <div style="font-weight:700; font-size:1rem;" id="statusSummaryText">Ready for Pickup Customization</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+          <div class="order-status-pill">
+            <i data-lucide="map-pin" style="width:14px; color:var(--caramel-accent);"></i>
+            <span id="activeBranchPill">Loading Branch...</span>
+          </div>
+          <div class="order-status-pill">
+            <i data-lucide="timer" style="width:14px; color:var(--caramel-accent);"></i>
+            <span id="activeTimePill">ASAP (15-20 min)</span>
+          </div>
+        </div>
+      </div>
+
       <div class="grid-container grid-2-cols" style="align-items:start;">
         
-        <!-- Left Selection Box -->
-        <div class="form-card-ref">
-          <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1.5rem;">1. Select Pickup Café Branch</h2>
-          <div style="display:flex; flex-direction:column; gap:1rem; margin-bottom:2rem;">
-            ${LOCATIONS_DATA.map((loc, idx) => `
-              <label style="display:flex; align-items:start; gap:1rem; padding:1rem; border-radius:12px; background:var(--bg-cream-light); border:1px solid var(--border-light); cursor:pointer;">
-                <input type="radio" name="pickupLoc" value="${loc.name}" ${idx===0?'checked':''} style="margin-top:4px; accent-color:var(--caramel-accent);">
-                <div>
-                  <div style="font-weight:700; color:var(--dark-espresso);">${loc.name}</div>
-                  <div style="font-size:0.85rem; color:var(--text-muted);">${loc.address}</div>
-                  <div style="font-size:0.8rem; color:var(--caramel-accent); margin-top:4px;">⏱ Prep Time: 15–20 mins</div>
-                </div>
-              </label>
-            `).join('')}
+        <!-- Left Column: Branch & Pickup Time Selection -->
+        <div style="display:flex; flex-direction:column; gap:2rem;">
+          
+          <!-- 1. Select Pickup Café Branch -->
+          <div class="form-card-ref">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+              <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin:0; color:var(--dark-espresso);">
+                1. Select Pickup Café Branch
+              </h2>
+              <span class="status-pill open" style="font-size:0.75rem;">All Branches Open</span>
+            </div>
+            
+            <div id="branchesContainer" style="display:flex; flex-direction:column; gap:1rem;">
+              <!-- Dynamic Branch Cards Rendered by JS -->
+            </div>
           </div>
 
-          <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1.5rem;">2. Estimated Pickup Time</h2>
-          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-            <button class="btn-brown" style="font-size:0.8rem; padding:0.5rem 1rem;">ASAP (15-20 min)</button>
-            <button class="btn-white" style="font-size:0.8rem; padding:0.5rem 1rem;">In 30 Mins</button>
-            <button class="btn-white" style="font-size:0.8rem; padding:0.5rem 1rem;">In 45 Mins</button>
+          <!-- 2. Estimated Pickup Time -->
+          <div class="form-card-ref">
+            <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1rem; color:var(--dark-espresso);">
+              2. Estimated Pickup Time
+            </h2>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">
+              Choose when you'd like your beverages freshly prepared and ready for counter pickup.
+            </p>
+
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:1.25rem;" id="presetTimeButtons">
+              <button type="button" class="btn-brown time-btn" data-time="ASAP (15-20 min)">ASAP (15-20 min)</button>
+              <button type="button" class="btn-white time-btn" data-time="In 30 Mins">In 30 Mins</button>
+              <button type="button" class="btn-white time-btn" data-time="In 45 Mins">In 45 Mins</button>
+              <button type="button" class="btn-white time-btn" data-time="In 60 Mins">In 60 Mins</button>
+            </div>
+
+            <div class="form-group-ref">
+              <label class="form-label-ref" style="font-size:0.85rem;">Or Select Custom Time Slot:</label>
+              <select id="customTimeSelect" class="form-select-ref" onchange="handleCustomTimeSelect(this.value)">
+                <option value="">-- Choose specific pickup time --</option>
+                <option value="In 15 Mins">In 15 Mins</option>
+                <option value="In 30 Mins">In 30 Mins</option>
+                <option value="In 45 Mins">In 45 Mins</option>
+                <option value="In 60 Mins">In 60 Mins</option>
+                <option value="In 90 Mins">In 90 Mins</option>
+                <option value="In 2 Hours">In 2 Hours</option>
+              </select>
+            </div>
           </div>
+
         </div>
 
-        <!-- Right Quick Add Box -->
-        <div class="form-card-ref">
-          <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1.5rem;">3. Quick Add Drinks</h2>
-          <div style="display:flex; flex-direction:column; gap:1rem; margin-bottom:2rem; max-height:260px; overflow-y:auto;">
-            ${PRODUCTS_DATA.slice(0, 4).map(prod => `
-              <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem; background:var(--bg-cream-light); border-radius:10px;">
-                <div style="display:flex; align-items:center; gap:0.75rem;">
-                  <img src="${prod.image}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;">
-                  <div>
-                    <div style="font-weight:700; font-size:0.9rem; color:var(--dark-espresso);">${prod.name}</div>
-                    <div style="font-size:0.85rem; color:var(--caramel-accent); font-weight:800;">$${prod.price.toFixed(2)}</div>
-                  </div>
-                </div>
-                <button class="btn-brown" style="padding:0.35rem 0.8rem; font-size:0.75rem;" onclick="AppState.addToCart(PRODUCTS_DATA.find(p=>p.id==='${prod.id}'))">+ Add</button>
+        <!-- Right Column: Quick Add Drinks & Cart Summary -->
+        <div style="display:flex; flex-direction:column; gap:2rem;">
+          
+          <!-- 3. Quick Add Drinks -->
+          <div class="form-card-ref">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin:0; color:var(--dark-espresso);">
+                3. Quick Add Drinks
+              </h2>
+              <a href="menu.html" style="font-size:0.85rem; font-weight:700; color:var(--caramel-accent); text-decoration:none;">
+                Full Menu →
+              </a>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">
+              Add signature handcrafted coffees and fresh pastries directly to your pickup order.
+            </p>
+
+            <div id="quickAddDrinksList" style="display:flex; flex-direction:column; gap:0.85rem; max-height:340px; overflow-y:auto; padding-right:4px;">
+              <!-- Dynamic Quick Add Items Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- 4. Order Summary & Checkout -->
+          <div class="form-card-ref">
+            <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1.25rem; color:var(--dark-espresso);">
+              4. Order Items Summary
+            </h2>
+            
+            <div id="orderItemsSummaryList" style="min-height:80px; max-height:220px; overflow-y:auto; margin-bottom:1.25rem;">
+              <!-- Dynamic Cart Items Preview -->
+            </div>
+
+            <!-- Promo Code Box -->
+            <div style="margin-bottom:1rem; padding:0.75rem; background:var(--bg-cream-light); border-radius:10px; border:1px dashed var(--border-light);">
+              <label style="font-size:0.78rem; font-weight:700; color:var(--dark-espresso); display:block; margin-bottom:0.35rem;">Promo / Offer Code:</label>
+              <div style="display:flex; gap:0.5rem;">
+                <input type="text" id="orderPromoInput" placeholder="Try WELCOME10 or COFFEE20" class="form-input-ref" style="font-size:0.85rem; padding:0.4rem 0.6rem; text-transform:uppercase;">
+                <button type="button" class="btn-brown" style="padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="applyOrderPromoCode()">Apply</button>
               </div>
-            `).join('')}
+              <div id="orderPromoMsg" style="font-size:0.75rem; margin-top:0.35rem; font-weight:600;"></div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:0.5rem; font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--border-light); margin-bottom:1.5rem;">
+              <div style="display:flex; justify-content:space-between; color:var(--text-muted);">
+                <span>Subtotal:</span>
+                <span id="orderSubtotal">$0.00</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; color:#2E7D32; font-weight:700;">
+                <span>Discount:</span>
+                <span id="orderDiscount">-$0.00</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; color:var(--text-muted);">
+                <span>Tax (8%):</span>
+                <span id="orderTax">$0.00</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.2rem; color:var(--dark-espresso); padding-top:0.6rem; border-top:1px solid var(--border-light);">
+                <span>Total:</span>
+                <span id="orderTotal" style="color:var(--caramel-accent);">$0.00</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn-brown" onclick="proceedToCheckout()" style="width:100%; text-align:center; padding:0.95rem 1.5rem; font-size:1rem;">
+              Proceed to Order Checkout
+            </button>
           </div>
 
-          <a href="checkout.html" class="btn-brown" style="width:100%; text-align:center; padding:0.9rem 1.5rem; font-size:1rem;">Proceed to Order Checkout</a>
         </div>
+
       </div>
     </section>
   </main>
@@ -148,6 +341,250 @@
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
   <script src="js/navbar.js"></script>
-  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  
+  <script>
+    let currentSelectedBranch = "";
+    let currentSelectedTime = "ASAP (15-20 min)";
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      
+      // Load stored order setup if available
+      const savedSetup = JSON.parse(localStorage.getItem('hcs_order_setup') || '{}');
+      if (savedSetup.branch) {
+        currentSelectedBranch = savedSetup.branch;
+      } else if (typeof LOCATIONS_DATA !== 'undefined' && LOCATIONS_DATA.length > 0) {
+        currentSelectedBranch = LOCATIONS_DATA[0].name;
+      }
+
+      if (savedSetup.pickupTime) {
+        currentSelectedTime = savedSetup.pickupTime;
+      }
+
+      renderBranches();
+      setupTimeSelectionHandlers();
+      renderQuickAddDrinks();
+      renderCartItemsSummary();
+      updateStatusHeader();
+    });
+
+    function renderBranches() {
+      const container = document.getElementById('branchesContainer');
+      if (!container || typeof LOCATIONS_DATA === 'undefined') return;
+
+      container.innerHTML = LOCATIONS_DATA.map((loc, idx) => {
+        const isSelected = (currentSelectedBranch === loc.name) || (!currentSelectedBranch && idx === 0);
+        if (isSelected) currentSelectedBranch = loc.name;
+
+        return `
+          <div class="branch-card ${isSelected ? 'active-branch' : ''}" onclick="selectBranch('${loc.name.replace(/'/g, "\\'")}')">
+            <input type="radio" name="pickupLoc" value="${loc.name}" ${isSelected ? 'checked' : ''} style="margin-top:4px; accent-color:var(--caramel-accent);">
+            <div style="flex:1;">
+              <div style="font-weight:700; color:var(--dark-espresso); font-size:1.02rem;">${loc.name}</div>
+              <div style="font-size:0.85rem; color:var(--text-muted); margin-top:2px;">${loc.address}</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">📞 ${loc.phone} • ⏰ ${loc.hours.split('|')[0]}</div>
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-top:6px;">
+                <span style="font-size:0.75rem; font-weight:700; color:var(--caramel-accent); background:rgba(184,104,27,0.1); padding:2px 8px; border-radius:10px;">⏱ Prep Time: 15–20 mins</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectBranch(branchName) {
+      currentSelectedBranch = branchName;
+      renderBranches();
+      updateStatusHeader();
+      saveOrderSetup();
+    }
+
+    function setupTimeSelectionHandlers() {
+      const buttons = document.querySelectorAll('#presetTimeButtons .time-btn');
+      buttons.forEach(btn => {
+        const btnTime = btn.getAttribute('data-time');
+        if (btnTime === currentSelectedTime) {
+          btn.className = 'btn-brown time-btn';
+        } else {
+          btn.className = 'btn-white time-btn';
+        }
+
+        btn.addEventListener('click', () => {
+          currentSelectedTime = btnTime;
+          document.getElementById('customTimeSelect').value = "";
+          
+          buttons.forEach(b => b.className = 'btn-white time-btn');
+          btn.className = 'btn-brown time-btn';
+          
+          updateStatusHeader();
+          saveOrderSetup();
+        });
+      });
+    }
+
+    function handleCustomTimeSelect(value) {
+      if (!value) return;
+      currentSelectedTime = value;
+      
+      const buttons = document.querySelectorAll('#presetTimeButtons .time-btn');
+      buttons.forEach(b => b.className = 'btn-white time-btn');
+      
+      updateStatusHeader();
+      saveOrderSetup();
+    }
+
+    function updateStatusHeader() {
+      const branchPill = document.getElementById('activeBranchPill');
+      const timePill = document.getElementById('activeTimePill');
+      const text = document.getElementById('statusSummaryText');
+
+      if (branchPill) branchPill.textContent = currentSelectedBranch || "Select Branch";
+      if (timePill) timePill.textContent = currentSelectedTime || "ASAP";
+      if (text) {
+        text.textContent = `${currentSelectedBranch.split('–')[1] || currentSelectedBranch} • ${currentSelectedTime}`;
+      }
+    }
+
+    function renderQuickAddDrinks() {
+      const container = document.getElementById('quickAddDrinksList');
+      if (!container || typeof PRODUCTS_DATA === 'undefined') return;
+
+      container.innerHTML = PRODUCTS_DATA.map(prod => {
+        const inCartCount = AppState.cart
+          .filter(item => item.id === prod.id)
+          .reduce((sum, item) => sum + item.quantity, 0);
+
+        return `
+          <div class="quick-drink-item">
+            <div style="display:flex; align-items:center; gap:0.85rem;">
+              <img src="${prod.image}" alt="${prod.name}" style="width:52px; height:52px; border-radius:10px; object-fit:cover;">
+              <div>
+                <div style="font-weight:700; font-size:0.9rem; color:var(--dark-espresso);">${prod.name}</div>
+                <div style="display:flex; align-items:center; gap:0.5rem; margin-top:2px;">
+                  <span style="font-size:0.85rem; color:var(--caramel-accent); font-weight:800;">$${prod.price.toFixed(2)}</span>
+                  <span style="font-size:0.75rem; color:var(--text-muted);">• ${prod.category}</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              ${inCartCount > 0 ? `<span style="font-size:0.75rem; font-weight:700; background:var(--caramel-accent); color:#FFF; padding:2px 7px; border-radius:10px;">x${inCartCount}</span>` : ''}
+              <button class="btn-brown" style="padding:0.4rem 0.85rem; font-size:0.78rem;" onclick="addQuickDrink('${prod.id}')">+ Add</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addQuickDrink(productId) {
+      const product = PRODUCTS_DATA.find(p => p.id === productId);
+      if (product) {
+        AppState.addToCart(product);
+        renderQuickAddDrinks();
+        renderCartItemsSummary();
+      }
+    }
+
+    function renderCartItemsSummary() {
+      const container = document.getElementById('orderItemsSummaryList');
+      if (!container) return;
+
+      if (AppState.cart.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:1.5rem; color:var(--text-muted); font-size:0.85rem;">
+            <i data-lucide="shopping-bag" style="width:28px; height:28px; margin-bottom:0.5rem; opacity:0.5;"></i>
+            <p>Your order is currently empty. Quick add drinks above or browse the menu.</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = AppState.cart.map(item => `
+          <div class="cart-item-mini">
+            <div style="flex:1;">
+              <div style="font-weight:700; font-size:0.85rem; color:var(--dark-espresso);">${item.name}</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">${item.size} • $${item.price.toFixed(2)}</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <button class="qty-btn" onclick="updateItemQty('${item.cartItemId}', ${item.quantity - 1})">-</button>
+              <span style="font-size:0.85rem; font-weight:700;">${item.quantity}</span>
+              <button class="qty-btn" onclick="updateItemQty('${item.cartItemId}', ${item.quantity + 1})">+</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      if (AppState.appliedPromo && AppState.appliedPromo.code) {
+        const promoInput = document.getElementById('orderPromoInput');
+        const msg = document.getElementById('orderPromoMsg');
+        if (promoInput && !promoInput.value) promoInput.value = AppState.appliedPromo.code;
+        if (msg) {
+          msg.style.color = '#2E7D32';
+          msg.textContent = `✓ Promo "${AppState.appliedPromo.code}" Active`;
+        }
+      }
+
+      document.getElementById('orderSubtotal').textContent = `$${AppState.getCartSubtotal().toFixed(2)}`;
+      document.getElementById('orderDiscount').textContent = `-$${AppState.getCartDiscount().toFixed(2)}`;
+      document.getElementById('orderTax').textContent = `$${AppState.getCartTax().toFixed(2)}`;
+      document.getElementById('orderTotal').textContent = `$${AppState.getCartTotal().toFixed(2)}`;
+
+      lucide.createIcons();
+    }
+
+    function applyOrderPromoCode() {
+      const code = (document.getElementById('orderPromoInput').value || '').trim().toUpperCase();
+      const msg = document.getElementById('orderPromoMsg');
+      const offer = typeof OFFERS_DATA !== 'undefined' ? OFFERS_DATA.find(o => o.code === code) : null;
+      
+      if (offer) {
+        AppState.appliedPromo = {
+          code: offer.code,
+          discountPercent: offer.discountPercent || 0,
+          discountAmount: offer.discountAmount || 0
+        };
+        localStorage.setItem('hcs_promo', JSON.stringify(AppState.appliedPromo));
+        msg.style.color = '#2E7D32';
+        msg.textContent = `✓ Promo "${code}" Applied (${offer.discount})!`;
+        showToast(`Promo Code "${code}" applied to order!`);
+      } else if (code === 'WELCOME10' || code === 'COFFEE20') {
+        AppState.appliedPromo = { code: code };
+        localStorage.setItem('hcs_promo', JSON.stringify(AppState.appliedPromo));
+        msg.style.color = '#2E7D32';
+        msg.textContent = `✓ Promo "${code}" Applied!`;
+        showToast(`Promo Code "${code}" applied!`);
+      } else if (!code) {
+        AppState.appliedPromo = null;
+        localStorage.removeItem('hcs_promo');
+        msg.textContent = '';
+        showToast("Promo code removed", "info");
+      } else {
+        AppState.appliedPromo = null;
+        msg.style.color = '#C62828';
+        msg.textContent = 'Invalid promo code. Try WELCOME10 or COFFEE20';
+      }
+      renderCartItemsSummary();
+    }
+
+    function updateItemQty(cartItemId, newQty) {
+      AppState.updateQuantity(cartItemId, newQty);
+      renderQuickAddDrinks();
+      renderCartItemsSummary();
+    }
+
+    function saveOrderSetup() {
+      const setup = {
+        branch: currentSelectedBranch,
+        pickupTime: currentSelectedTime
+      };
+      localStorage.setItem('hcs_order_setup', JSON.stringify(setup));
+    }
+
+    function proceedToCheckout() {
+      saveOrderSetup();
+      if (AppState.cart.length === 0) {
+        showToast("Please add at least one beverage or item to your order!", "info");
+        return;
+      }
+      window.location.href = 'checkout.html';
+    }
+  </script>
 </body>
 </html>

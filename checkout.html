@@ -151,8 +151,48 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      populateBranchOptions();
+      loadOrderSetup();
       renderCheckoutReview();
     });
+
+    function populateBranchOptions() {
+      const branchSelect = document.getElementById('checkoutBranch');
+      if (branchSelect && typeof LOCATIONS_DATA !== 'undefined') {
+        branchSelect.innerHTML = LOCATIONS_DATA.map(loc => `
+          <option value="${loc.name}">${loc.name} (${loc.address.split(',')[0]})</option>
+        `).join('');
+      }
+    }
+
+    function loadOrderSetup() {
+      const savedSetup = JSON.parse(localStorage.getItem('hcs_order_setup') || '{}');
+      if (savedSetup.branch) {
+        const branchSelect = document.getElementById('checkoutBranch');
+        if (branchSelect) branchSelect.value = savedSetup.branch;
+      }
+      if (savedSetup.pickupTime) {
+        const timeSelect = document.getElementById('checkoutTime');
+        if (timeSelect) {
+          // Check if option exists, otherwise add it
+          let found = false;
+          for (let i = 0; i < timeSelect.options.length; i++) {
+            if (timeSelect.options[i].value === savedSetup.pickupTime) {
+              timeSelect.options[i].selected = true;
+              found = true;
+              break;
+            }
+          }
+          if (!found) {
+            const opt = document.createElement('option');
+            opt.value = savedSetup.pickupTime;
+            opt.textContent = savedSetup.pickupTime;
+            opt.selected = true;
+            timeSelect.appendChild(opt);
+          }
+        }
+      }
+    }
 
     function renderCheckoutReview() {
       const container = document.getElementById('checkoutItemsList');

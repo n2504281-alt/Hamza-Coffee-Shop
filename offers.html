@@ -3,12 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Special Offers — Hamza Coffee Shop</title>
+  <title>Special Offers & Promo Codes — Hamza Coffee Shop</title>
   <meta name="description" content="Exclusive café offers and promo codes at Hamza Coffee Shop. Enjoy 10-20% off your favorite artisan coffee and pastries.">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .offer-card {
+      position: relative;
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 1.8rem;
+      border: 2px solid var(--border-light);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+    }
+    .offer-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border-color: var(--caramel-accent);
+    }
+    .offer-card.active-offer {
+      border-color: #2E7D32;
+      background: #F4FBF7;
+      box-shadow: 0 8px 24px rgba(46, 125, 50, 0.15);
+    }
+    .active-promo-banner {
+      background: linear-gradient(135deg, var(--dark-espresso) 0%, #4A2B1B 100%);
+      color: #FFFFFF;
+      padding: 1.25rem 1.75rem;
+      border-radius: 16px;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 8px 24px rgba(43, 24, 12, 0.15);
+    }
+  </style>
 </head>
 <body>
 
@@ -63,12 +100,29 @@
   <main>
     <section class="page-header-banner">
       <div class="container">
-        <h1 class="page-header-title">Special Café Offers</h1>
-        <p class="page-header-subtitle">Copy your promo code below and apply it at checkout to enjoy discounts on your order.</p>
+        <h1 class="page-header-title">Special Café Offers & Promo Codes</h1>
+        <p class="page-header-subtitle">Click "Apply Offer" to use discount codes instantly on your coffee orders, or copy for later.</p>
       </div>
     </section>
 
     <section class="container" style="padding-bottom:5rem;">
+      
+      <!-- Active Promo Banner -->
+      <div id="activePromoBanner" class="active-promo-banner" style="display:none;">
+        <div style="display:flex; align-items:center; gap:0.85rem;">
+          <i data-lucide="tag" style="color:var(--caramel-accent); width:28px; height:28px;"></i>
+          <div>
+            <div style="font-size:0.8rem; color:rgba(255,255,255,0.7); text-transform:uppercase; letter-spacing:0.5px;">Active Discount Applied</div>
+            <div style="font-weight:800; font-size:1.1rem; color:#A7F3D0;" id="activePromoText">WELCOME10 — 10% OFF</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:0.75rem; align-items:center;">
+          <a href="order.html" class="btn-brown" style="font-size:0.85rem; padding:0.5rem 1.2rem;">Order Ahead Now →</a>
+          <button type="button" onclick="removeActivePromo()" class="btn-white" style="font-size:0.8rem; padding:0.5rem 1rem;">Remove</button>
+        </div>
+      </div>
+
+      <!-- Offers Grid -->
       <div id="offersGrid" class="grid-container grid-2-cols" style="gap:2rem;"></div>
     </section>
   </main>
@@ -80,16 +134,11 @@
         <div>
           <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
           <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
-          <div class="footer-socials">
-            <a href="#" class="social-pill" title="Instagram"><i data-lucide="instagram"></i></a>
-            <a href="#" class="social-pill" title="Facebook"><i data-lucide="facebook"></i></a>
-            <a href="#" class="social-pill" title="Twitter"><i data-lucide="twitter"></i></a>
-          </div>
         </div>
         <div>
           <h4 class="footer-column-title">Quick Links</h4>
           <div class="footer-links-list">
-            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a><a href="locations.html">Locations</a>
           </div>
         </div>
         <div>
@@ -100,33 +149,15 @@
         </div>
         <div>
           <h4 class="footer-column-title">Join Coffee Club</h4>
-          <p style="font-size:0.85rem; color:rgba(255,255,255,0.7); margin-bottom:1rem;">Get 10% off your first order!</p>
           <form onsubmit="event.preventDefault(); showToast('Subscribed to Newsletter!');" style="display:flex; gap:0.5rem;">
-            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem 0.8rem; font-size:0.85rem;">
-            <button type="submit" class="btn-brown" style="padding:0.5rem 1rem;">Join</button>
+            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem; font-size:0.85rem;">
+            <button type="submit" class="btn-brown">Join</button>
           </form>
         </div>
       </div>
-      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p><p>Crafted with Passion &amp; Precision</p></div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
     </div>
   </footer>
-
-  <!-- Side Cart Drawer -->
-  <div id="cartOverlay" class="cart-overlay"></div>
-  <div id="cartDrawer" class="cart-drawer">
-    <div class="cart-drawer-header">
-      <h3 style="font-family:var(--font-heading); color:var(--dark-espresso);">Your Coffee Cart</h3>
-      <button id="closeCartBtn" class="icon-btn-ref"><i data-lucide="x"></i></button>
-    </div>
-    <div id="cartDrawerItems" class="cart-drawer-items"></div>
-    <div class="cart-drawer-footer">
-      <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-weight:700;">
-        <span>Total:</span>
-        <span id="cartDrawerTotal" style="color:var(--caramel-accent);">$0.00</span>
-      </div>
-      <a href="checkout.html" class="btn-brown" style="width:100%; text-align:center;">Proceed to Checkout</a>
-    </div>
-  </div>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
@@ -135,30 +166,112 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      renderOffers();
+      updateActivePromoBanner();
+    });
 
+    function renderOffers() {
       const grid = document.getElementById('offersGrid');
-      if (grid && typeof OFFERS_DATA !== 'undefined') {
-        grid.innerHTML = OFFERS_DATA.map(off => `
-          <div class="form-card-ref reveal" style="position:relative; overflow:visible;">
-            <span style="position:absolute; top:-12px; right:20px; background:var(--caramel-accent); color:#FFF; font-size:0.75rem; font-weight:800; padding:0.25rem 0.75rem; border-radius:999px; box-shadow:0 2px 8px rgba(0,0,0,0.15);">${off.badge}</span>
-            <div style="font-family:var(--font-heading); font-size:2.6rem; font-weight:900; color:var(--caramel-accent); margin-bottom:0.4rem; line-height:1;">${off.discount}</div>
-            <h3 style="font-family:var(--font-heading); font-size:1.25rem; margin-bottom:0.5rem; color:var(--dark-espresso);">${off.title}</h3>
-            <p style="color:var(--text-muted); margin-bottom:1.5rem; font-size:0.9rem; line-height:1.6;">${off.description}</p>
-            <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:var(--text-muted); margin-bottom:1.2rem;">
-              <i data-lucide="calendar" style="width:14px;"></i>
-              <span>Valid Until: <strong>${off.validUntil}</strong></span>
+      if (!grid || typeof OFFERS_DATA === 'undefined') return;
+
+      const activeCode = AppState.appliedPromo ? AppState.appliedPromo.code : null;
+
+      grid.innerHTML = OFFERS_DATA.map(off => {
+        const isApplied = activeCode === off.code;
+
+        return `
+          <div class="offer-card ${isApplied ? 'active-offer' : ''}">
+            <span style="position:absolute; top:-12px; right:20px; background:${isApplied ? '#2E7D32' : 'var(--caramel-accent)'}; color:#FFF; font-size:0.75rem; font-weight:800; padding:0.25rem 0.85rem; border-radius:999px; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+              ${isApplied ? '✓ Applied to Cart' : off.badge}
+            </span>
+
+            <div>
+              <div style="font-family:var(--font-heading); font-size:2.6rem; font-weight:900; color:var(--caramel-accent); margin-bottom:0.3rem; line-height:1;">
+                ${off.discount}
+              </div>
+              <h3 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:0.5rem; color:var(--dark-espresso);">
+                ${off.title}
+              </h3>
+              <p style="color:var(--text-muted); margin-bottom:1.25rem; font-size:0.9rem; line-height:1.6;">
+                ${off.description}
+              </p>
+              <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:var(--text-muted); margin-bottom:1.5rem;">
+                <i data-lucide="calendar" style="width:14px;"></i>
+                <span>Valid: <strong>${off.validUntil}</strong></span>
+              </div>
             </div>
-            <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-cream-light); padding:0.75rem 1.25rem; border-radius:12px; border:1.5px dashed var(--caramel-accent);">
-              <div style="font-family:monospace; font-size:1.1rem; font-weight:800; color:var(--dark-espresso); letter-spacing:2px;">${off.code}</div>
-              <button class="btn-brown" style="padding:0.4rem 1rem; font-size:0.8rem;" onclick="copyPromoCode('${off.code}')">
-                <i data-lucide="copy" style="width:14px; margin-right:4px;"></i> Copy Code
-              </button>
+
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-cream-light); padding:0.75rem 1.25rem; border-radius:12px; border:1.5px dashed var(--caramel-accent);">
+                <div>
+                  <div style="font-size:0.7rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Promo Code</div>
+                  <div style="font-family:monospace; font-size:1.15rem; font-weight:800; color:var(--dark-espresso); letter-spacing:2px;">${off.code}</div>
+                </div>
+                <button type="button" class="btn-white" style="padding:0.35rem 0.85rem; font-size:0.78rem;" onclick="copyPromoCode('${off.code}')">
+                  <i data-lucide="copy" style="width:13px; margin-right:3px;"></i> Copy
+                </button>
+              </div>
+
+              <div style="display:flex; gap:0.5rem;">
+                ${isApplied ? `
+                  <button type="button" class="btn-brown" style="flex:1; text-align:center; padding:0.6rem 1rem; font-size:0.85rem; background:#2E7D32;" onclick="window.location.href='order.html'">
+                    Use on Order Ahead →
+                  </button>
+                  <button type="button" class="btn-white" style="padding:0.6rem 0.9rem; font-size:0.8rem;" onclick="removeActivePromo()">
+                    Remove
+                  </button>
+                ` : `
+                  <button type="button" class="btn-brown" style="width:100%; text-align:center; padding:0.6rem 1rem; font-size:0.85rem;" onclick="applyPromoOffer('${off.code}')">
+                    <i data-lucide="check-circle" style="width:14px; margin-right:4px;"></i> Apply Code Now
+                  </button>
+                `}
+              </div>
             </div>
           </div>
-        `).join('');
-        lucide.createIcons();
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function applyPromoOffer(code) {
+      const offer = OFFERS_DATA.find(o => o.code === code);
+      if (offer) {
+        AppState.appliedPromo = {
+          code: offer.code,
+          discountPercent: offer.discountPercent || 0,
+          discountAmount: offer.discountAmount || 0
+        };
+        localStorage.setItem('hcs_promo', JSON.stringify(AppState.appliedPromo));
+        showToast(`Promo Code "${code}" applied to your order! 🎉`);
+        renderOffers();
+        updateActivePromoBanner();
       }
-    });
+    }
+
+    function removeActivePromo() {
+      AppState.appliedPromo = null;
+      localStorage.removeItem('hcs_promo');
+      showToast("Promo code removed.", "info");
+      renderOffers();
+      updateActivePromoBanner();
+    }
+
+    function updateActivePromoBanner() {
+      const banner = document.getElementById('activePromoBanner');
+      const text = document.getElementById('activePromoText');
+      
+      if (!banner) return;
+
+      if (AppState.appliedPromo && AppState.appliedPromo.code) {
+        const offer = OFFERS_DATA.find(o => o.code === AppState.appliedPromo.code);
+        const discountLabel = offer ? offer.discount : AppState.appliedPromo.code;
+        text.textContent = `CODE: ${AppState.appliedPromo.code} (${discountLabel})`;
+        banner.style.display = 'flex';
+      } else {
+        banner.style.display = 'none';
+      }
+    }
 
     function copyPromoCode(code) {
       navigator.clipboard.writeText(code).then(() => {

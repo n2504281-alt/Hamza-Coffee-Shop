@@ -122,8 +122,13 @@ const AppState = {
   getCartDiscount() {
     const subtotal = this.getCartSubtotal();
     if (!this.appliedPromo) return 0;
-    if (this.appliedPromo.code === 'WELCOME10') return subtotal * 0.10;
-    if (this.appliedPromo.code === 'COFFEE20') return subtotal * 0.20;
+    const code = (this.appliedPromo.code || '').toUpperCase();
+    if (code === 'WELCOME10') return subtotal * 0.10;
+    if (code === 'COFFEE20') return subtotal * 0.20;
+    if (code === 'PASTRY15') return subtotal * 0.15;
+    if (code === 'EXPRESS5') return Math.min(5.00, subtotal);
+    if (this.appliedPromo.discountPercent) return subtotal * (this.appliedPromo.discountPercent / 100);
+    if (this.appliedPromo.discountAmount) return Math.min(this.appliedPromo.discountAmount, subtotal);
     return 0;
   },
 
