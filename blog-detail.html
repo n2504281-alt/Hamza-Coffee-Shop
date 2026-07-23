@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Reader — Hamza Coffee Shop</title>
+  <title>Article — Hamza Coffee Shop</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -11,21 +11,50 @@
 </head>
 <body>
 
-  <header class="navbar scrolled">
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
-      <nav class="nav-links"><a href="blog.html" class="nav-link"><i data-lucide="arrow-left" style="width:14px;"></i> Back to Blog Journal</a></nav>
+  <!-- NAVBAR -->
+  <header class="navbar-ref">
+    <div class="container nav-flex">
+      <a href="index.html" class="logo-ref"><i data-lucide="coffee" style="color:var(--caramel-accent);"></i><span>Coffee</span></a>
+      <nav class="nav-links-ref"><a href="blog.html" class="nav-link-ref"><i data-lucide="arrow-left" style="width:14px;"></i> Return to Blog</a></nav>
     </div>
   </header>
 
-  <main style="padding-top:7rem;" class="section">
+  <main style="padding: 4rem 0 6rem 0;">
     <div class="container" style="max-width:800px;">
       <div id="blogDetailContainer"></div>
     </div>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+  <!-- UNIFORM FOOTER -->
+  <footer class="footer-ref">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
+          <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Quick Links</h4>
+          <div class="footer-links-list">
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Customer Care</h4>
+          <div class="footer-links-list">
+            <a href="faq.html">FAQ</a><a href="reservations.html">Book a Table</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Join Coffee Club</h4>
+          <form onsubmit="event.preventDefault(); showToast('Subscribed!');" style="display:flex; gap:0.5rem;">
+            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem; font-size:0.85rem;">
+            <button type="submit" class="btn-brown">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+    </div>
   </footer>
 
   <script src="js/data.js"></script>
@@ -41,16 +70,16 @@
 
       const container = document.getElementById('blogDetailContainer');
       container.innerHTML = `
-        <span class="badge badge-gold" style="margin-bottom:1rem;">${post.category}</span>
-        <h1 class="title-lg" style="margin-bottom:1rem;">${post.title}</h1>
-        <div style="display:flex; gap:1.5rem; color:var(--color-text-dim); font-size:0.85rem; margin-bottom:2rem;">
-          <span>By ${post.author}</span>
-          <span>•</span>
-          <span>${post.date}</span>
-        </div>
-        <img src="${post.image}" alt="${post.title}" style="width:100%; height:400px; object-fit:cover; border-radius:var(--radius-lg); margin-bottom:2.5rem; box-shadow:var(--shadow-lg);">
-        <div style="font-size:1.1rem; line-height:1.8; color:var(--color-text-light);">
-          ${post.content}
+        <div class="form-card-ref">
+          <span style="background:var(--caramel-accent); color:#FFF; font-size:0.75rem; font-weight:800; padding:0.25rem 0.75rem; border-radius:999px;">${post.category}</span>
+          <h1 style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:var(--dark-espresso); margin:1rem 0 0.5rem 0;">${post.title}</h1>
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">By ${post.author} • ${post.date}</div>
+          <div style="border-radius:14px; overflow:hidden; height:320px; margin-bottom:2rem;">
+            <img src="${post.image}" alt="${post.title}" style="width:100%; height:100%; object-fit:cover;">
+          </div>
+          <div style="font-size:1.05rem; line-height:1.8; color:var(--dark-espresso);">
+            ${post.content}
+          </div>
         </div>
       `;
       lucide.createIcons();

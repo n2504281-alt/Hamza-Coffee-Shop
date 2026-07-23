@@ -11,83 +11,76 @@
 </head>
 <body>
 
-  <header class="navbar scrolled">
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
-      <nav class="nav-links"><a href="cart.html" class="nav-link"><i data-lucide="arrow-left" style="width:14px;"></i> Return to Cart</a></nav>
+  <!-- NAVBAR -->
+  <header class="navbar-ref">
+    <div class="container nav-flex">
+      <a href="index.html" class="logo-ref"><i data-lucide="coffee" style="color:var(--caramel-accent);"></i><span>Coffee</span></a>
+      <nav class="nav-links-ref"><a href="cart.html" class="nav-link-ref"><i data-lucide="arrow-left" style="width:14px;"></i> Return to Cart</a></nav>
     </div>
   </header>
 
-  <main style="padding-top:7rem;" class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="subtitle">Secure Pickup Checkout</span>
-        <h1 class="title-lg">Complete Your Order</h1>
+  <main>
+    <section class="page-header-banner">
+      <div class="container">
+        <h1 class="page-header-title">Checkout Order</h1>
+        <p class="page-header-subtitle">Provide pickup contact details and choose your pickup branch.</p>
       </div>
+    </section>
 
+    <section class="container" style="padding-bottom:5rem;">
       <form id="checkoutForm" onsubmit="handlePlaceOrder(event)">
-        <div class="grid grid-3" style="gap:2.5rem; align-items:start;">
-          <!-- Left: Customer Details & Pickup Options (Span 2) -->
+        <div class="grid-container grid-3-cols" style="align-items:start;">
+          <!-- Customer Details & Pickup Options (Span 2) -->
           <div style="grid-column: span 2; display:flex; flex-direction:column; gap:2rem;">
             
-            <!-- Customer Contact -->
-            <div style="background:var(--color-surface-card); padding:2rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark);">
-              <h2 style="font-size:1.25rem; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;"><i data-lucide="user" style="color:var(--color-caramel);"></i> 1. Contact Information</h2>
-              <div class="grid grid-2" style="gap:1rem;">
-                <div>
-                  <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Full Name *</label>
-                  <input type="text" required id="custName" placeholder="e.g. Alexander Wright" style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
+            <!-- Contact -->
+            <div class="form-card-ref">
+              <h2 style="font-family:var(--font-heading); font-size:1.25rem; margin-bottom:1.25rem; color:var(--dark-espresso);">1. Contact Information</h2>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div class="form-group-ref">
+                  <label class="form-label-ref">Full Name *</label>
+                  <input type="text" required id="custName" placeholder="e.g. Alexander Wright" class="form-input-ref">
                 </div>
-                <div>
-                  <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Phone Number *</label>
-                  <input type="tel" required id="custPhone" placeholder="+1 (555) 019-2834" style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
+                <div class="form-group-ref">
+                  <label class="form-label-ref">Phone Number *</label>
+                  <input type="tel" required id="custPhone" placeholder="+1 (555) 019-2834" class="form-input-ref">
                 </div>
-                <div style="grid-column:1/-1;">
-                  <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Email Address (For Receipt & Order Status) *</label>
-                  <input type="email" required id="custEmail" placeholder="alexander@example.com" style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
+                <div class="form-group-ref" style="grid-column:1/-1;">
+                  <label class="form-label-ref">Email Address *</label>
+                  <input type="email" required id="custEmail" placeholder="alexander@example.com" class="form-input-ref">
                 </div>
               </div>
             </div>
 
-            <!-- Pickup Location & Time -->
-            <div style="background:var(--color-surface-card); padding:2rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark);">
-              <h2 style="font-size:1.25rem; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin" style="color:var(--color-caramel);"></i> 2. Pickup Location & Time</h2>
-              <div style="margin-bottom:1.25rem;">
-                <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Select Branch Location *</label>
-                <select id="checkoutBranch" style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
+            <!-- Location & Time -->
+            <div class="form-card-ref">
+              <h2 style="font-family:var(--font-heading); font-size:1.25rem; margin-bottom:1.25rem; color:var(--dark-espresso);">2. Pickup Location & Time</h2>
+              <div class="form-group-ref">
+                <label class="form-label-ref">Select Branch *</label>
+                <select id="checkoutBranch" class="form-select-ref">
                   <option value="Hamza Coffee Shop – Main Flagship Branch">Hamza Coffee Shop – Main Flagship Branch (742 Grand Ave)</option>
                   <option value="Hamza Coffee Shop – Marina Bay Corner">Hamza Coffee Shop – Marina Bay Corner (108 Waterfront Promenade)</option>
                 </select>
               </div>
-
-              <div>
-                <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Pickup Time *</label>
-                <select id="checkoutTime" style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
+              <div class="form-group-ref">
+                <label class="form-label-ref">Pickup Time *</label>
+                <select id="checkoutTime" class="form-select-ref">
                   <option value="ASAP (15-20 mins)">ASAP (15–20 minutes)</option>
                   <option value="In 30 Minutes">In 30 Minutes</option>
                   <option value="In 45 Minutes">In 45 Minutes</option>
-                  <option value="In 1 Hour">In 1 Hour</option>
                 </select>
               </div>
             </div>
 
             <!-- Payment Options -->
-            <div style="background:var(--color-surface-card); padding:2rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark);">
-              <h2 style="font-size:1.25rem; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;"><i data-lucide="credit-card" style="color:var(--color-caramel);"></i> 3. Payment Selection</h2>
+            <div class="form-card-ref">
+              <h2 style="font-family:var(--font-heading); font-size:1.25rem; margin-bottom:1.25rem; color:var(--dark-espresso);">3. Payment Choice</h2>
               <div style="display:flex; flex-direction:column; gap:1rem;">
-                <label style="display:flex; align-items:center; gap:1rem; padding:1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.04); border:1px solid var(--color-border-dark); cursor:pointer;">
-                  <input type="radio" name="payMethod" value="Pay at Pickup" checked style="accent-color:var(--color-caramel);">
+                <label style="display:flex; align-items:center; gap:1rem; padding:1rem; border-radius:12px; background:var(--bg-cream-light); border:1px solid var(--border-light); cursor:pointer;">
+                  <input type="radio" name="payMethod" value="Pay at Pickup" checked style="accent-color:var(--caramel-accent);">
                   <div>
-                    <div style="font-weight:700;">Pay at Café Counter (Cash / Card)</div>
-                    <div style="font-size:0.8rem; color:var(--color-text-dim);">Pay when you arrive to pick up your order.</div>
-                  </div>
-                </label>
-
-                <label style="display:flex; align-items:center; gap:1rem; padding:1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.04); border:1px solid var(--color-border-dark); cursor:pointer;">
-                  <input type="radio" name="payMethod" value="Card Online" style="accent-color:var(--color-caramel);">
-                  <div>
-                    <div style="font-weight:700;">Credit / Debit Card (Online Gateway Ready)</div>
-                    <div style="font-size:0.8rem; color:var(--color-text-dim);">Stripe / Apple Pay integration ready for production backend.</div>
+                    <div style="font-weight:700; color:var(--dark-espresso);">Pay at Café Counter (Cash / Card)</div>
+                    <div style="font-size:0.8rem; color:var(--text-muted);">Pay when you arrive to pick up your beverage.</div>
                   </div>
                 </label>
               </div>
@@ -95,29 +88,61 @@
 
           </div>
 
-          <!-- Right: Order Review & Submit -->
-          <div style="background:var(--color-surface-card); padding:2rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark);">
-            <h2 style="font-size:1.3rem; margin-bottom:1.5rem;">Items in Order</h2>
+          <!-- Order Summary Card -->
+          <div class="form-card-ref">
+            <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1.5rem; color:var(--dark-espresso);">Items in Order</h2>
             <div id="checkoutItemsList" style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.5rem; max-height:240px; overflow-y:auto;"></div>
 
-            <div style="display:flex; flex-direction:column; gap:0.6rem; font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--color-border-dark);">
-              <div style="display:flex; justify-content:space-between; color:var(--color-text-dim);"><span>Subtotal:</span><span id="coSubtotal">$0.00</span></div>
-              <div style="display:flex; justify-content:space-between; color:#4CAF50;"><span>Discount:</span><span id="coDiscount">-$0.00</span></div>
-              <div style="display:flex; justify-content:space-between; color:var(--color-text-dim);"><span>Tax (8%):</span><span id="coTax">$0.00</span></div>
-              <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.25rem; color:var(--color-cream); padding-top:0.75rem; border-top:1px solid var(--color-border-dark);">
+            <div style="display:flex; flex-direction:column; gap:0.6rem; font-size:0.9rem; padding-top:1rem; border-top:1px solid var(--border-light);">
+              <div style="display:flex; justify-content:space-between; color:var(--text-muted);"><span>Subtotal:</span><span id="coSubtotal">$0.00</span></div>
+              <div style="display:flex; justify-content:space-between; color:#2E7D32; font-weight:700;"><span>Discount:</span><span id="coDiscount">-$0.00</span></div>
+              <div style="display:flex; justify-content:space-between; color:var(--text-muted);"><span>Tax (8%):</span><span id="coTax">$0.00</span></div>
+              <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.25rem; color:var(--dark-espresso); padding-top:0.75rem; border-top:1px solid var(--border-light);">
                 <span>Total Due:</span>
-                <span id="coTotal" style="color:var(--color-caramel);">$0.00</span>
+                <span id="coTotal" style="color:var(--caramel-accent);">$0.00</span>
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg glow-pulse" style="width:100%; margin-top:1.5rem;">
-              <i data-lucide="check-circle"></i> Place Pickup Order
+            <button type="submit" class="btn-brown" style="width:100%; text-align:center; padding:0.9rem; font-size:1rem; margin-top:1.5rem;">
+              Place Pickup Order
             </button>
           </div>
         </div>
       </form>
-    </div>
+    </section>
   </main>
+
+  <!-- UNIFORM FOOTER -->
+  <footer class="footer-ref">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
+          <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Quick Links</h4>
+          <div class="footer-links-list">
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Customer Care</h4>
+          <div class="footer-links-list">
+            <a href="faq.html">FAQ</a><a href="reservations.html">Book a Table</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Join Coffee Club</h4>
+          <form onsubmit="event.preventDefault(); showToast('Subscribed!');" style="display:flex; gap:0.5rem;">
+            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem; font-size:0.85rem;">
+            <button type="submit" class="btn-brown">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+    </div>
+  </footer>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
@@ -139,12 +164,12 @@
       }
 
       container.innerHTML = AppState.cart.map(item => `
-        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.875rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.85rem;">
           <div>
-            <div style="font-weight:600; color:var(--color-cream);">${item.quantity}x ${item.name}</div>
-            <div style="font-size:0.75rem; color:var(--color-text-dim);">${item.size} • ${item.milk}</div>
+            <div style="font-weight:700; color:var(--dark-espresso);">${item.quantity}x ${item.name}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${item.size} • ${item.milk}</div>
           </div>
-          <div style="font-weight:700; color:var(--color-caramel);">$${(item.price * item.quantity).toFixed(2)}</div>
+          <div style="font-weight:800; color:var(--caramel-accent);">$${(item.price * item.quantity).toFixed(2)}</div>
         </div>
       `).join('');
 
@@ -156,7 +181,6 @@
 
     function handlePlaceOrder(e) {
       e.preventDefault();
-
       const orderNumber = `#HCS-${Math.floor(10000 + Math.random() * 90000)}`;
       const activeOrder = {
         orderNumber,
@@ -172,17 +196,13 @@
         tax: AppState.getCartTax(),
         total: AppState.getCartTotal(),
         createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        status: "Received" // Simulated status
+        status: "Received"
       };
 
       AppState.activeOrder = activeOrder;
       localStorage.setItem('hcs_active_order', JSON.stringify(activeOrder));
-      
-      // Clear cart
       AppState.cart = [];
       AppState.saveCart();
-
-      // Redirect to Confirmation & Live Tracker page
       window.location.href = 'confirmation.html';
     }
   </script>

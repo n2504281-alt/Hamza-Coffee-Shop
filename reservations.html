@@ -11,98 +11,131 @@
 </head>
 <body>
 
-  <header class="navbar scrolled">
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
-      <nav class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="menu.html" class="nav-link">Menu</a>
-        <a href="reservations.html" class="nav-link active">Book a Table</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+  <!-- NAVBAR -->
+  <header class="navbar-ref">
+    <div class="container nav-flex">
+      <a href="index.html" class="logo-ref"><i data-lucide="coffee" style="color:var(--caramel-accent);"></i><span>Coffee</span></a>
+      <nav class="nav-links-ref">
+        <a href="index.html" class="nav-link-ref">Home</a>
+        <a href="menu.html" class="nav-link-ref">Menu</a>
+        <a href="reservations.html" class="nav-link-ref active">Book a Table</a>
+        <a href="contact.html" class="nav-link-ref">Contact</a>
       </nav>
-      <div class="nav-actions">
-        <button class="icon-btn open-cart-btn"><i data-lucide="shopping-bag"></i><span class="icon-badge cart-count-badge" style="display:none;">0</span></button>
+      <div class="nav-right-actions">
+        <button class="icon-btn-ref open-cart-btn"><i data-lucide="shopping-bag"></i><span class="badge-count cart-count-badge" style="display:none;">0</span></button>
       </div>
     </div>
   </header>
 
-  <main style="padding-top:7rem;" class="section">
-    <div class="container" style="max-width:720px;">
-      <div class="section-header reveal">
-        <span class="subtitle">Table Reservations</span>
-        <h1 class="title-lg">Reserve Your Café Experience</h1>
-        <p>Book a cozy corner table or a group seating area for your business meeting or casual coffee date.</p>
+  <main>
+    <section class="page-header-banner">
+      <div class="container">
+        <h1 class="page-header-title">Reserve a Table</h1>
+        <p class="page-header-subtitle">Book a cozy corner table or lounge seating for business meetings or relaxed coffee dates.</p>
       </div>
+    </section>
 
-      <div style="background:var(--color-surface-card); padding:2.5rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark); box-shadow:var(--shadow-lg);">
+    <section class="container" style="max-width:700px; padding-bottom:5rem;">
+      <div class="form-card-ref">
         <form id="reservationForm" onsubmit="handleReservationSubmit(event)">
-          <div class="grid grid-2" style="gap:1.25rem;">
-            <div>
-              <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Full Name *</label>
-              <input type="text" required id="resName" placeholder="e.g. Sophia Turner" style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
-            </div>
-            <div>
-              <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Phone Number *</label>
-              <input type="tel" required id="resPhone" placeholder="+1 (555) 345-6789" style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
-            </div>
-            <div style="grid-column:1/-1;">
-              <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Email Address *</label>
-              <input type="email" required id="resEmail" placeholder="sophia@example.com" style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
-            </div>
+          <div class="form-group-ref">
+            <label class="form-label-ref">Full Name *</label>
+            <input type="text" required id="resName" placeholder="e.g. Sophia Turner" class="form-input-ref">
+          </div>
 
-            <div>
-              <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Reservation Date *</label>
-              <input type="date" required id="resDate" style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group-ref">
+              <label class="form-label-ref">Phone Number *</label>
+              <input type="tel" required id="resPhone" placeholder="+1 (555) 345-6789" class="form-input-ref">
             </div>
-            <div>
-              <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Time *</label>
-              <select id="resTime" required style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
-                <option value="09:00 AM">09:00 AM</option>
-                <option value="11:30 AM">11:30 AM</option>
-                <option value="02:00 PM">02:00 PM</option>
-                <option value="04:30 PM">04:30 PM</option>
-                <option value="07:00 PM">07:00 PM</option>
-              </select>
-            </div>
-
-            <div style="grid-column:1/-1;">
-              <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Number of Guests *</label>
-              <select id="resGuests" style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);">
-                <option value="2 Guests">2 Guests (Cozy Table)</option>
-                <option value="4 Guests">4 Guests (Standard Table)</option>
-                <option value="6 Guests">6 Guests (Lounge Seating)</option>
-                <option value="8 Guests">8+ Guests (Group Meeting)</option>
-              </select>
-            </div>
-
-            <div style="grid-column:1/-1;">
-              <label style="font-size:0.85rem; color:var(--color-text-dim); display:block; margin-bottom:0.4rem;">Special Requests / Notes</label>
-              <textarea id="resNotes" rows="3" placeholder="Window seat, quiet corner, wheelchair accessible..." style="width:100%; padding:0.75rem 1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.06); border:1px solid var(--color-border-dark); color:var(--color-cream);"></textarea>
+            <div class="form-group-ref">
+              <label class="form-label-ref">Email Address *</label>
+              <input type="email" required id="resEmail" placeholder="sophia@example.com" class="form-input-ref">
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-lg glow-pulse" style="width:100%; margin-top:1.5rem;">
-            <i data-lucide="calendar"></i> Confirm Table Reservation
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group-ref">
+              <label class="form-label-ref">Reservation Date *</label>
+              <input type="date" required id="resDate" class="form-input-ref">
+            </div>
+            <div class="form-group-ref">
+              <label class="form-label-ref">Time *</label>
+              <select id="resTime" required class="form-select-ref">
+                <option value="09:00 AM">09:00 AM</option>
+                <option value="11:30 AM">11:30 AM</option>
+                <option value="02:00 PM">02:00 PM</option>
+                <option value="05:00 PM">05:00 PM</option>
+                <option value="07:30 PM">07:30 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group-ref">
+            <label class="form-label-ref">Number of Guests *</label>
+            <select id="resGuests" class="form-select-ref">
+              <option value="2 Guests">2 Guests (Cozy Window Table)</option>
+              <option value="4 Guests">4 Guests (Standard Table)</option>
+              <option value="6 Guests">6 Guests (Lounge Area)</option>
+              <option value="8 Guests">8+ Guests (Group Meeting)</option>
+            </select>
+          </div>
+
+          <div class="form-group-ref">
+            <label class="form-label-ref">Special Requests / Notes</label>
+            <textarea id="resNotes" rows="3" placeholder="Window seat, quiet corner, wheelchair accessible..." class="form-textarea-ref"></textarea>
+          </div>
+
+          <button type="submit" class="btn-brown" style="width:100%; text-align:center; padding:0.9rem; font-size:1rem; margin-top:1rem;">
+            Confirm Table Reservation
           </button>
         </form>
       </div>
-    </div>
+    </section>
   </main>
 
   <!-- Modal Confirmation -->
   <div id="resModal" class="cart-overlay" style="display:none; align-items:center; justify-content:center;">
-    <div style="background:var(--color-surface-card); padding:2.5rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark); max-width:480px; text-align:center;">
-      <div style="width:64px; height:64px; border-radius:50%; background:rgba(76,175,80,0.15); color:#4CAF50; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem auto; font-size:2rem;">
-        <i data-lucide="check-circle"></i>
+    <div class="form-card-ref" style="max-width:440px; text-align:center;">
+      <div style="width:56px; height:56px; border-radius:50%; background:rgba(46,125,50,0.15); color:#2E7D32; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem auto; font-size:1.8rem;">
+        ✓
       </div>
-      <h2 style="font-family:var(--font-heading); margin-bottom:0.5rem;">Table Reserved!</h2>
-      <p style="color:var(--color-text-dim); font-size:0.95rem; margin-bottom:1.5rem;" id="resModalBody"></p>
-      <button class="btn btn-primary" onclick="closeResModal()">Done</button>
+      <h2 style="font-family:var(--font-heading); margin-bottom:0.5rem; color:var(--dark-espresso);">Table Reserved!</h2>
+      <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;" id="resModalBody"></p>
+      <button class="btn-brown" onclick="closeResModal()">Done</button>
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+  <!-- UNIFORM FOOTER -->
+  <footer class="footer-ref">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
+          <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Quick Links</h4>
+          <div class="footer-links-list">
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Customer Care</h4>
+          <div class="footer-links-list">
+            <a href="faq.html">FAQ</a><a href="reservations.html">Book a Table</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Join Coffee Club</h4>
+          <form onsubmit="event.preventDefault(); showToast('Subscribed!');" style="display:flex; gap:0.5rem;">
+            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem; font-size:0.85rem;">
+            <button type="submit" class="btn-brown">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+    </div>
   </footer>
 
   <script src="js/data.js"></script>
@@ -111,22 +144,17 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
-
     function handleReservationSubmit(e) {
       e.preventDefault();
       const name = document.getElementById('resName').value;
       const date = document.getElementById('resDate').value;
       const time = document.getElementById('resTime').value;
       const guests = document.getElementById('resGuests').value;
-
       document.getElementById('resModalBody').textContent = `We look forward to hosting you, ${name}! Your table for ${guests} is confirmed on ${date} at ${time}.`;
       document.getElementById('resModal').style.display = 'flex';
-      document.getElementById('resModal').classList.add('open');
     }
-
     function closeResModal() {
       document.getElementById('resModal').style.display = 'none';
-      document.getElementById('resModal').classList.remove('open');
       document.getElementById('reservationForm').reset();
     }
   </script>

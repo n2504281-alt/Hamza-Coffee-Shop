@@ -11,71 +11,91 @@
 </head>
 <body>
 
-  <header class="navbar scrolled">
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
-      <nav class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="menu.html" class="nav-link">Menu</a>
-        <a href="story.html" class="nav-link active">Our Story</a>
-        <a href="gallery.html" class="nav-link">Gallery</a>
-        <a href="locations.html" class="nav-link">Locations</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+  <!-- NAVBAR -->
+  <header class="navbar-ref">
+    <div class="container nav-flex">
+      <a href="index.html" class="logo-ref"><i data-lucide="coffee" style="color:var(--caramel-accent);"></i><span>Coffee</span></a>
+      <nav class="nav-links-ref">
+        <a href="index.html" class="nav-link-ref">Home</a>
+        <a href="menu.html" class="nav-link-ref">Menu</a>
+        <a href="story.html" class="nav-link-ref active">Our Story</a>
+        <a href="gallery.html" class="nav-link-ref">Gallery</a>
+        <a href="contact.html" class="nav-link-ref">Contact</a>
       </nav>
-      <div class="nav-actions">
-        <button class="icon-btn open-cart-btn"><i data-lucide="shopping-bag"></i><span class="icon-badge cart-count-badge" style="display:none;">0</span></button>
-        <a href="order.html" class="btn btn-primary btn-sm">Order Ahead</a>
+      <div class="nav-right-actions">
+        <button class="icon-btn-ref open-cart-btn"><i data-lucide="shopping-bag"></i><span class="badge-count cart-count-badge" style="display:none;">0</span></button>
+        <a href="order.html" class="btn-brown" style="padding:0.5rem 1.2rem; font-size:0.85rem;">Order Ahead</a>
       </div>
     </div>
   </header>
 
-  <main style="padding-top:7rem;">
-    <!-- Editorial Hero -->
-    <section class="section" style="text-align:center;">
-      <div class="container" style="max-width:800px;">
-        <span class="subtitle">Brand Heritage</span>
-        <h1 class="title-xl" style="margin-bottom:1.5rem;">Crafting Exceptional Coffee Since Day One</h1>
-        <p style="font-size:1.2rem; color:var(--color-text-dim); line-height:1.8;">
-          Hamza Coffee Shop was born out of an unyielding passion for extraordinary coffee beans, meticulous brewing temperature control, and creating a warm, elegant space where community thrives.
-        </p>
+  <main>
+    <section class="page-header-banner">
+      <div class="container">
+        <h1 class="page-header-title">Brand Heritage & Craft</h1>
+        <p class="page-header-subtitle">Direct-trade micro-lot beans, precision roasting, and a passion for luxury café culture.</p>
       </div>
     </section>
 
-    <!-- Visual Story Section 1 -->
-    <section class="section section-cream">
-      <div class="container grid grid-2" style="align-items:center; gap:4rem;">
-        <div class="reveal">
-          <span class="subtitle">Ethical Sourcing</span>
-          <h2 class="title-lg" style="margin-bottom:1rem;">Direct From Ethiopian & Colombian High-Altitude Farms</h2>
-          <p style="color:var(--color-text-muted); font-size:1.05rem; line-height:1.7;">
+    <section class="container" style="padding-bottom:5rem;">
+      <div class="grid-container grid-2-cols" style="align-items:center; gap:3rem; margin-bottom:4rem;">
+        <div>
+          <span style="font-size:0.85rem; font-weight:800; color:var(--caramel-accent); text-transform:uppercase;">Direct Farm Sourcing</span>
+          <h2 style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:var(--dark-espresso); margin:0.5rem 0 1rem 0;">From High-Altitude Ethiopian Slopes</h2>
+          <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7;">
             We travel directly to micro-lot coffee farms in Yirgacheffe and Huila. By paying 35% above fair-trade standards, we ensure that local farming families thrive while securing the richest Arabica cherries harvested at peak ripeness.
           </p>
         </div>
-        <div class="reveal reveal-right">
-          <img src="images/hero_coffee.png" alt="Ethical Coffee Beans" style="border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); width:100%; height:400px; object-fit:cover;">
+        <div style="border-radius:var(--radius-card); overflow:hidden; border:1px solid var(--border-light); height:280px;">
+          <img src="images/hero_coffee.png" alt="Coffee Sourcing" style="width:100%; height:100%; object-fit:cover;">
         </div>
       </div>
-    </section>
 
-    <!-- Visual Story Section 2 -->
-    <section class="section">
-      <div class="container grid grid-2" style="align-items:center; gap:4rem;">
-        <div class="reveal reveal-left">
-          <img src="images/cafe_interior.png" alt="Luxury Cafe Interior" style="border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); width:100%; height:400px; object-fit:cover;">
+      <div class="grid-container grid-2-cols" style="align-items:center; gap:3rem;">
+        <div style="border-radius:var(--radius-card); overflow:hidden; border:1px solid var(--border-light); height:280px;">
+          <img src="images/cafe_interior.png" alt="Cafe Philosophy" style="width:100%; height:100%; object-fit:cover;">
         </div>
-        <div class="reveal">
-          <span class="subtitle">Our Philosophy</span>
-          <h2 class="title-lg" style="margin-bottom:1rem;">A Sanctuary for Coffee Connoisseurs</h2>
-          <p style="color:var(--color-text-dim); font-size:1.05rem; line-height:1.7;">
-            Every detail in our café — from the acoustic lighting to the bespoke oak tables and velvet seating — is engineered to provide a soothing, elevated atmosphere where every sip is celebrated.
+        <div>
+          <span style="font-size:0.85rem; font-weight:800; color:var(--caramel-accent); text-transform:uppercase;">Café Atmosphere</span>
+          <h2 style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:var(--dark-espresso); margin:0.5rem 0 1rem 0;">A Sanctuary for Coffee Connoisseurs</h2>
+          <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7;">
+            Every detail in our café — from acoustic lighting to bespoke oak tables and velvet seating — is engineered to provide a soothing, elevated atmosphere where every sip is celebrated.
           </p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+  <!-- UNIFORM FOOTER -->
+  <footer class="footer-ref">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
+          <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Quick Links</h4>
+          <div class="footer-links-list">
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Customer Care</h4>
+          <div class="footer-links-list">
+            <a href="faq.html">FAQ</a><a href="reservations.html">Book a Table</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Join Coffee Club</h4>
+          <form onsubmit="event.preventDefault(); showToast('Subscribed!');" style="display:flex; gap:0.5rem;">
+            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem; font-size:0.85rem;">
+            <button type="submit" class="btn-brown">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+    </div>
   </footer>
 
   <script src="js/data.js"></script>

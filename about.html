@@ -10,29 +10,79 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <header class="navbar scrolled">
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
-      <nav class="nav-links"><a href="index.html" class="nav-link">Home</a><a href="menu.html" class="nav-link">Menu</a><a href="story.html" class="nav-link">Our Story</a></nav>
-      <div class="nav-actions"><a href="order.html" class="btn btn-primary btn-sm">Order Ahead</a></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar-ref">
+    <div class="container nav-flex">
+      <a href="index.html" class="logo-ref"><i data-lucide="coffee" style="color:var(--caramel-accent);"></i><span>Coffee</span></a>
+      <nav class="nav-links-ref">
+        <a href="index.html" class="nav-link-ref">Home</a>
+        <a href="menu.html" class="nav-link-ref">Menu</a>
+        <a href="story.html" class="nav-link-ref">Our Story</a>
+        <a href="contact.html" class="nav-link-ref">Contact</a>
+      </nav>
+      <div class="nav-right-actions">
+        <a href="order.html" class="btn-brown" style="padding:0.5rem 1.2rem; font-size:0.85rem;">Order Ahead</a>
+      </div>
     </div>
   </header>
 
-  <main style="padding-top:7rem;" class="section">
-    <div class="container" style="max-width:800px; text-align:center;">
-      <span class="subtitle">About Us</span>
-      <h1 class="title-lg" style="margin-bottom:1.5rem;">Passion for Excellence in Every Cup</h1>
-      <p style="color:var(--color-text-dim); font-size:1.1rem; line-height:1.8; margin-bottom:2rem;">
-        At Hamza Coffee Shop, we believe that coffee is more than a beverage — it is a ritual, a craft, and an art form. Founded with a vision to bring world-class micro-roasted beans and artisanal barista techniques to our community, every single cup is hand-poured with dedication.
-      </p>
-      <img src="images/cafe_interior.png" style="border-radius:var(--radius-lg); width:100%; height:380px; object-fit:cover; box-shadow:var(--shadow-lg);">
-    </div>
+  <main>
+    <section class="page-header-banner">
+      <div class="container">
+        <h1 class="page-header-title">About Hamza Coffee Shop</h1>
+        <p class="page-header-subtitle">A commitment to extraordinary micro-roasted coffee beans and luxury community spaces.</p>
+      </div>
+    </section>
+
+    <section class="container" style="max-width:800px; text-align:center; padding-bottom:5rem;">
+      <div class="form-card-ref">
+        <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:800; color:var(--dark-espresso); margin-bottom:1rem;">Passion for Excellence in Every Cup</h2>
+        <p style="color:var(--text-muted); font-size:1rem; line-height:1.7; margin-bottom:2rem;">
+          At Hamza Coffee Shop, we believe that coffee is more than a beverage — it is a ritual, a craft, and an art form. Founded with a vision to bring world-class micro-roasted beans and artisanal barista techniques to our community, every single cup is hand-poured with dedication.
+        </p>
+        <div style="border-radius:14px; overflow:hidden; height:280px;">
+          <img src="images/cafe_interior.png" alt="Café Interior" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+  <!-- UNIFORM FOOTER -->
+  <footer class="footer-ref">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
+          <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Quick Links</h4>
+          <div class="footer-links-list">
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Customer Care</h4>
+          <div class="footer-links-list">
+            <a href="faq.html">FAQ</a><a href="reservations.html">Book a Table</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Join Coffee Club</h4>
+          <form onsubmit="event.preventDefault(); showToast('Subscribed!');" style="display:flex; gap:0.5rem;">
+            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem; font-size:0.85rem;">
+            <button type="submit" class="btn-brown">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+    </div>
   </footer>
-  <script src="js/data.js"></script><script src="js/app.js"></script><script src="js/navbar.js"></script>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
 </body>
 </html>

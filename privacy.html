@@ -4,34 +4,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Hamza Coffee Shop</title>
+  <meta name="description" content="Privacy Policy for Hamza Coffee Shop. Learn how we collect, use, and protect your personal information when using our Order Ahead service.">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <header class="navbar scrolled">
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
-      <nav class="nav-links"><a href="index.html" class="nav-link">Home</a></nav>
+
+  <!-- NAVBAR -->
+  <header class="navbar-ref">
+    <div class="container nav-flex">
+      <a href="index.html" class="logo-ref"><i data-lucide="coffee" style="color:var(--caramel-accent);"></i><span>Coffee</span></a>
+      <nav class="nav-links-ref">
+        <a href="index.html" class="nav-link-ref">Home</a>
+        <a href="menu.html" class="nav-link-ref">Menu</a>
+        <a href="contact.html" class="nav-link-ref">Contact</a>
+      </nav>
+      <div class="nav-right-actions">
+        <button class="icon-btn-ref open-cart-btn" title="Cart">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge-count cart-count-badge" style="display:none;">0</span>
+        </button>
+        <a href="order.html" class="btn-brown" style="padding:0.5rem 1.2rem; font-size:0.85rem;">Order Ahead</a>
+      </div>
     </div>
   </header>
 
-  <main style="padding-top:7rem;" class="section">
-    <div class="container" style="max-width:800px; color:var(--color-text-dim); line-height:1.7;">
-      <h1 class="title-lg" style="color:var(--color-cream); margin-bottom:1.5rem;">Privacy Policy</h1>
-      <p style="margin-bottom:1rem;">Your privacy is extremely important to Hamza Coffee Shop. This document outlines how we collect, use, and protect your information when using our Order Ahead service.</p>
-      
-      <h3 style="color:var(--color-cream); margin:1.5rem 0 0.5rem 0;">1. Information We Collect</h3>
-      <p>When placing an online pickup order or reservation, we collect your name, phone number, and email address strictly to fulfill your order and notify you when your drink is ready.</p>
+  <main>
+    <section class="page-header-banner">
+      <div class="container">
+        <h1 class="page-header-title">Privacy Policy</h1>
+        <p class="page-header-subtitle">Your privacy is extremely important to us. Last updated: January 2026.</p>
+      </div>
+    </section>
 
-      <h3 style="color:var(--color-cream); margin:1.5rem 0 0.5rem 0;">2. Data Security</h3>
-      <p>We do not store credit card credentials on local storage. All client data is encrypted and handled under modern security best practices.</p>
-    </div>
+    <section class="container" style="max-width:800px; padding-bottom:5rem;">
+      <div class="form-card-ref" style="line-height:1.8;">
+
+        <p style="color:var(--text-muted); margin-bottom:2rem;">Your privacy is extremely important to Hamza Coffee Shop. This document outlines how we collect, use, and protect your information when using our Order Ahead service and website.</p>
+
+        <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin:2rem 0 0.6rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="database" style="color:var(--caramel-accent); width:20px;"></i> 1. Information We Collect
+        </h2>
+        <p style="color:var(--text-muted);">When placing an online pickup order or reservation, we collect your name, phone number, and email address strictly to fulfill your order and notify you when your drink is ready.</p>
+
+        <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin:2rem 0 0.6rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="shield" style="color:var(--caramel-accent); width:20px;"></i> 2. Data Security
+        </h2>
+        <p style="color:var(--text-muted);">We do not store credit card credentials on local storage. All client data is encrypted and handled under modern security best practices. We use industry-standard SSL encryption for all data transmissions.</p>
+
+        <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin:2rem 0 0.6rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="eye-off" style="color:var(--caramel-accent); width:20px;"></i> 3. Third-Party Sharing
+        </h2>
+        <p style="color:var(--text-muted);">We do not sell, trade, or rent your personal information to third parties. We may share anonymized, aggregated data with service providers who assist us in operating our website, provided they agree to keep this information confidential.</p>
+
+        <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin:2rem 0 0.6rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="cookie" style="color:var(--caramel-accent); width:20px;"></i> 4. Cookies
+        </h2>
+        <p style="color:var(--text-muted);">Our website uses browser localStorage to save your cart and wishlist for a seamless shopping experience. No tracking cookies are sent to external advertising networks.</p>
+
+        <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin:2rem 0 0.6rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="mail" style="color:var(--caramel-accent); width:20px;"></i> 5. Contact About Privacy
+        </h2>
+        <p style="color:var(--text-muted);">If you have questions about this Privacy Policy, please contact us at <strong>privacy@hamzacoffee.com</strong> or through our <a href="contact.html" style="color:var(--caramel-accent); font-weight:600;">Contact Page</a>.</p>
+
+      </div>
+    </section>
   </main>
 
-  <footer class="footer"><div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div></footer>
-  <script src="js/data.js"></script><script src="js/app.js"></script><script src="js/navbar.js"></script>
+  <!-- UNIFORM FOOTER -->
+  <footer class="footer-ref">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
+          <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Quick Links</h4>
+          <div class="footer-links-list">
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Customer Care</h4>
+          <div class="footer-links-list">
+            <a href="faq.html">FAQ</a><a href="reservations.html">Book a Table</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Legal</h4>
+          <div class="footer-links-list">
+            <a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="refund.html">Refund Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
 </body>
 </html>

@@ -11,91 +11,118 @@
 </head>
 <body>
 
-  <header class="navbar scrolled">
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
-      <nav class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="menu.html" class="nav-link">Menu</a>
-        <a href="order.html" class="nav-link active">Order Ahead</a>
-        <a href="locations.html" class="nav-link">Locations</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+  <!-- NAVBAR -->
+  <header class="navbar-ref">
+    <div class="container nav-flex">
+      <a href="index.html" class="logo-ref"><i data-lucide="coffee" style="color:var(--caramel-accent);"></i><span>Coffee</span></a>
+      <nav class="nav-links-ref">
+        <a href="index.html" class="nav-link-ref">Home</a>
+        <a href="menu.html" class="nav-link-ref">Menu</a>
+        <a href="order.html" class="nav-link-ref active">Order Ahead</a>
+        <a href="locations.html" class="nav-link-ref">Locations</a>
+        <a href="offers.html" class="nav-link-ref">Offers</a>
+        <a href="contact.html" class="nav-link-ref">Contact</a>
       </nav>
-      <div class="nav-actions">
-        <button class="icon-btn open-cart-btn"><i data-lucide="shopping-bag"></i><span class="icon-badge cart-count-badge" style="display:none;">0</span></button>
+      <div class="nav-right-actions">
+        <button class="icon-btn-ref open-cart-btn"><i data-lucide="shopping-bag"></i><span class="badge-count cart-count-badge" style="display:none;">0</span></button>
       </div>
     </div>
   </header>
 
-  <main style="padding-top:7rem;" class="section">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="subtitle">Express Pickup</span>
-        <h1 class="title-lg">Order Ahead & Skip the Line</h1>
-        <p>Your coffee is freshly ground and brewed 5 minutes before your estimated arrival time.</p>
+  <main>
+    <section class="page-header-banner">
+      <div class="container">
+        <h1 class="page-header-title">Express Order Ahead</h1>
+        <p class="page-header-subtitle">Your coffee is freshly ground and brewed 5 minutes prior to your arrival.</p>
       </div>
+    </section>
 
-      <div class="grid grid-2" style="gap:3rem;">
-        <!-- Left: Location & Time Selection -->
-        <div style="background:var(--color-surface-card); padding:2rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark);">
-          <h2 style="font-size:1.3rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin" style="color:var(--color-caramel);"></i> 1. Select Pickup Café Branch</h2>
+    <section class="container" style="padding-bottom:5rem;">
+      <div class="grid-container grid-2-cols" style="align-items:start;">
+        
+        <!-- Left Selection Box -->
+        <div class="form-card-ref">
+          <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1.5rem;">1. Select Pickup Café Branch</h2>
           <div style="display:flex; flex-direction:column; gap:1rem; margin-bottom:2rem;">
             ${LOCATIONS_DATA.map((loc, idx) => `
-              <label style="display:flex; align-items:start; gap:1rem; padding:1rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.04); border:1px solid var(--color-border-dark); cursor:pointer;">
-                <input type="radio" name="pickupLoc" value="${loc.name}" ${idx===0?'checked':''} style="margin-top:4px; accent-color:var(--color-caramel);">
+              <label style="display:flex; align-items:start; gap:1rem; padding:1rem; border-radius:12px; background:var(--bg-cream-light); border:1px solid var(--border-light); cursor:pointer;">
+                <input type="radio" name="pickupLoc" value="${loc.name}" ${idx===0?'checked':''} style="margin-top:4px; accent-color:var(--caramel-accent);">
                 <div>
-                  <div style="font-weight:700; color:var(--color-cream);">${loc.name}</div>
-                  <div style="font-size:0.85rem; color:var(--color-text-dim);">${loc.address}</div>
-                  <div style="font-size:0.8rem; color:var(--color-caramel); margin-top:4px;">⏱ Prep Time: 15–20 minutes</div>
+                  <div style="font-weight:700; color:var(--dark-espresso);">${loc.name}</div>
+                  <div style="font-size:0.85rem; color:var(--text-muted);">${loc.address}</div>
+                  <div style="font-size:0.8rem; color:var(--caramel-accent); margin-top:4px;">⏱ Prep Time: 15–20 mins</div>
                 </div>
               </label>
             `).join('')}
           </div>
 
-          <h2 style="font-size:1.3rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem;"><i data-lucide="clock" style="color:var(--color-caramel);"></i> 2. Estimated Pickup Time</h2>
-          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;">
-            <button class="filter-btn active" onclick="selectPickupTime('ASAP (15-20 min)', this)">ASAP (15-20 min)</button>
-            <button class="filter-btn" onclick="selectPickupTime('In 30 Minutes', this)">In 30 Mins</button>
-            <button class="filter-btn" onclick="selectPickupTime('In 45 Minutes', this)">In 45 Mins</button>
+          <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1.5rem;">2. Estimated Pickup Time</h2>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <button class="btn-brown" style="font-size:0.8rem; padding:0.5rem 1rem;">ASAP (15-20 min)</button>
+            <button class="btn-white" style="font-size:0.8rem; padding:0.5rem 1rem;">In 30 Mins</button>
+            <button class="btn-white" style="font-size:0.8rem; padding:0.5rem 1rem;">In 45 Mins</button>
           </div>
         </div>
 
-        <!-- Right: Fast Add Items & Cart Summary -->
-        <div style="background:var(--color-surface-card); padding:2rem; border-radius:var(--radius-lg); border:1px solid var(--color-border-dark);">
-          <h2 style="font-size:1.3rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem;"><i data-lucide="coffee" style="color:var(--color-caramel);"></i> 3. Quick Add Drinks</h2>
-          <div style="display:flex; flex-direction:column; gap:1rem; margin-bottom:2rem; max-height:280px; overflow-y:auto;">
+        <!-- Right Quick Add Box -->
+        <div class="form-card-ref">
+          <h2 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1.5rem;">3. Quick Add Drinks</h2>
+          <div style="display:flex; flex-direction:column; gap:1rem; margin-bottom:2rem; max-height:260px; overflow-y:auto;">
             ${PRODUCTS_DATA.slice(0, 4).map(prod => `
-              <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem; background:rgba(255,255,255,0.03); border-radius:var(--radius-md);">
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem; background:var(--bg-cream-light); border-radius:10px;">
                 <div style="display:flex; align-items:center; gap:0.75rem;">
-                  <img src="${prod.image}" style="width:48px; height:48px; border-radius:var(--radius-sm); object-fit:cover;">
+                  <img src="${prod.image}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;">
                   <div>
-                    <div style="font-weight:600; font-size:0.9rem;">${prod.name}</div>
-                    <div style="font-size:0.8rem; color:var(--color-caramel);">$${prod.price.toFixed(2)}</div>
+                    <div style="font-weight:700; font-size:0.9rem; color:var(--dark-espresso);">${prod.name}</div>
+                    <div style="font-size:0.85rem; color:var(--caramel-accent); font-weight:800;">$${prod.price.toFixed(2)}</div>
                   </div>
                 </div>
-                <button class="btn btn-outline btn-sm" onclick="AppState.addToCart(PRODUCTS_DATA.find(p=>p.id==='${prod.id}'))">+ Add</button>
+                <button class="btn-brown" style="padding:0.35rem 0.8rem; font-size:0.75rem;" onclick="AppState.addToCart(PRODUCTS_DATA.find(p=>p.id==='${prod.id}'))">+ Add</button>
               </div>
             `).join('')}
           </div>
 
-          <a href="checkout.html" class="btn btn-primary btn-lg" style="width:100%;">Proceed to Order Checkout</a>
+          <a href="checkout.html" class="btn-brown" style="width:100%; text-align:center; padding:0.9rem 1.5rem; font-size:1rem;">Proceed to Order Checkout</a>
         </div>
       </div>
-    </div>
+    </section>
   </main>
+
+  <!-- UNIFORM FOOTER -->
+  <footer class="footer-ref">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
+          <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Quick Links</h4>
+          <div class="footer-links-list">
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a><a href="locations.html">Locations</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Customer Care</h4>
+          <div class="footer-links-list">
+            <a href="faq.html">FAQ</a><a href="reservations.html">Book a Table</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Join Coffee Club</h4>
+          <form onsubmit="event.preventDefault(); showToast('Subscribed to Newsletter!');" style="display:flex; gap:0.5rem;">
+            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem; font-size:0.85rem;">
+            <button type="submit" class="btn-brown">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+    </div>
+  </footer>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
   <script src="js/navbar.js"></script>
-
-  <script>
-    let selectedTime = 'ASAP (15-20 min)';
-    function selectPickupTime(t, btn) {
-      selectedTime = t;
-      btn.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-    }
-    document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
-  </script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
 </body>
 </html>

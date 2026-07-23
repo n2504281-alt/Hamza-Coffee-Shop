@@ -8,163 +8,147 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .gallery-item {
-      position: relative;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      cursor: pointer;
-      height: 280px;
-      border: 1px solid var(--color-border-dark);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform var(--transition-slow);
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity var(--transition-normal);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 1.25rem;
-      color: #fff;
-    }
-
-    .gallery-item:hover .gallery-overlay {
-      opacity: 1;
-    }
-
-    /* Lightbox Modal */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      backdrop-filter: blur(10px);
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    .lightbox.open {
-      display: flex;
-    }
-
-    .lightbox-img {
-      max-width: 90vw;
-      max-height: 80vh;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-    }
-  </style>
 </head>
 <body>
 
-  <header class="navbar scrolled">
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
-      <nav class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="menu.html" class="nav-link">Menu</a>
-        <a href="story.html" class="nav-link">Our Story</a>
-        <a href="gallery.html" class="nav-link active">Gallery</a>
-        <a href="locations.html" class="nav-link">Locations</a>
+  <!-- HEADER NAVBAR -->
+  <header class="navbar-ref">
+    <div class="container nav-flex">
+      <a href="index.html" class="logo-ref">
+        <i data-lucide="coffee" style="color:var(--caramel-accent);"></i>
+        <span>Coffee</span>
+      </a>
+
+      <nav class="nav-links-ref">
+        <a href="index.html" class="nav-link-ref">Home</a>
+        <a href="menu.html" class="nav-link-ref">Menu</a>
+        <a href="story.html" class="nav-link-ref">Our Story</a>
+        <a href="gallery.html" class="nav-link-ref active">Gallery</a>
+        <a href="locations.html" class="nav-link-ref">Locations</a>
+        <a href="offers.html" class="nav-link-ref">Offers</a>
+        <a href="blog.html" class="nav-link-ref">Blog</a>
+        <a href="contact.html" class="nav-link-ref">Contact</a>
       </nav>
-      <div class="nav-actions">
-        <button class="icon-btn open-cart-btn"><i data-lucide="shopping-bag"></i><span class="icon-badge cart-count-badge" style="display:none;">0</span></button>
+
+      <div class="nav-right-actions">
+        <a href="wishlist.html" class="icon-btn-ref" title="Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="badge-count wishlist-count-badge" style="display:none;">0</span>
+        </a>
+        <button class="icon-btn-ref open-cart-btn" title="Cart">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge-count cart-count-badge" style="display:none;">0</span>
+        </button>
+        <a href="order.html" class="btn-brown" style="padding:0.5rem 1.2rem; font-size:0.85rem;">Order Ahead</a>
       </div>
     </div>
   </header>
 
-  <main style="padding-top:7rem;" class="section">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="subtitle">Visual Moments</span>
-        <h1 class="title-lg">Café Gallery</h1>
-        <p>A glimpse into our daily coffee crafting, warm ambiance, and delicious freshly baked delicacies.</p>
+  <main>
+    <!-- PAGE HEADER -->
+    <section class="page-header-banner">
+      <div class="container">
+        <h1 class="page-header-title">Café Photo Gallery</h1>
+        <p class="page-header-subtitle">A glimpse into our daily coffee crafting, cozy atmosphere, and freshly baked delicacies.</p>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:5rem;">
+      <!-- Filter Category Buttons -->
+      <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:2.5rem;">
+        <button class="btn-white active" onclick="filterGallery('all', this)">All Photos</button>
+        <button class="btn-white" onclick="filterGallery('coffee', this)">Coffee Brews</button>
+        <button class="btn-white" onclick="filterGallery('food', this)">French Pastries</button>
+        <button class="btn-white" onclick="filterGallery('cafe', this)">Café Atmosphere</button>
       </div>
 
-      <!-- Category Filter -->
-      <div class="filter-container reveal">
-        <button class="filter-btn active" onclick="filterGallery('all', this)">All Photos</button>
-        <button class="filter-btn" onclick="filterGallery('coffee', this)">Coffee</button>
-        <button class="filter-btn" onclick="filterGallery('food', this)">Pastries & Food</button>
-        <button class="filter-btn" onclick="filterGallery('cafe', this)">Café Interior</button>
-      </div>
-
-      <!-- Gallery Grid -->
-      <div id="galleryGrid" class="gallery-grid">
-        <!-- Item 1 -->
-        <div class="gallery-item" data-cat="coffee" onclick="openLightbox('images/hero_coffee.png', 'Artisan Latte Art')">
-          <img src="images/hero_coffee.png" alt="Latte Art">
-          <div class="gallery-overlay">
-            <h4 style="font-family:var(--font-heading);">Artisan Latte Art</h4>
-            <span style="font-size:0.8rem; color:var(--color-caramel);">Click to Expand</span>
+      <!-- Bounded 220px Gallery Grid -->
+      <div id="galleryGrid" class="gallery-grid-ref">
+        <div class="gallery-card-ref" data-cat="coffee" onclick="openLightbox('images/hero_coffee.png', 'Artisan Espresso Latte')">
+          <img src="images/hero_coffee.png" alt="Coffee">
+          <div class="gallery-overlay-ref">
+            <h4 style="font-family:var(--font-heading); font-size:1rem;">Artisan Latte Art</h4>
+            <span style="font-size:0.75rem; color:var(--caramel-accent);">Click to View</span>
           </div>
         </div>
 
-        <!-- Item 2 -->
-        <div class="gallery-item" data-cat="coffee" onclick="openLightbox('images/iced_coffee.png', 'Iced Caramel Macchiato')">
+        <div class="gallery-card-ref" data-cat="coffee" onclick="openLightbox('images/iced_coffee.png', 'Iced Caramel Macchiato')">
           <img src="images/iced_coffee.png" alt="Iced Coffee">
-          <div class="gallery-overlay">
-            <h4 style="font-family:var(--font-heading);">Iced Caramel Macchiato</h4>
-            <span style="font-size:0.8rem; color:var(--color-caramel);">Click to Expand</span>
+          <div class="gallery-overlay-ref">
+            <h4 style="font-family:var(--font-heading); font-size:1rem;">Iced Caramel Macchiato</h4>
+            <span style="font-size:0.75rem; color:var(--caramel-accent);">Click to View</span>
           </div>
         </div>
 
-        <!-- Item 3 -->
-        <div class="gallery-item" data-cat="food" onclick="openLightbox('images/pastry_croissant.png', 'Freshly Baked Croissants')">
+        <div class="gallery-card-ref" data-cat="food" onclick="openLightbox('images/pastry_croissant.png', 'Fresh French Butter Croissants')">
           <img src="images/pastry_croissant.png" alt="Pastry">
-          <div class="gallery-overlay">
-            <h4 style="font-family:var(--font-heading);">Fresh French Butter Croissants</h4>
-            <span style="font-size:0.8rem; color:var(--color-caramel);">Click to Expand</span>
+          <div class="gallery-overlay-ref">
+            <h4 style="font-family:var(--font-heading); font-size:1rem;">Butter Croissants</h4>
+            <span style="font-size:0.75rem; color:var(--caramel-accent);">Click to View</span>
           </div>
         </div>
 
-        <!-- Item 4 -->
-        <div class="gallery-item" data-cat="cafe" onclick="openLightbox('images/cafe_interior.png', 'Flagship Café Interior')">
-          <img src="images/cafe_interior.png" alt="Cafe Interior">
-          <div class="gallery-overlay">
-            <h4 style="font-family:var(--font-heading);">Luxury Cozy Interior</h4>
-            <span style="font-size:0.8rem; color:var(--color-caramel);">Click to Expand</span>
+        <div class="gallery-card-ref" data-cat="cafe" onclick="openLightbox('images/cafe_interior.png', 'Luxury Café Interior')">
+          <img src="images/cafe_interior.png" alt="Interior">
+          <div class="gallery-overlay-ref">
+            <h4 style="font-family:var(--font-heading); font-size:1rem;">Luxury Café Interior</h4>
+            <span style="font-size:0.75rem; color:var(--caramel-accent);">Click to View</span>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </main>
 
-  <!-- Fullscreen Lightbox Modal -->
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <button class="icon-btn" style="position:absolute; top:20px; right:20px; z-index:2010;"><i data-lucide="x"></i></button>
-    <div style="text-align:center;" onclick="event.stopPropagation()">
-      <img id="lightboxImg" src="" alt="Expanded View" class="lightbox-img">
-      <div id="lightboxCaption" style="margin-top:1rem; font-family:var(--font-heading); font-size:1.2rem; color:var(--color-cream);"></div>
+  <!-- UNIFORM FOOTER -->
+  <footer class="footer-ref">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
+          <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-column-title">Quick Links</h4>
+          <div class="footer-links-list">
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="story.html">Our Story</a>
+            <a href="gallery.html">Gallery</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-column-title">Customer Care</h4>
+          <div class="footer-links-list">
+            <a href="faq.html">FAQ</a>
+            <a href="reservations.html">Book a Table</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-column-title">Join Coffee Club</h4>
+          <form onsubmit="event.preventDefault(); showToast('Subscribed to Newsletter!');" style="display:flex; gap:0.5rem;">
+            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem; font-size:0.85rem;">
+            <button type="submit" class="btn-brown">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>© 2026 Hamza Coffee Shop. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="cart-overlay" style="display:none; align-items:center; justify-content:center;" onclick="closeLightbox()">
+    <div style="text-align:center; max-width:600px;" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="" style="max-width:90vw; max-height:70vh; border-radius:var(--radius-card); box-shadow:0 10px 40px rgba(0,0,0,0.6);">
+      <div id="lightboxCaption" style="font-family:var(--font-heading); font-size:1.1rem; color:#FFF; margin-top:1rem;"></div>
     </div>
   </div>
-
-  <footer class="footer">
-    <div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
-  </footer>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
@@ -172,27 +156,18 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
-
     function filterGallery(cat, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.gallery-item').forEach(item => {
-        if (cat === 'all' || item.getAttribute('data-cat') === cat) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
+      document.querySelectorAll('.gallery-card-ref').forEach(item => {
+        item.style.display = (cat === 'all' || item.getAttribute('data-cat') === cat) ? 'block' : 'none';
       });
     }
-
-    function openLightbox(src, caption) {
+    function openLightbox(src, cap) {
       document.getElementById('lightboxImg').src = src;
-      document.getElementById('lightboxCaption').textContent = caption;
-      document.getElementById('lightbox').classList.add('open');
+      document.getElementById('lightboxCaption').textContent = cap;
+      document.getElementById('lightbox').style.display = 'flex';
     }
-
     function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
+      document.getElementById('lightbox').style.display = 'none';
     }
   </script>
 </body>

@@ -3,32 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms & Conditions — Hamza Coffee Shop</title>
+  <title>Terms &amp; Conditions — Hamza Coffee Shop</title>
+  <meta name="description" content="Terms and Conditions for Hamza Coffee Shop. Read our order pickup obligations, website usage terms, and customer responsibilities.">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <header class="navbar scrolled">
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><div class="logo-icon"><i data-lucide="coffee"></i></div><span>Hamza</span> Coffee</a>
-      <nav class="nav-links"><a href="index.html" class="nav-link">Home</a></nav>
+
+  <!-- NAVBAR -->
+  <header class="navbar-ref">
+    <div class="container nav-flex">
+      <a href="index.html" class="logo-ref"><i data-lucide="coffee" style="color:var(--caramel-accent);"></i><span>Coffee</span></a>
+      <nav class="nav-links-ref">
+        <a href="index.html" class="nav-link-ref">Home</a>
+        <a href="menu.html" class="nav-link-ref">Menu</a>
+        <a href="contact.html" class="nav-link-ref">Contact</a>
+      </nav>
+      <div class="nav-right-actions">
+        <button class="icon-btn-ref open-cart-btn" title="Cart">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge-count cart-count-badge" style="display:none;">0</span>
+        </button>
+        <a href="order.html" class="btn-brown" style="padding:0.5rem 1.2rem; font-size:0.85rem;">Order Ahead</a>
+      </div>
     </div>
   </header>
 
-  <main style="padding-top:7rem;" class="section">
-    <div class="container" style="max-width:800px; color:var(--color-text-dim); line-height:1.7;">
-      <h1 class="title-lg" style="color:var(--color-cream); margin-bottom:1.5rem;">Terms & Conditions</h1>
-      <p style="margin-bottom:1rem;">Welcome to Hamza Coffee Shop. By accessing our website or placing an Order Ahead ticket, you agree to comply with the following terms.</p>
-      
-      <h3 style="color:var(--color-cream); margin:1.5rem 0 0.5rem 0;">1. Order Pickup Obligations</h3>
-      <p>Orders prepared for pickup will be held at maximum serving temperature for 30 minutes. Customers are requested to arrive at their selected pickup time for the best taste quality.</p>
-    </div>
+  <main>
+    <section class="page-header-banner">
+      <div class="container">
+        <h1 class="page-header-title">Terms &amp; Conditions</h1>
+        <p class="page-header-subtitle">By visiting Hamza Coffee Shop or using our Order Ahead service, you agree to the following terms.</p>
+      </div>
+    </section>
+
+    <section class="container" style="max-width:800px; padding-bottom:5rem;">
+      <div class="form-card-ref" style="line-height:1.8;">
+
+        <p style="color:var(--text-muted); margin-bottom:2rem;">Welcome to Hamza Coffee Shop. By accessing our website or placing an Order Ahead ticket, you agree to comply with and be bound by the following terms and conditions.</p>
+
+        <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin:2rem 0 0.6rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="clock" style="color:var(--caramel-accent); width:20px;"></i> 1. Order Pickup Obligations
+        </h2>
+        <p style="color:var(--text-muted);">Orders prepared for pickup will be held at maximum serving temperature for 30 minutes. Customers are requested to arrive at their selected pickup time for the best taste quality. Hamza Coffee Shop is not responsible for quality degradation due to late pickup.</p>
+
+        <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin:2rem 0 0.6rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="credit-card" style="color:var(--caramel-accent); width:20px;"></i> 2. Payment Terms
+        </h2>
+        <p style="color:var(--text-muted);">All prices are displayed in USD and are subject to applicable local taxes. Promo codes must be entered at checkout and cannot be combined with other offers. Hamza Coffee Shop reserves the right to modify pricing at any time without prior notice.</p>
+
+        <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin:2rem 0 0.6rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="table" style="color:var(--caramel-accent); width:20px;"></i> 3. Reservations
+        </h2>
+        <p style="color:var(--text-muted);">Table reservations are subject to availability. A reservation guarantees your table for 15 minutes after the scheduled time. After 15 minutes without contact, the table may be released to other guests. For groups of 6 or more, please contact us directly.</p>
+
+        <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin:2rem 0 0.6rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="file-text" style="color:var(--caramel-accent); width:20px;"></i> 4. Intellectual Property
+        </h2>
+        <p style="color:var(--text-muted);">All content on this website, including text, graphics, logos, and images, is the property of Hamza Coffee Shop and is protected under applicable copyright laws. Unauthorized use is strictly prohibited.</p>
+
+        <h2 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso); margin:2rem 0 0.6rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="phone" style="color:var(--caramel-accent); width:20px;"></i> 5. Contact
+        </h2>
+        <p style="color:var(--text-muted);">Questions about these Terms? Contact us at <strong>legal@hamzacoffee.com</strong> or visit our <a href="contact.html" style="color:var(--caramel-accent); font-weight:600;">Contact Page</a>.</p>
+
+      </div>
+    </section>
   </main>
 
-  <footer class="footer"><div class="container footer-bottom" style="border:none; padding:0;"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div></footer>
-  <script src="js/data.js"></script><script src="js/app.js"></script><script src="js/navbar.js"></script>
+  <!-- UNIFORM FOOTER -->
+  <footer class="footer-ref">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
+          <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Quick Links</h4>
+          <div class="footer-links-list">
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Customer Care</h4>
+          <div class="footer-links-list">
+            <a href="faq.html">FAQ</a><a href="reservations.html">Book a Table</a><a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-column-title">Legal</h4>
+          <div class="footer-links-list">
+            <a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="refund.html">Refund Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
 </body>
 </html>
