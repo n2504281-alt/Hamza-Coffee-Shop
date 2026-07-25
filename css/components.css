@@ -1217,8 +1217,44 @@
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  background: linear-gradient(135deg, #1A0E07 0%, #2D1A10 100%);
+/* Blog Article Typography & Lead Formatting */
+.blog-body-content p {
+  margin-bottom: 1.4rem;
+  line-height: 1.8;
+  font-size: 1.02rem;
+  color: var(--dark-espresso);
+}
+
+.blog-body-content .blog-lead {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--dark-espresso);
+  border-left: 4px solid var(--caramel-accent);
+  padding-left: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.blog-body-content h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--dark-espresso);
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+}
+
+.blog-body-content .blog-quote {
+  background: var(--bg-cream-light);
+  border-left: 4px solid var(--caramel-accent);
+  padding: 1.5rem 1.75rem;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--dark-espresso);
+  border-radius: 0 16px 16px 0;
+  margin: 2rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.03);
 }
 
 /* --------------------------------------------------------------------------

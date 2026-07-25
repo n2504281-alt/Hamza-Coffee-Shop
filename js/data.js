@@ -245,31 +245,145 @@ const OFFERS_DATA = [
 const BLOG_DATA = [
   {
     id: "blog-1",
-    title: "The Art of Pour-Over Coffee: A Step-by-Step Guide",
+    title: "The Ultimate Guide to Pour-Over Coffee: Master the Chemex & V60",
     category: "Brewing Guides",
-    date: "July 18, 2026",
+    readTime: "5 min read",
+    date: "July 22, 2026",
     author: "Hamza Al-Maktoum (Head Roaster)",
-    image: "images/hero_coffee.png",
-    excerpt: "Discover how water temperature, grind size, and pour timing combine to extract the fullest flavor from bean to cup.",
+    authorRole: "Founder & Master Roaster",
+    authorAvatar: "☕",
+    image: "images/gallery_pour_over.png",
+    excerpt: "Master water temperature, grind size consistency, and bloom timing to extract vibrant floral and berry notes from single-origin beans.",
     content: `
-      <p>Pour-over coffee brewing is both a science and an art form. When done correctly, it brings out subtle floral notes, bright acidity, and complex sweetness that espresso machine extraction can sometimes mask.</p>
-      <h3>1. The Grind Size Matters</h3>
-      <p>Target a medium-coarse consistency resembling sea salt. Too fine, and your brew will taste bitter and over-extracted; too coarse, and water will rush through, leaving a watery taste.</p>
-      <h3>2. Water Temperature Precision</h3>
-      <p>Water should ideally sit between 92°C to 96°C (198°F to 205°F). Never pour boiling water directly onto grounds as it burns the delicate aromatic oils.</p>
-      <h3>3. The Bloom Phase</h3>
-      <p>Pour 50g of hot water in circular motions and wait 45 seconds. Watch the coffee bed bubble as trapped carbon dioxide gas escapes — this is called the bloom.</p>
+      <p class="blog-lead">Pour-over coffee brewing is both a science and an art form. When done correctly, it brings out subtle floral notes, bright citrus acidity, and complex sweetness that high-pressure espresso extraction can sometimes mask.</p>
+      
+      <h2>1. The Precision Grind Size</h2>
+      <p>Target a medium-coarse consistency resembling sea salt. Too fine, and your brew will taste bitter and over-extracted; too coarse, and water will rush through, leaving a watery, weak taste. Invest in a burr grinder for uniform particle size.</p>
+
+      <h2>2. Water Temperature Control</h2>
+      <p>Water temperature is critical for extracting delicate flavor compounds without scorching the coffee bed. Water should ideally sit between 92°C to 96°C (198°F to 205°F). Never pour boiling water directly onto grounds as it burns essential aromatic oils.</p>
+
+      <h2>3. The 45-Second Bloom Phase</h2>
+      <p>Pour 50g of hot water in slow, circular motions and wait 45 seconds. Watch the coffee bed bubble as trapped carbon dioxide gas escapes — this is called the bloom. Blooming prepares the coffee cell structure for optimal extraction during subsequent pours.</p>
+
+      <blockquote class="blog-quote">
+        "A great pour-over isn't just a caffeine hit; it's a moment of mindfulness where geometry, temperature, and timing create liquid perfection."
+      </blockquote>
+
+      <h2>4. The Golden Ratio: 1:16</h2>
+      <p>For a standard 350ml cup, use 22 grams of freshly ground coffee to 350g of filtered water. Maintain a steady, concentric pour from the center outward, avoiding the paper filter edges.</p>
     `
   },
   {
     id: "blog-2",
-    title: "Why Single-Origin Beans Are Revolutionizing Modern Cafés",
-    category: "Coffee Tips",
-    date: "July 10, 2026",
+    title: "Cold Brew vs. Iced Coffee: What’s the Real Difference?",
+    category: "Coffee Culture",
+    readTime: "4 min read",
+    date: "July 18, 2026",
     author: "Elena Rostova (Barista Lead)",
+    authorRole: "Senior Barista & Drink Stylist",
+    authorAvatar: "🧊",
     image: "images/iced_coffee.png",
-    excerpt: "Learn how micro-climate, soil quality, and altitude define the distinct taste profiles of Ethiopian Yirgacheffe and Colombian Huila.",
-    content: `<p>Single-origin coffees tell a story of geographical origin. Unlike blends designed for consistency, single origin allows coffee lovers to taste the terroir of specific farms.</p>`
+    excerpt: "Discover how 24-hour cold immersion extraction creates a smooth, low-acid brew compared to traditional flash-chilled espresso.",
+    content: `
+      <p class="blog-lead">While both drinks are served over ice, Cold Brew and traditional Iced Coffee are created through completely different chemical extraction processes, resulting in vastly different flavor profiles on the palate.</p>
+      
+      <h2>The Extraction Time Difference</h2>
+      <p>Traditional iced coffee is brewed hot using espresso or pour-over methods and then rapidly chilled over ice. Cold brew, however, never touches hot water. Coarsely ground Arabica beans steep in ambient or chilled filtered water for 18 to 24 hours.</p>
+
+      <h2>Acidity & Smoothness</h2>
+      <p>Because hot water extracts bitter acids and oils faster, cold brew boasts up to 65% less acidity than hot-brewed coffee. The result is a naturally sweet, velvety smooth drink with deep chocolate and nutty notes that requires minimal added sugar.</p>
+
+      <h2>Caffeine Strength Comparison</h2>
+      <p>Due to the long steeping time and higher coffee-to-water ratio, cold brew concentrate contains higher caffeine density per ounce. Paired with sweet cream or vanilla bean syrup, it yields an incredibly refreshing energy boost.</p>
+    `
+  },
+  {
+    id: "blog-3",
+    title: "The Secrets Behind French Butter Pastry Lamination",
+    category: "Bakery Craft",
+    readTime: "6 min read",
+    date: "July 14, 2026",
+    author: "Chef Jean-Luc",
+    authorRole: "Master Pastry Chef",
+    authorAvatar: "🥐",
+    image: "images/pastry_croissant.png",
+    excerpt: "An inside look at our 81-layer croissant dough process using imported Normandy butter and stone-ground French wheat.",
+    content: `
+      <p class="blog-lead">Nothing complements a morning latte quite like a fresh, golden-shattered croissant. The secret to our legendary pastry lies in the meticulous art of French butter lamination.</p>
+
+      <h2>Imported Normandy Beurre d'Isigny</h2>
+      <p>We exclusively use 84% butterfat Normandy butter. High butterfat content ensures low water content, preventing steam from tearing dough layers during rolling and guaranteeing rich, caramelized flavor.</p>
+
+      <h2>81 Micro-Thin Layers</h2>
+      <p>Our dough undergoes three precise single folds over a 24-hour resting period. This creates 81 distinct layers of dough separated by microscopic sheets of cold butter.</p>
+
+      <h2>The Oven Steam Explosion</h2>
+      <p>When placed in our stone-deck ovens at 200°C, the water in the butter layers instantly vaporizes into steam, pushing the dough layers upward to form the iconic honeycomb cross-section inside.</p>
+    `
+  },
+  {
+    id: "blog-4",
+    title: "Single-Origin Arabica: From Ethiopian Highlands to Your Cup",
+    category: "Roastery Stories",
+    readTime: "7 min read",
+    date: "July 09, 2026",
+    author: "Hamza Al-Maktoum (Head Roaster)",
+    authorRole: "Founder & Master Roaster",
+    authorAvatar: "☕",
+    image: "images/hero_coffee.png",
+    excerpt: "Journey into high-altitude volcanic soils, heirloom coffee varieties, and washed processing that give Yirgacheffe its iconic bergamot aroma.",
+    content: `
+      <p class="blog-lead">Ethiopia is widely recognized as the birthplace of coffee. Grown at altitudes exceeding 1,900 meters above sea level in the Yirgacheffe region, these heirloom beans represent the pinnacle of coffee complexity.</p>
+
+      <h2>Volcanic Soil & Micro-Climates</h2>
+      <p>High elevation slows the growth of coffee cherries, allowing sugars to concentrate dense seed structures. Rich volcanic soil supplies essential minerals that yield vibrant stone-fruit and jasmine notes.</p>
+
+      <h2>Washed vs. Natural Processing</h2>
+      <p>Our featured lot undergoes a wet-washed fermentation process. After de-pulping, beans soak in clean mountain spring water for 36 hours before drying on raised African beds. This process highlights clean acidity and bright citrus clarity.</p>
+    `
+  },
+  {
+    id: "blog-5",
+    title: "The Rise of Ceremonial Uji Matcha & Plant-Based Milks",
+    category: "Wellness & Teas",
+    readTime: "5 min read",
+    date: "July 04, 2026",
+    author: "Aria Chen",
+    authorRole: "Tea & Beverage Specialist",
+    authorAvatar: "🍵",
+    image: "images/gallery_matcha_latte.png",
+    excerpt: "Why shade-grown green tea leaves from Kyoto paired with creamy steamed oat milk create the ultimate sustained-energy beverage.",
+    content: `
+      <p class="blog-lead">Matcha has evolved from ancient Japanese tea ceremonies into a global wellness staple. When paired with high-grade oat milk, it provides a smooth, jitter-free energy boost that lasts all day.</p>
+
+      <h2>Shade-Grown Quality: First Harvest</h2>
+      <p>Three weeks before harvest, tea bushes in Uji, Kyoto are shaded from sunlight. This spikes chlorophyll levels and amino acids like L-theanine, giving authentic ceremonial matcha its electric green color and sweet umami taste.</p>
+
+      <h2>L-Theanine & Sustained Focus</h2>
+      <p>Unlike caffeine from coffee which can cause rapid spikes and crashes, the L-theanine in matcha slows caffeine absorption in the bloodstream, delivering 4-6 hours of calm, focused mental clarity.</p>
+    `
+  },
+  {
+    id: "blog-6",
+    title: "Designing Cozy Café Aesthetics: Velvet, Warm Lights & Jazz",
+    category: "Café Vibe",
+    readTime: "4 min read",
+    date: "June 28, 2026",
+    author: "Sophia Vance",
+    authorRole: "Interior Architect",
+    authorAvatar: "✨",
+    image: "images/cafe_interior.png",
+    excerpt: "How interior lighting temperature, plush velvet lounge nooks, and curated acoustic jazz create an inspiring sanctuary for coffee lovers.",
+    content: `
+      <p class="blog-lead">A coffee shop should be more than just a place to pick up a drink; it should be a sensory sanctuary where creativity and relaxation flourish.</p>
+
+      <h2>2700K Warm Ambient Lighting</h2>
+      <p>We avoid harsh overhead fluorescent lighting in favor of warm, dimmable 2700K pendant bulbs and brass accent sconces. Warm light triggers relaxation and makes food and drinks look vibrant.</p>
+
+      <h2>Acoustic Soundscapes</h2>
+      <p>Soft velvet upholstery, solid oak tables, and acoustic ceiling baffles damp harsh noises while allowing quiet conversation and gentle background vinyl jazz to resonate naturally.</p>
+    `
   }
 ];
 

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog — Hamza Coffee Shop</title>
-  <meta name="description" content="Brewing Journal and Coffee Articles from Hamza Coffee Shop. Insights, pour-over guides, and single-origin roast stories from our master baristas.">
+  <title>Brewing Journal &amp; Articles — Hamza Coffee Shop</title>
+  <meta name="description" content="Brewing Journal and Coffee Articles from Hamza Coffee Shop. Insights, pour-over guides, single-origin roasts, and bakery stories from our master baristas.">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -76,15 +76,54 @@
   </div>
 
   <main>
+    <!-- PAGE HEADER -->
     <section class="page-header-banner">
       <div class="container">
-        <h1 class="page-header-title">Brewing Journal &amp; Articles</h1>
-        <p class="page-header-subtitle">Insights, pour-over guides, and single-origin roast stories from our master baristas.</p>
+        <h1 class="page-header-title">Brewing Journal &amp; Coffee Stories</h1>
+        <p class="page-header-subtitle">Expert barista guides, single-origin roastery insights, French bakery secrets, and coffee culture.</p>
       </div>
     </section>
 
+    <!-- FEATURED ARTICLE BANNER -->
+    <section class="container" style="margin-top:-2.5rem; margin-bottom:3rem;">
+      <div id="featuredBlogHero" style="background:#1A0E07; border-radius:24px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.25); display:grid; grid-template-columns:1.2fr 1fr; color:#FFF;">
+        <!-- Injected by JS -->
+      </div>
+    </section>
+
+    <!-- MAIN BLOGS SECTION -->
     <section class="container" style="padding-bottom:5rem;">
-      <div id="blogGrid" class="grid-container grid-2-cols" style="gap:2rem;"></div>
+
+      <!-- TOOLBAR: CATEGORY FILTER TABS & SEARCH -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem; background:#FFFFFF; padding:1.25rem; border-radius:16px; border:1px solid var(--border-light); box-shadow:0 4px 16px rgba(0,0,0,0.04);">
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;" id="blogCategoryPills">
+          <button class="btn-white active" onclick="filterBlogCategory('all', this)" style="background:var(--caramel-accent); color:#FFF; border-color:var(--caramel-accent);">All Articles</button>
+          <button class="btn-white" onclick="filterBlogCategory('Brewing Guides', this)">Brewing Guides</button>
+          <button class="btn-white" onclick="filterBlogCategory('Coffee Culture', this)">Coffee Culture</button>
+          <button class="btn-white" onclick="filterBlogCategory('Bakery Craft', this)">Bakery Craft</button>
+          <button class="btn-white" onclick="filterBlogCategory('Roastery Stories', this)">Roastery Stories</button>
+          <button class="btn-white" onclick="filterBlogCategory('Wellness & Teas', this)">Wellness &amp; Teas</button>
+        </div>
+
+        <div style="display:flex; gap:0.5rem; width:100%; max-width:300px;">
+          <input type="text" id="blogSearchInput" placeholder="Search articles..." oninput="renderBlogsGrid()" class="form-input-ref" style="padding:0.6rem 0.9rem; font-size:0.88rem;">
+        </div>
+      </div>
+
+      <!-- BLOG GRID -->
+      <div id="blogGrid" class="grid-container grid-3-cols" style="gap:2rem;"></div>
+
+      <!-- NEWSLETTER SUBSCRIBE BOX -->
+      <div style="margin-top:4rem; background:linear-gradient(135deg, #25140B 0%, #3B2317 100%); border-radius:24px; padding:3rem 2rem; text-align:center; color:#FFF; box-shadow:0 15px 40px rgba(0,0,0,0.15);">
+        <i data-lucide="mail-open" style="width:40px; height:40px; color:var(--caramel-accent); margin-bottom:1rem;"></i>
+        <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:800; margin-bottom:0.5rem;">Subscribe to Our Coffee Journal</h2>
+        <p style="color:rgba(255,255,255,0.75); max-width:540px; margin:0 auto 1.75rem auto; font-size:0.95rem; line-height:1.6;">Receive weekly brewing recipes, new coffee origin drops, and exclusive café event invitations directly in your inbox.</p>
+        <form onsubmit="event.preventDefault(); showToast('Subscribed to Coffee Journal!');" style="display:flex; max-width:440px; margin:0 auto; gap:0.5rem;">
+          <input type="email" placeholder="Enter your email address..." required class="form-input-ref" style="padding:0.75rem 1rem; border-radius:10px; flex:1;">
+          <button type="submit" class="btn-brown" style="padding:0.75rem 1.5rem; white-space:nowrap;">Join Journal</button>
+        </form>
+      </div>
+
     </section>
   </main>
 
@@ -104,7 +143,7 @@
         <div>
           <h4 class="footer-column-title">Quick Links</h4>
           <div class="footer-links-list">
-            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a><a href="blog.html">Blog Journal</a>
           </div>
         </div>
         <div>
@@ -115,65 +154,149 @@
         </div>
         <div>
           <h4 class="footer-column-title">Join Coffee Club</h4>
-          <p style="font-size:0.85rem; color:rgba(255,255,255,0.7); margin-bottom:1rem;">Get 10% off your first order!</p>
-          <form onsubmit="event.preventDefault(); showToast('Subscribed to Newsletter!');" style="display:flex; gap:0.5rem;">
+          <form onsubmit="event.preventDefault(); showToast('Subscribed!');" style="display:flex; gap:0.5rem;">
             <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem 0.8rem; font-size:0.85rem;">
             <button type="submit" class="btn-brown" style="padding:0.5rem 1rem;">Join</button>
           </form>
         </div>
       </div>
-      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p><p>Crafted with Passion &amp; Precision</p></div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
     </div>
   </footer>
-
-  <!-- Side Cart Drawer -->
-  <div id="cartOverlay" class="cart-overlay"></div>
-  <div id="cartDrawer" class="cart-drawer">
-    <div class="cart-drawer-header">
-      <h3 style="font-family:var(--font-heading); color:#FFFFFF;">Your Coffee Cart</h3>
-      <button id="closeCartBtn" class="icon-btn" style="color:#FFF; background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.2);"><i data-lucide="x"></i></button>
-    </div>
-    <div id="cartDrawerItems" class="cart-drawer-items"></div>
-    <div class="cart-drawer-footer">
-      <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-weight:700;">
-        <span>Total:</span>
-        <span id="cartDrawerTotal" style="color:var(--caramel-accent);">$0.00</span>
-      </div>
-      <a href="checkout.html" class="btn-brown" style="width:100%; text-align:center;">Proceed to Checkout</a>
-    </div>
-  </div>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
   <script src="js/navbar.js"></script>
 
   <script>
+    let activeBlogCategory = 'all';
+
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      renderFeaturedHero();
+      renderBlogsGrid();
+    });
 
-      const grid = document.getElementById('blogGrid');
-      if (grid && typeof BLOG_DATA !== 'undefined') {
-        grid.innerHTML = BLOG_DATA.map(b => `
-          <div class="card-ref reveal">
-            <div class="card-img-wrap" style="height:220px;">
-              <img src="${b.image}" alt="${b.title}">
+    function filterBlogCategory(cat, btn) {
+      activeBlogCategory = cat;
+      document.querySelectorAll('#blogCategoryPills .btn-white').forEach(b => {
+        b.style.background = '#FFFFFF';
+        b.style.color = 'var(--dark-espresso)';
+        b.style.borderColor = 'rgba(59, 35, 23, 0.15)';
+      });
+      btn.style.background = 'var(--caramel-accent)';
+      btn.style.color = '#FFFFFF';
+      btn.style.borderColor = 'var(--caramel-accent)';
+      renderBlogsGrid();
+    }
+
+    function renderFeaturedHero() {
+      const heroContainer = document.getElementById('featuredBlogHero');
+      if (!heroContainer || !BLOG_DATA || BLOG_DATA.length === 0) return;
+
+      const feat = BLOG_DATA[0]; // First article as featured hero
+      heroContainer.innerHTML = `
+        <div style="padding:3rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+            <span style="background:var(--caramel-accent); color:#FFF; font-size:0.75rem; font-weight:800; padding:0.25rem 0.75rem; border-radius:999px; text-transform:uppercase;">
+              FEATURED STORY
+            </span>
+            <span style="font-size:0.82rem; color:rgba(255,255,255,0.7);">${feat.category} • ${feat.readTime || '5 min read'}</span>
+          </div>
+          <h2 style="font-family:var(--font-heading); font-size:2.1rem; font-weight:800; line-height:1.25; margin-bottom:1rem;">
+            <a href="blog-detail.html?id=${feat.id}" style="color:inherit; text-decoration:none;">${feat.title}</a>
+          </h2>
+          <p style="color:rgba(255,255,255,0.8); font-size:0.98rem; line-height:1.6; margin-bottom:1.75rem; max-width:520px;">
+            ${feat.excerpt}
+          </p>
+          <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(255,255,255,0.12); padding-top:1.25rem;">
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+              <span style="width:36px; height:36px; border-radius:50%; background:rgba(184,104,27,0.3); display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
+                ${feat.authorAvatar || '☕'}
+              </span>
+              <div>
+                <strong style="display:block; font-size:0.88rem;">${feat.author}</strong>
+                <small style="color:rgba(255,255,255,0.6); font-size:0.75rem;">${feat.date}</small>
+              </div>
             </div>
-            <div class="card-content">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; font-size:0.8rem; color:var(--caramel-accent); font-weight:700;">
-                <span>${b.category}</span>
-                <span>${b.date}</span>
+            <a href="blog-detail.html?id=${feat.id}" class="btn-brown" style="padding:0.6rem 1.3rem; font-size:0.85rem;">Read Story →</a>
+          </div>
+        </div>
+        <div style="height:100%; min-height:360px; overflow:hidden;">
+          <img src="${feat.image}" alt="${feat.title}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+      `;
+    }
+
+    function renderBlogsGrid() {
+      const grid = document.getElementById('blogGrid');
+      const searchVal = (document.getElementById('blogSearchInput')?.value || '').toLowerCase().trim();
+
+      if (!grid || !BLOG_DATA) return;
+
+      // Skip index 0 (featured hero) for grid display if 'all' filter is active and no search
+      let articles = BLOG_DATA;
+      if (activeBlogCategory === 'all' && !searchVal) {
+        articles = BLOG_DATA.slice(1);
+      }
+
+      let filtered = articles.filter(b => {
+        const matchesCategory = activeBlogCategory === 'all' || b.category === activeBlogCategory;
+        const matchesSearch = b.title.toLowerCase().includes(searchVal) ||
+                              b.excerpt.toLowerCase().includes(searchVal) ||
+                              b.category.toLowerCase().includes(searchVal) ||
+                              b.author.toLowerCase().includes(searchVal);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column:1/-1; background:#FFF; border-radius:16px; padding:3rem 1rem; text-align:center; border:1px solid var(--border-light);">
+            <i data-lucide="book-open" style="width:40px; height:40px; opacity:0.3; color:var(--caramel-accent); margin-bottom:0.75rem;"></i>
+            <h3 style="font-family:var(--font-heading); margin-bottom:0.25rem;">No Articles Found</h3>
+            <p style="color:var(--text-muted); font-size:0.88rem;">Try adjusting your search query or selecting a different category filter.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = filtered.map(b => `
+        <div class="card-ref reveal" style="display:flex; flex-direction:column; background:#FFF; border-radius:16px; overflow:hidden; border:1px solid var(--border-light); box-shadow:0 4px 18px rgba(0,0,0,0.05); transition:transform 0.3s, box-shadow 0.3s;">
+          <div class="card-img-wrap" style="height:210px; overflow:hidden; position:relative;">
+            <img src="${b.image}" alt="${b.title}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+            <span style="position:absolute; top:12px; left:12px; background:rgba(26,14,7,0.85); backdrop-filter:blur(4px); color:var(--caramel-accent); padding:0.25rem 0.65rem; border-radius:999px; font-size:0.72rem; font-weight:800; text-transform:uppercase;">
+              ${b.category}
+            </span>
+          </div>
+
+          <div class="card-content" style="padding:1.5rem; display:flex; flex-direction:column; flex:1; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; font-size:0.78rem; color:var(--text-muted);">
+                <span>📅 ${b.date}</span>
+                <span>⏱️ ${b.readTime || '5 min read'}</span>
               </div>
-              <h3 class="card-title" style="font-size:1.2rem;"><a href="blog-detail.html?id=${b.id}" style="color:inherit; text-decoration:none;">${b.title}</a></h3>
-              <p class="card-desc">${b.excerpt}</p>
-              <div style="margin-top:auto;">
-                <a href="blog-detail.html?id=${b.id}" class="btn-brown" style="padding:0.4rem 1rem; font-size:0.8rem;">Read Article →</a>
+              <h3 class="card-title" style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; line-height:1.35; margin-bottom:0.5rem;">
+                <a href="blog-detail.html?id=${b.id}" style="color:var(--dark-espresso); text-decoration:none;">${b.title}</a>
+              </h3>
+              <p class="card-desc" style="font-size:0.86rem; color:var(--text-muted); line-height:1.5; margin-bottom:1.25rem;">
+                ${b.excerpt}
+              </p>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border-light); padding-top:0.85rem; margin-top:auto;">
+              <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.78rem; color:var(--dark-espresso); font-weight:700;">
+                <span>${b.authorAvatar || '☕'}</span>
+                <span>${b.author.split(' ')[0]} ${b.author.split(' ')[1] || ''}</span>
               </div>
+              <a href="blog-detail.html?id=${b.id}" class="btn-brown" style="padding:0.4rem 0.9rem; font-size:0.78rem;">Read Article →</a>
             </div>
           </div>
-        `).join('');
-        lucide.createIcons();
-      }
-    });
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
   </script>
 </body>
 </html>

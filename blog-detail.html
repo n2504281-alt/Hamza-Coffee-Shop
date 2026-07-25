@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Article — Hamza Coffee Shop</title>
+  <title>Coffee Journal Article — Hamza Coffee Shop</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -11,17 +11,88 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- HEADER NAVBAR -->
   <header class="navbar-ref">
     <div class="container nav-flex">
-      <a href="index.html" class="logo-ref"><i data-lucide="coffee" style="color:var(--caramel-accent);"></i><span>Coffee</span></a>
-      <nav class="nav-links-ref"><a href="blog.html" class="nav-link-ref"><i data-lucide="arrow-left" style="width:14px;"></i> Return to Blog</a></nav>
+      <a href="index.html" class="logo-ref">
+        <i data-lucide="coffee" style="color:var(--caramel-accent);"></i>
+        <span>Coffee</span>
+      </a>
+
+      <nav class="nav-links-ref">
+        <a href="index.html" class="nav-link-ref">Home</a>
+        
+        <div class="nav-dropdown-ref">
+          <a href="menu.html" class="nav-link-ref">Menu <i data-lucide="chevron-down" class="dropdown-chevron"></i></a>
+          <div class="dropdown-menu-ref">
+            <a href="menu.html" class="dropdown-item-ref">
+              <i data-lucide="coffee"></i>
+              <div>
+                <strong>Full Menu</strong>
+                <small>Explore drinks &amp; treats</small>
+              </div>
+            </a>
+            <a href="reservations.html" class="dropdown-item-ref">
+              <i data-lucide="calendar"></i>
+              <div>
+                <strong>Book a Table</strong>
+                <small>Reserve your table</small>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="gallery.html" class="nav-link-ref">Gallery</a>
+        <a href="blog.html" class="nav-link-ref active">Blog</a>
+        <a href="contact.html" class="nav-link-ref">Contact</a>
+      </nav>
+
+      <div class="nav-right-actions">
+        <a href="wishlist.html" class="icon-btn" title="Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="icon-badge wishlist-count-badge" style="display:none;">0</span>
+        </a>
+        <button class="icon-btn open-cart-btn" title="Cart">
+          <i data-lucide="shopping-bag"></i>
+          <span class="icon-badge cart-count-badge" style="display:none;">0</span>
+        </button>
+        <a href="order.html" class="btn-brown" style="padding:0.6rem 1.4rem; font-size:0.85rem;">Order Ahead</a>
+        <div class="hamburger-ref">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main style="padding: 4rem 0 6rem 0;">
-    <div class="container" style="max-width:800px;">
-      <div id="blogDetailContainer"></div>
+  <!-- Mobile Menu Drawer -->
+  <div class="mobile-menu-ref">
+    <a href="index.html" class="nav-link-ref">Home</a>
+    <a href="menu.html" class="nav-link-ref">Menu</a>
+    <a href="reservations.html" class="nav-link-ref" style="padding-left:1.5rem; font-size:0.92rem; color:var(--caramel-accent);">↳ Book a Table</a>
+    <a href="gallery.html" class="nav-link-ref">Gallery</a>
+    <a href="blog.html" class="nav-link-ref active">Blog</a>
+    <a href="contact.html" class="nav-link-ref">Contact</a>
+  </div>
+
+  <main style="padding: 3rem 0 6rem 0; background:var(--bg-cream-light);">
+    <div class="container" style="max-width:860px;">
+      
+      <!-- BACK TO BLOGS BUTTON -->
+      <a href="blog.html" class="btn-white" style="display:inline-flex; align-items:center; gap:0.5rem; margin-bottom:2rem; padding:0.55rem 1.1rem; font-size:0.85rem;">
+        <i data-lucide="arrow-left" style="width:16px;"></i> Back to All Articles
+      </a>
+
+      <!-- MAIN ARTICLE CARD -->
+      <article id="blogDetailContainer" class="form-card-ref" style="background:#FFF; padding:2.5rem; border-radius:24px; box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+        <!-- Dynamically Rendered by JS -->
+      </article>
+
+      <!-- RELATED ARTICLES SECTION -->
+      <section style="margin-top:4rem;">
+        <h3 style="font-family:var(--font-heading); font-size:1.5rem; font-weight:800; color:var(--dark-espresso); margin-bottom:1.5rem;">Related Articles</h3>
+        <div id="relatedBlogsGrid" class="grid-container grid-2-cols" style="gap:1.5rem;"></div>
+      </section>
+
     </div>
   </main>
 
@@ -36,7 +107,7 @@
         <div>
           <h4 class="footer-column-title">Quick Links</h4>
           <div class="footer-links-list">
-            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a><a href="blog.html">Blog Journal</a>
           </div>
         </div>
         <div>
@@ -48,8 +119,8 @@
         <div>
           <h4 class="footer-column-title">Join Coffee Club</h4>
           <form onsubmit="event.preventDefault(); showToast('Subscribed!');" style="display:flex; gap:0.5rem;">
-            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem; font-size:0.85rem;">
-            <button type="submit" class="btn-brown">Join</button>
+            <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem 0.8rem; font-size:0.85rem;">
+            <button type="submit" class="btn-brown" style="padding:0.5rem 1rem;">Join</button>
           </form>
         </div>
       </div>
@@ -64,24 +135,103 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+
       const urlParams = new URLSearchParams(window.location.search);
       const blogId = urlParams.get('id') || 'blog-1';
       const post = BLOG_DATA.find(b => b.id === blogId) || BLOG_DATA[0];
 
+      // Update page title
+      document.title = `${post.title} — Hamza Coffee Shop`;
+
+      // Render main article
       const container = document.getElementById('blogDetailContainer');
       container.innerHTML = `
-        <div class="form-card-ref">
-          <span style="background:var(--caramel-accent); color:#FFF; font-size:0.75rem; font-weight:800; padding:0.25rem 0.75rem; border-radius:999px;">${post.category}</span>
-          <h1 style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:var(--dark-espresso); margin:1rem 0 0.5rem 0;">${post.title}</h1>
-          <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">By ${post.author} • ${post.date}</div>
-          <div style="border-radius:14px; overflow:hidden; height:320px; margin-bottom:2rem;">
-            <img src="${post.image}" alt="${post.title}" style="width:100%; height:100%; object-fit:cover;">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem; flex-wrap:wrap;">
+          <span style="background:var(--caramel-accent); color:#FFF; font-size:0.75rem; font-weight:800; padding:0.25rem 0.75rem; border-radius:999px; text-transform:uppercase;">
+            ${post.category}
+          </span>
+          <span style="font-size:0.85rem; color:var(--text-muted);">📅 ${post.date}</span>
+          <span style="font-size:0.85rem; color:var(--text-muted);">⏱️ ${post.readTime || '5 min read'}</span>
+        </div>
+
+        <h1 style="font-family:var(--font-heading); font-size:2.2rem; font-weight:800; color:var(--dark-espresso); line-height:1.25; margin-bottom:1.5rem;">
+          ${post.title}
+        </h1>
+
+        <!-- Author Meta Info Row -->
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; border-top:1px solid var(--border-light); border-bottom:1px solid var(--border-light); padding:1rem 0; margin-bottom:2rem;">
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <div style="width:46px; height:46px; border-radius:50%; background:var(--bg-cream-light); border:1px solid var(--border-light); display:flex; align-items:center; justify-content:center; font-size:1.3rem;">
+              ${post.authorAvatar || '☕'}
+            </div>
+            <div>
+              <strong style="display:block; font-size:0.95rem; color:var(--dark-espresso);">${post.author}</strong>
+              <small style="color:var(--text-muted); font-size:0.8rem;">${post.authorRole || 'Craft Coffee Contributor'}</small>
+            </div>
           </div>
-          <div style="font-size:1.05rem; line-height:1.8; color:var(--dark-espresso);">
-            ${post.content}
+
+          <div style="display:flex; gap:0.5rem;">
+            <button class="btn-white" style="padding:0.4rem 0.8rem; font-size:0.78rem;" onclick="showToast('Link copied to clipboard!')">
+              <i data-lucide="share-2" style="width:14px;"></i> Share
+            </button>
+            <button class="btn-white" style="padding:0.4rem 0.8rem; font-size:0.78rem;" onclick="window.print()">
+              <i data-lucide="printer" style="width:14px;"></i> Print
+            </button>
+          </div>
+        </div>
+
+        <!-- Featured Image -->
+        <div style="border-radius:18px; overflow:hidden; max-height:420px; margin-bottom:2.25rem; box-shadow:0 8px 30px rgba(0,0,0,0.1);">
+          <img src="${post.image}" alt="${post.title}" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+
+        <!-- Article Body Content -->
+        <div style="font-size:1.05rem; line-height:1.8; color:var(--dark-espresso);" class="blog-body-content">
+          ${post.content}
+        </div>
+
+        <!-- FEATURED PAIRING CALLOUT BOX -->
+        <div style="margin-top:3rem; background:var(--bg-cream-light); border:1px solid rgba(184,104,27,0.3); border-radius:18px; padding:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <span style="font-size:0.75rem; color:var(--caramel-accent); font-weight:800; text-transform:uppercase;">CRAFT COFFEE PAIRING</span>
+            <h4 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--dark-espresso); margin-top:0.2rem;">Inspired to try our Artisan Brews?</h4>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">Order ahead for instant branch pickup or table delivery.</p>
+          </div>
+          <a href="order.html" class="btn-brown" style="padding:0.7rem 1.4rem; font-size:0.88rem;">Order Ahead Now</a>
+        </div>
+
+        <!-- AUTHOR BIO BOX -->
+        <div style="margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--border-light); display:flex; gap:1rem; align-items:flex-start;">
+          <div style="width:54px; height:54px; border-radius:50%; background:var(--bg-cream); display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0;">
+            ${post.authorAvatar || '☕'}
+          </div>
+          <div>
+            <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:var(--dark-espresso); margin-bottom:0.25rem;">Written by ${post.author}</h4>
+            <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5; margin:0;">Dedicated coffee artisan passionate about ethical bean sourcing, brewing techniques, and crafting memorable cafe experiences at Hamza Coffee Shop.</p>
           </div>
         </div>
       `;
+
+      // Render Related Blogs (exclude current)
+      const related = BLOG_DATA.filter(b => b.id !== post.id).slice(0, 2);
+      const relatedGrid = document.getElementById('relatedBlogsGrid');
+      if (relatedGrid) {
+        relatedGrid.innerHTML = related.map(b => `
+          <div class="card-ref" style="background:#FFF; border-radius:16px; overflow:hidden; border:1px solid var(--border-light); box-shadow:0 4px 18px rgba(0,0,0,0.05);">
+            <div style="height:170px; overflow:hidden;">
+              <img src="${b.image}" alt="${b.title}" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:1.25rem;">
+              <span style="font-size:0.75rem; color:var(--caramel-accent); font-weight:800;">${b.category}</span>
+              <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:var(--dark-espresso); margin:0.35rem 0 0.5rem 0; line-height:1.35;">
+                <a href="blog-detail.html?id=${b.id}" style="color:inherit; text-decoration:none;">${b.title}</a>
+              </h4>
+              <a href="blog-detail.html?id=${b.id}" class="btn-brown" style="padding:0.4rem 0.85rem; font-size:0.78rem; display:inline-block;">Read Article →</a>
+            </div>
+          </div>
+        `).join('');
+      }
+
       lucide.createIcons();
     });
   </script>
