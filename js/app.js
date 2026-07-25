@@ -6,7 +6,52 @@ const AppState = {
   cart: JSON.parse(localStorage.getItem('hcs_cart')) || [],
   wishlist: JSON.parse(localStorage.getItem('hcs_wishlist')) || [],
   appliedPromo: JSON.parse(localStorage.getItem('hcs_promo')) || null,
-  activeOrder: JSON.parse(localStorage.getItem('hcs_active_order')) || null,
+  reservations: JSON.parse(localStorage.getItem('hcs_reservations')) || [
+    {
+      id: "HCS-RES-782910",
+      name: "Sophia Turner",
+      phone: "+1 (555) 345-6789",
+      email: "sophia@example.com",
+      date: new Date().toISOString().split('T')[0],
+      time: "07:30 PM",
+      guests: "4 Guests",
+      notes: "Window corner table for birthday coffee",
+      status: "pending",
+      createdAt: new Date(Date.now() - 3600000).toISOString()
+    },
+    {
+      id: "HCS-RES-452109",
+      name: "Michael Ross",
+      phone: "+1 (555) 890-1234",
+      email: "michael@example.com",
+      date: new Date().toISOString().split('T')[0],
+      time: "02:00 PM",
+      guests: "2 Guests",
+      notes: "Business meeting near power outlet",
+      status: "confirmed",
+      tableNum: "Table #8 (Window Lounge)",
+      createdAt: new Date(Date.now() - 7200000).toISOString()
+    }
+  ],
+
+  saveReservations() {
+    localStorage.setItem('hcs_reservations', JSON.stringify(this.reservations));
+  },
+
+  addReservation(resData) {
+    this.reservations.unshift(resData);
+    this.saveReservations();
+  },
+
+  updateReservationStatus(resId, status, tableNum = '', adminNotes = '') {
+    const res = this.reservations.find(r => r.id === resId);
+    if (res) {
+      res.status = status;
+      if (tableNum) res.tableNum = tableNum;
+      if (adminNotes) res.adminNotes = adminNotes;
+      this.saveReservations();
+    }
+  },
 
   saveCart() {
     localStorage.setItem('hcs_cart', JSON.stringify(this.cart));

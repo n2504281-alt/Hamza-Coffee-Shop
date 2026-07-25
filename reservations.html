@@ -142,6 +142,24 @@
           </button>
         </form>
       </div>
+
+      <!-- Live Reservation Status Lookup Card -->
+      <div class="form-card-ref" style="margin-top:2.5rem; background:#FFFFFF;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <h3 style="font-family:var(--font-heading); font-size:1.2rem; font-weight:800; color:var(--dark-espresso);">
+            <i data-lucide="search" style="width:18px; color:var(--caramel-accent); vertical-align:middle;"></i> Check Your Booking Status
+          </h3>
+          <a href="admin.html" class="btn-white" style="padding:0.35rem 0.85rem; font-size:0.78rem;" target="_blank">👑 Open Admin Panel Demo</a>
+        </div>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">Enter your registered Email Address or Booking Reference ID (e.g. <code>sophia@example.com</code> or <code>HCS-RES-782910</code>) to check live table availability status from Admin.</p>
+        
+        <div style="display:flex; gap:0.5rem;">
+          <input type="text" id="statusQueryInput" placeholder="Enter Email or Reference ID..." class="form-input-ref" style="flex:1;">
+          <button type="button" class="btn-brown" onclick="checkReservationStatusLookup()" style="padding:0.75rem 1.2rem;">Check Status</button>
+        </div>
+
+        <div id="statusLookupResult" style="margin-top:1.25rem; display:none;"></div>
+      </div>
     </section>
   </main>
 
@@ -149,7 +167,10 @@
   <div id="resModal" class="modal-overlay">
     <div class="form-card-ref" style="max-width:520px; text-align:left; width:100%; box-shadow:0 25px 60px rgba(0,0,0,0.5); padding:2rem;">
       <div id="resModalContent"></div>
-      <button class="btn-brown" style="width:100%; text-align:center; margin-top:1.5rem;" onclick="closeResModal()">Done &amp; Close</button>
+      <div style="display:flex; gap:0.75rem; margin-top:1.5rem;">
+        <a href="admin.html" target="_blank" class="btn-white" style="flex:1; text-align:center; font-size:0.85rem;">👑 Open Admin Portal</a>
+        <button class="btn-brown" style="flex:1; text-align:center; font-size:0.85rem;" onclick="closeResModal()">Done &amp; Close</button>
+      </div>
     </div>
   </div>
 
@@ -164,7 +185,7 @@
         <div>
           <h4 class="footer-column-title">Quick Links</h4>
           <div class="footer-links-list">
-            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a>
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a><a href="admin.html">Admin Portal</a>
           </div>
         </div>
         <div>
@@ -231,93 +252,123 @@
       const rawTime = document.getElementById('resTime').value;
       const time = formatTime12h(rawTime);
       const guests = document.getElementById('resGuests').value;
+      const notes = document.getElementById('resNotes').value.trim();
 
-      const refNum = `HCS-${Math.floor(100000 + Math.random() * 900000)}`;
-      const hour = parseInt((rawTime || '14:00').split(':')[0], 10);
-      const isPeakBusy = (hour >= 19 && hour <= 21);
+      const newRes = {
+        id: `HCS-RES-${Math.floor(100000 + Math.random() * 900000)}`,
+        name,
+        phone,
+        email,
+        date,
+        rawTime,
+        time,
+        guests,
+        notes,
+        status: 'pending',
+        tableNum: '',
+        adminNotes: '',
+        createdAt: new Date().toISOString()
+      };
+
+      AppState.addReservation(newRes);
 
       const modalContent = document.getElementById('resModalContent');
-
-      if (isPeakBusy) {
-        // High Demand Slot Notice + Status Email Sent
-        modalContent.innerHTML = `
-          <div style="text-align:center; margin-bottom:1.25rem;">
-            <div style="width:60px; height:60px; border-radius:50%; background:rgba(184,104,27,0.15); color:var(--caramel-accent); display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem auto;">
-              <i data-lucide="mail-check" style="width:30px; height:30px;"></i>
-            </div>
-            <h2 style="font-family:var(--font-heading); color:var(--dark-espresso); font-size:1.5rem; font-weight:800; margin-bottom:0.3rem;">Slot Busy — Status Email Sent!</h2>
-            <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.5;">Requested time slot (<strong>${time}</strong>) is currently at peak capacity. A status update has been sent to your email.</p>
+      modalContent.innerHTML = `
+        <div style="text-align:center; margin-bottom:1.25rem;">
+          <div style="width:60px; height:60px; border-radius:50%; background:rgba(184,104,27,0.15); color:var(--caramel-accent); display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem auto;">
+            <i data-lucide="clock" style="width:32px; height:32px;"></i>
           </div>
+          <h2 style="font-family:var(--font-heading); color:var(--dark-espresso); font-size:1.5rem; font-weight:800; margin-bottom:0.3rem;">Request Sent to Admin!</h2>
+          <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.5;">Your table request is saved in the system. Admin is reviewing live table availability for <strong>${time}</strong> on <strong>${date}</strong>.</p>
+        </div>
 
-          <div style="background:var(--bg-cream-light); border:1px solid rgba(184,104,27,0.3); border-radius:14px; padding:1.1rem; font-size:0.86rem; color:var(--dark-espresso);">
-            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:0.6rem; margin-bottom:0.6rem;">
-              <div>
-                <span style="font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; font-weight:700; display:block;">Confirmation Email Sent To</span>
-                <strong style="color:var(--caramel-accent);">${email}</strong>
-              </div>
-              <span style="font-size:0.72rem; background:rgba(184,104,27,0.15); color:var(--caramel-accent); padding:0.2rem 0.5rem; border-radius:6px; font-weight:800;">Ref: #${refNum}</span>
+        <div style="background:var(--bg-cream-light); border:1px solid rgba(184,104,27,0.3); border-radius:14px; padding:1.1rem; font-size:0.86rem; color:var(--dark-espresso);">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:0.6rem; margin-bottom:0.6rem;">
+            <div>
+              <span style="font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; font-weight:700; display:block;">Email Notification Queued To</span>
+              <strong style="color:var(--caramel-accent);">${email}</strong>
             </div>
-            <p style="margin-bottom:0.4rem; line-height:1.5;">Dear <strong>${name}</strong>,</p>
-            <p style="margin-bottom:0.6rem; line-height:1.5; color:var(--text-muted);">
-              Thank you for choosing Hamza Coffee Shop. Due to high table occupancy at <strong>${time} on ${date}</strong>, our host team is reviewing table layouts for <strong>${guests}</strong>.
-            </p>
-            <div style="background:#FFF; padding:0.65rem; border-radius:8px; border:1px solid var(--border-light); margin-bottom:0.6rem;">
-              <strong style="display:block; font-size:0.78rem; color:var(--dark-espresso); margin-bottom:0.25rem;">Suggested Instant Alternate Slots:</strong>
-              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
-                <span style="font-size:0.75rem; background:var(--bg-cream); color:var(--dark-espresso); padding:0.18rem 0.45rem; border-radius:4px; font-weight:700;">☕ 06:15 PM (Available)</span>
-                <span style="font-size:0.75rem; background:var(--bg-cream); color:var(--dark-espresso); padding:0.18rem 0.45rem; border-radius:4px; font-weight:700;">☕ 09:30 PM (Available)</span>
-              </div>
-            </div>
-            <p style="font-size:0.78rem; color:var(--text-muted);">Please check your email inbox to confirm your preferred slot or call +1 (555) 234-5678.</p>
-          </div>
-        `;
-      } else {
-        // Table Confirmed + Email Dispatched
-        modalContent.innerHTML = `
-          <div style="text-align:center; margin-bottom:1.25rem;">
-            <div style="width:60px; height:60px; border-radius:50%; background:rgba(46,125,50,0.15); color:#2E7D32; display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem auto;">
-              <i data-lucide="check-circle-2" style="width:32px; height:32px;"></i>
-            </div>
-            <h2 style="font-family:var(--font-heading); color:var(--dark-espresso); font-size:1.5rem; font-weight:800; margin-bottom:0.3rem;">Table Reserved &amp; Email Sent!</h2>
-            <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.5;">Your table booking is confirmed! An official confirmation email has been dispatched to <strong>${email}</strong>.</p>
+            <span style="font-size:0.72rem; background:rgba(184,104,27,0.15); color:var(--caramel-accent); padding:0.2rem 0.5rem; border-radius:6px; font-weight:800;">Ref: #${newRes.id}</span>
           </div>
 
-          <div style="background:var(--bg-cream-light); border:1px solid rgba(46,125,50,0.3); border-radius:14px; padding:1.1rem; font-size:0.86rem; color:var(--dark-espresso);">
-            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:0.6rem; margin-bottom:0.6rem;">
-              <div>
-                <span style="font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; font-weight:700; display:block;">Confirmation Email Dispatched To</span>
-                <strong style="color:#2E7D32;">${email}</strong>
-              </div>
-              <span style="font-size:0.72rem; background:rgba(46,125,50,0.15); color:#2E7D32; padding:0.2rem 0.5rem; border-radius:6px; font-weight:800;">Ref: #${refNum}</span>
+          <div style="background:#FFF; padding:0.75rem; border-radius:8px; border:1px solid var(--border-light); margin-bottom:0.6rem;">
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.25rem;">
+              <span style="color:var(--text-muted);">Guest Name:</span>
+              <strong>${name}</strong>
             </div>
-            <p style="margin-bottom:0.4rem; line-height:1.5;">Dear <strong>${name}</strong>,</p>
-            <p style="margin-bottom:0.6rem; line-height:1.5; color:var(--text-muted);">
-              Your table for <strong>${guests}</strong> on <strong>${date} at ${time}</strong> has been locked and reserved at Hamza Coffee Shop.
-            </p>
-            <div style="background:#FFF; padding:0.65rem; border-radius:8px; border:1px solid var(--border-light); margin-bottom:0.6rem;">
-              <div style="display:flex; justify-content:space-between; font-size:0.78rem; margin-bottom:0.25rem;">
-                <span style="color:var(--text-muted);">Guest Name:</span>
-                <strong>${name}</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between; font-size:0.78rem; margin-bottom:0.25rem;">
-                <span style="color:var(--text-muted);">Phone Number:</span>
-                <strong>${phone}</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between; font-size:0.78rem;">
-                <span style="color:var(--text-muted);">Assigned Area:</span>
-                <strong style="color:var(--caramel-accent);">Table #${Math.floor(1 + Math.random()*20)} (Window Lounge)</strong>
-              </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.25rem;">
+              <span style="color:var(--text-muted);">Date &amp; Time:</span>
+              <strong>${date} at ${time}</strong>
             </div>
-            <p style="font-size:0.78rem; color:var(--text-muted);">Please present this confirmation email upon arrival. We look forward to serving you!</p>
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.25rem;">
+              <span style="color:var(--text-muted);">Party Size:</span>
+              <strong>${guests}</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem;">
+              <span style="color:var(--text-muted);">Status:</span>
+              <strong style="color:#D47B22;">⏳ PENDING ADMIN APPROVAL</strong>
+            </div>
           </div>
-        `;
-      }
+          <p style="font-size:0.78rem; color:var(--text-muted);">When Admin approves or marks table unavailable, an automated status confirmation email will be sent to ${email}. You can also open the Admin Portal demo to simulate Admin actions!</p>
+        </div>
+      `;
 
       lucide.createIcons();
       document.getElementById('resModal').classList.add('open');
       if (typeof showToast === 'function') {
-        showToast(`Confirmation email sent to ${email}`);
+        showToast(`Request #${newRes.id} sent to Admin! Email notification queued to ${email}`);
       }
+    }
+
+    function checkReservationStatusLookup() {
+      const q = (document.getElementById('statusQueryInput')?.value || '').trim().toLowerCase();
+      const resContainer = document.getElementById('statusLookupResult');
+      if (!resContainer) return;
+
+      if (!q) {
+        showToast("Please enter an Email or Reference ID", "info");
+        return;
+      }
+
+      const matches = AppState.reservations.filter(r => 
+        r.email.toLowerCase().includes(q) || r.id.toLowerCase().includes(q) || r.name.toLowerCase().includes(q)
+      );
+
+      resContainer.style.display = 'block';
+
+      if (matches.length === 0) {
+        resContainer.innerHTML = `
+          <div style="background:#FFF3CD; border:1px solid #FFEBAA; border-radius:10px; padding:1rem; color:#856404; font-size:0.85rem;">
+            No reservation found for "<strong>${q}</strong>". Please check your Reference ID or Email address.
+          </div>
+        `;
+        return;
+      }
+
+      resContainer.innerHTML = matches.map(res => {
+        let badgeHtml = `<span style="background:rgba(212,123,34,0.15); color:#D47B22; padding:0.2rem 0.6rem; border-radius:6px; font-weight:800; font-size:0.75rem;">⏳ PENDING ADMIN REVIEW</span>`;
+        if (res.status === 'confirmed') {
+          badgeHtml = `<span style="background:rgba(46,125,50,0.15); color:#2E7D32; padding:0.2rem 0.6rem; border-radius:6px; font-weight:800; font-size:0.75rem;">✅ CONFIRMED — ${res.tableNum || 'Table Assigned'}</span>`;
+        } else if (res.status === 'unavailable') {
+          badgeHtml = `<span style="background:rgba(185,28,28,0.15); color:#B91C1C; padding:0.2rem 0.6rem; border-radius:6px; font-weight:800; font-size:0.75rem;">❌ NOT AVAILABLE AT THIS TIME</span>`;
+        }
+
+        return `
+          <div style="background:var(--bg-cream-light); border:1px solid var(--border-light); border-radius:12px; padding:1rem; margin-bottom:0.75rem; font-size:0.85rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">
+              <strong>Ref: #${res.id}</strong>
+              ${badgeHtml}
+            </div>
+            <div style="color:var(--text-muted); line-height:1.5;">
+              <div>👤 <strong>${res.name}</strong> • 📞 ${res.phone} • ✉️ ${res.email}</div>
+              <div>📅 <strong>${res.date} at ${res.time}</strong> (${res.guests})</div>
+              ${res.tableNum ? `<div style="color:#2E7D32; font-weight:700; margin-top:0.25rem;">🪑 ${res.tableNum}</div>` : ''}
+              ${res.adminNotes ? `<div style="background:#FFF; padding:0.5rem 0.75rem; border-radius:6px; border:1px solid rgba(185,28,28,0.2); color:#B91C1C; margin-top:0.5rem;"><strong>Admin Note:</strong> ${res.adminNotes}</div>` : ''}
+              <div style="font-size:0.75rem; color:rgba(0,0,0,0.4); margin-top:0.5rem;">Confirmation Email Status: Dispatched to ${res.email}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     function closeResModal() {

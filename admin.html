@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Reservation Management — Hamza Coffee Shop</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- HEADER NAVBAR -->
+  <header class="navbar-ref" style="background:#25140B; border-bottom:1px solid rgba(255,255,255,0.1);">
+    <div class="container nav-flex">
+      <a href="index.html" class="logo-ref" style="color:#FFF;">
+        <i data-lucide="shield-check" style="color:var(--caramel-accent);"></i>
+        <span>Admin Portal</span>
+      </a>
+
+      <nav class="nav-links-ref">
+        <a href="index.html" class="nav-link-ref" style="color:rgba(255,255,255,0.85);">Home</a>
+        <a href="reservations.html" class="nav-link-ref" style="color:rgba(255,255,255,0.85);">Customer Reservation Form</a>
+        <a href="menu.html" class="nav-link-ref" style="color:rgba(255,255,255,0.85);">Menu</a>
+      </nav>
+
+      <div class="nav-right-actions">
+        <a href="reservations.html" class="btn-brown" style="padding:0.5rem 1.2rem; font-size:0.82rem;">+ New Reservation</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HEADER -->
+    <section class="page-header-banner" style="background:#1A0E07; padding:2.5rem 0;">
+      <div class="container">
+        <h1 class="page-header-title">Admin Reservation Management</h1>
+        <p class="page-header-subtitle">Review incoming table booking requests, assign tables to approve &amp; dispatch confirmation emails, or mark unavailable with custom notes.</p>
+      </div>
+    </section>
+
+    <!-- ADMIN CONTENT SECTION -->
+    <section class="container" style="padding-bottom:5rem; margin-top:2.5rem;">
+      
+      <!-- STATS COUNTER ROW -->
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1.25rem; margin-bottom:2.5rem;">
+        <div class="form-card-ref" style="padding:1.25rem; text-align:center; background:#FFF;">
+          <span style="font-size:0.75rem; color:var(--text-muted); font-weight:800; text-transform:uppercase;">Total Requests</span>
+          <h3 id="statTotalCount" style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:var(--dark-espresso); margin-top:0.25rem;">0</h3>
+        </div>
+        <div class="form-card-ref" style="padding:1.25rem; text-align:center; background:#FFF; border-left:4px solid #D47B22;">
+          <span style="font-size:0.75rem; color:#D47B22; font-weight:800; text-transform:uppercase;">Pending Review</span>
+          <h3 id="statPendingCount" style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:#D47B22; margin-top:0.25rem;">0</h3>
+        </div>
+        <div class="form-card-ref" style="padding:1.25rem; text-align:center; background:#FFF; border-left:4px solid #2E7D32;">
+          <span style="font-size:0.75rem; color:#2E7D32; font-weight:800; text-transform:uppercase;">Confirmed &amp; Emailed</span>
+          <h3 id="statConfirmedCount" style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:#2E7D32; margin-top:0.25rem;">0</h3>
+        </div>
+        <div class="form-card-ref" style="padding:1.25rem; text-align:center; background:#FFF; border-left:4px solid #B91C1C;">
+          <span style="font-size:0.75rem; color:#B91C1C; font-weight:800; text-transform:uppercase;">Unavailable / Rejected</span>
+          <h3 id="statUnavailableCount" style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:#B91C1C; margin-top:0.25rem;">0</h3>
+        </div>
+      </div>
+
+      <!-- FILTER & SEARCH BAR -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:2rem; background:#FFF; padding:1.25rem; border-radius:16px; border:1px solid var(--border-light);">
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;" id="filterTabBtns">
+          <button class="btn-white active-filter" onclick="setAdminFilter('all', this)" style="background:var(--caramel-accent); color:#FFF; border-color:var(--caramel-accent);">All Requests</button>
+          <button class="btn-white" onclick="setAdminFilter('pending', this)">Pending Review</button>
+          <button class="btn-white" onclick="setAdminFilter('confirmed', this)">Confirmed</button>
+          <button class="btn-white" onclick="setAdminFilter('unavailable', this)">Unavailable</button>
+        </div>
+
+        <div style="display:flex; gap:0.5rem; width:100%; max-width:340px;">
+          <input type="text" id="adminSearchInput" placeholder="Search Name, Email, or Ref ID..." oninput="renderAdminReservations()" class="form-input-ref" style="padding:0.6rem 0.9rem; font-size:0.88rem;">
+        </div>
+      </div>
+
+      <!-- RESERVATIONS LIST CONTAINER -->
+      <div id="adminReservationsList" style="display:flex; flex-direction:column; gap:1.25rem;"></div>
+
+    </section>
+  </main>
+
+  <!-- ACTION MODAL: APPROVE TABLE -->
+  <div id="approveModal" class="modal-overlay">
+    <div class="form-card-ref" style="max-width:480px; text-align:left; width:100%; box-shadow:0 25px 60px rgba(0,0,0,0.5); padding:2rem;">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+        <div style="width:44px; height:44px; border-radius:50%; background:rgba(46,125,50,0.15); color:#2E7D32; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <i data-lucide="check-circle" style="width:24px; height:24px;"></i>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso);">Approve &amp; Assign Table</h3>
+          <p style="font-size:0.8rem; color:var(--text-muted);">Confirming table reservation &amp; dispatching confirmation email.</p>
+        </div>
+      </div>
+
+      <input type="hidden" id="approveResId">
+
+      <div class="form-group-ref" style="margin-bottom:1rem;">
+        <label class="form-label-ref">Assign Table Number / Location *</label>
+        <input type="text" id="assignTableNum" class="form-input-ref" placeholder="e.g. Table #14 (Window Lounge)" value="Table #12 (Main Dining Lounge)">
+      </div>
+
+      <div class="form-group-ref" style="margin-bottom:1.5rem;">
+        <label class="form-label-ref">Admin Confirmation Note (Included in Email)</label>
+        <textarea id="approveAdminNote" rows="2" class="form-textarea-ref" placeholder="e.g. Table is reserved and prepped. Special requests accommodated."></textarea>
+      </div>
+
+      <div style="display:flex; gap:0.75rem;">
+        <button type="button" class="btn-brown" style="flex:1; text-align:center; background:#2E7D32;" onclick="submitApproveReservation()">✅ Confirm &amp; Dispatch Email</button>
+        <button type="button" class="btn-white" onclick="closeApproveModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION MODAL: MARK UNAVAILABLE -->
+  <div id="unavailableModal" class="modal-overlay">
+    <div class="form-card-ref" style="max-width:480px; text-align:left; width:100%; box-shadow:0 25px 60px rgba(0,0,0,0.5); padding:2rem;">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+        <div style="width:44px; height:44px; border-radius:50%; background:rgba(185,28,28,0.15); color:#B91C1C; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <i data-lucide="x-circle" style="width:24px; height:24px;"></i>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso);">Mark Table Unavailable</h3>
+          <p style="font-size:0.8rem; color:var(--text-muted);">Notify customer that requested slot is full and suggest alternative times.</p>
+        </div>
+      </div>
+
+      <input type="hidden" id="unavailableResId">
+
+      <div class="form-group-ref" style="margin-bottom:1.5rem;">
+        <label class="form-label-ref">Reason / Alternative Time Suggestion *</label>
+        <textarea id="unavailableAdminNote" rows="3" class="form-textarea-ref" placeholder="e.g. Fully booked at 07:30 PM due to peak evening rush. Available alternative times: 06:00 PM or 09:15 PM. Please call +1 (555) 234-5678."></textarea>
+      </div>
+
+      <div style="display:flex; gap:0.75rem;">
+        <button type="button" class="btn-brown" style="flex:1; text-align:center; background:#B91C1C;" onclick="submitUnavailableReservation()">❌ Mark Unavailable &amp; Email</button>
+        <button type="button" class="btn-white" onclick="closeUnavailableModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIFORM FOOTER -->
+  <footer class="footer-ref">
+    <div class="container">
+      <div class="footer-bottom-bar" style="border:none; padding:1.5rem 0;">
+        <p>© 2026 Hamza Coffee Shop — Admin Reservation Management Portal.</p>
+        <p><a href="reservations.html" style="color:var(--caramel-accent);">Customer Reservation Form ➔</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+
+  <script>
+    let activeFilter = 'all';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderAdminReservations();
+    });
+
+    function setAdminFilter(cat, btn) {
+      activeFilter = cat;
+      document.querySelectorAll('#filterTabBtns .btn-white').forEach(b => {
+        b.style.background = '#FFFFFF';
+        b.style.color = 'var(--dark-espresso)';
+        b.style.borderColor = 'rgba(59, 35, 23, 0.15)';
+      });
+      btn.style.background = 'var(--caramel-accent)';
+      btn.style.color = '#FFFFFF';
+      btn.style.borderColor = 'var(--caramel-accent)';
+      renderAdminReservations();
+    }
+
+    function renderAdminReservations() {
+      const container = document.getElementById('adminReservationsList');
+      const searchVal = (document.getElementById('adminSearchInput')?.value || '').toLowerCase().trim();
+
+      const reservations = AppState.reservations || [];
+
+      // Update counters
+      const total = reservations.length;
+      const pending = reservations.filter(r => r.status === 'pending').length;
+      const confirmed = reservations.filter(r => r.status === 'confirmed').length;
+      const unavailable = reservations.filter(r => r.status === 'unavailable').length;
+
+      document.getElementById('statTotalCount').textContent = total;
+      document.getElementById('statPendingCount').textContent = pending;
+      document.getElementById('statConfirmedCount').textContent = confirmed;
+      document.getElementById('statUnavailableCount').textContent = unavailable;
+
+      // Filter list
+      let filtered = reservations.filter(r => {
+        const matchesFilter = activeFilter === 'all' || r.status === activeFilter;
+        const matchesSearch = r.name.toLowerCase().includes(searchVal) ||
+                              r.email.toLowerCase().includes(searchVal) ||
+                              r.id.toLowerCase().includes(searchVal) ||
+                              (r.phone || '').toLowerCase().includes(searchVal);
+        return matchesFilter && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="background:#FFF; border-radius:16px; padding:4rem 1rem; text-align:center; border:1px solid var(--border-light);">
+            <i data-lucide="inbox" style="width:48px; height:48px; opacity:0.3; color:var(--caramel-accent); margin-bottom:1rem;"></i>
+            <h3 style="font-family:var(--font-heading); margin-bottom:0.4rem;">No Reservation Requests Found</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">There are no table booking requests matching the current filter "${activeFilter}".</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(res => {
+        let statusBadgeHtml = `<span style="background:rgba(212,123,34,0.15); color:#D47B22; padding:0.35rem 0.85rem; border-radius:999px; font-weight:800; font-size:0.78rem;">⏳ PENDING REVIEW</span>`;
+        if (res.status === 'confirmed') {
+          statusBadgeHtml = `<span style="background:rgba(46,125,50,0.15); color:#2E7D32; padding:0.35rem 0.85rem; border-radius:999px; font-weight:800; font-size:0.78rem;">✅ CONFIRMED — ${res.tableNum || 'Table Assigned'}</span>`;
+        } else if (res.status === 'unavailable') {
+          statusBadgeHtml = `<span style="background:rgba(185,28,28,0.15); color:#B91C1C; padding:0.35rem 0.85rem; border-radius:999px; font-weight:800; font-size:0.78rem;">❌ NOT AVAILABLE AT THIS TIME</span>`;
+        }
+
+        return `
+          <div class="form-card-ref" style="background:#FFF; padding:1.5rem; transition:box-shadow 0.2s;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; border-bottom:1px solid var(--border-light); padding-bottom:1rem; margin-bottom:1rem;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Booking Reference</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso);">#${res.id}</h3>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+                ${statusBadgeHtml}
+                <span style="font-size:0.78rem; color:var(--text-muted);">Rec'd: ${new Date(res.createdAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</span>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:1rem; margin-bottom:1.25rem; font-size:0.88rem;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; display:block; margin-bottom:0.25rem;">CUSTOMER DETAILS</span>
+                <div style="font-weight:700; color:var(--dark-espresso); font-size:1rem;">${res.name}</div>
+                <div style="color:var(--text-muted);">📧 ${res.email}</div>
+                <div style="color:var(--text-muted);">📞 ${res.phone}</div>
+              </div>
+
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; display:block; margin-bottom:0.25rem;">RESERVATION DETAILS</span>
+                <div style="font-weight:700; color:var(--caramel-accent);">📅 ${res.date}</div>
+                <div style="font-weight:700; color:var(--dark-espresso);">⏰ ${res.time}</div>
+                <div style="color:var(--text-muted);">👥 Party Size: ${res.guests}</div>
+              </div>
+
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; display:block; margin-bottom:0.25rem;">SPECIAL NOTES / REQUESTS</span>
+                <div style="font-style:italic; color:var(--text-muted); background:var(--bg-cream-light); padding:0.5rem 0.75rem; border-radius:8px; border:1px solid var(--border-light);">
+                  "${res.notes || 'No special notes provided.'}"
+                </div>
+              </div>
+            </div>
+
+            ${res.adminNotes ? `
+              <div style="background:rgba(185,28,28,0.06); border:1px solid rgba(185,28,28,0.2); border-radius:10px; padding:0.75rem 1rem; margin-bottom:1.25rem; font-size:0.85rem; color:#B91C1C;">
+                <strong>Admin Note to Customer:</strong> ${res.adminNotes}
+              </div>
+            ` : ''}
+
+            <!-- ADMIN ACTION BUTTONS -->
+            <div style="display:flex; justify-content:flex-end; gap:0.75rem; border-top:1px solid var(--border-light); padding-top:1rem; flex-wrap:wrap;">
+              <button class="btn-brown" style="background:#2E7D32; padding:0.5rem 1.1rem; font-size:0.82rem;" onclick="openApproveModal('${res.id}')">
+                <i data-lucide="check" style="width:16px;"></i> Approve &amp; Send Confirmation Email
+              </button>
+              <button class="btn-brown" style="background:#B91C1C; padding:0.5rem 1.1rem; font-size:0.82rem;" onclick="openUnavailableModal('${res.id}')">
+                <i data-lucide="x" style="width:16px;"></i> Mark Not Available &amp; Notify
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    /* Modal Action Triggers */
+    function openApproveModal(resId) {
+      document.getElementById('approveResId').value = resId;
+      const res = AppState.reservations.find(r => r.id === resId);
+      if (res) {
+        document.getElementById('assignTableNum').value = res.tableNum || `Table #${Math.floor(1 + Math.random()*20)} (Window Lounge)`;
+        document.getElementById('approveAdminNote').value = `Your table for ${res.guests} on ${res.date} at ${res.time} is reserved. See you soon!`;
+      }
+      document.getElementById('approveModal').classList.add('open');
+    }
+
+    function closeApproveModal() {
+      document.getElementById('approveModal').classList.remove('open');
+    }
+
+    function submitApproveReservation() {
+      const resId = document.getElementById('approveResId').value;
+      const tableNum = document.getElementById('assignTableNum').value.trim() || 'Table Assigned';
+      const adminNote = document.getElementById('approveAdminNote').value.trim();
+
+      AppState.updateReservationStatus(resId, 'confirmed', tableNum, adminNote);
+
+      const res = AppState.reservations.find(r => r.id === resId);
+      closeApproveModal();
+      renderAdminReservations();
+
+      showToast(`✅ Table ${tableNum} assigned! Confirmation email sent to ${res ? res.email : 'customer'}`);
+    }
+
+    function openUnavailableModal(resId) {
+      document.getElementById('unavailableResId').value = resId;
+      const res = AppState.reservations.find(r => r.id === resId);
+      if (res) {
+        document.getElementById('unavailableAdminNote').value = `Unfortunately, our café is fully booked at ${res.time} on ${res.date}. Recommended available times: 30-45 minutes earlier or later. Please select a custom time on our form or call +1 (555) 234-5678.`;
+      }
+      document.getElementById('unavailableModal').classList.add('open');
+    }
+
+    function closeUnavailableModal() {
+      document.getElementById('unavailableModal').classList.remove('open');
+    }
+
+    function submitUnavailableReservation() {
+      const resId = document.getElementById('unavailableResId').value;
+      const adminNote = document.getElementById('unavailableAdminNote').value.trim();
+
+      AppState.updateReservationStatus(resId, 'unavailable', '', adminNote);
+
+      const res = AppState.reservations.find(r => r.id === resId);
+      closeUnavailableModal();
+      renderAdminReservations();
+
+      showToast(`❌ Marked unavailable. Notification email sent to ${res ? res.email : 'customer'}`, "info");
+    }
+  </script>
+</body>
+</html>
