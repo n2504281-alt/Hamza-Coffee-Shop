@@ -234,11 +234,7 @@
 
       if (!grid || !BLOG_DATA) return;
 
-      // Skip index 0 (featured hero) for grid display if 'all' filter is active and no search
       let articles = BLOG_DATA;
-      if (activeBlogCategory === 'all' && !searchVal) {
-        articles = BLOG_DATA.slice(1);
-      }
 
       let filtered = articles.filter(b => {
         const matchesCategory = activeBlogCategory === 'all' || b.category === activeBlogCategory;
@@ -262,7 +258,7 @@
       }
 
       grid.innerHTML = filtered.map(b => `
-        <div class="card-ref reveal" style="display:flex; flex-direction:column; background:#FFF; border-radius:16px; overflow:hidden; border:1px solid var(--border-light); box-shadow:0 4px 18px rgba(0,0,0,0.05); transition:transform 0.3s, box-shadow 0.3s;">
+        <div class="card-ref" style="display:flex; flex-direction:column; background:#FFFFFF; border-radius:16px; overflow:hidden; border:1px solid var(--border-light); box-shadow:0 4px 18px rgba(0,0,0,0.06); transition:transform 0.3s, box-shadow 0.3s;">
           <div class="card-img-wrap" style="height:210px; overflow:hidden; position:relative;">
             <img src="${b.image}" alt="${b.title}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
             <span style="position:absolute; top:12px; left:12px; background:rgba(26,14,7,0.85); backdrop-filter:blur(4px); color:var(--caramel-accent); padding:0.25rem 0.65rem; border-radius:999px; font-size:0.72rem; font-weight:800; text-transform:uppercase;">
