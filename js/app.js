@@ -282,4 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
   AppState.updateWishlistBadges();
   renderOpenStatusWidgets();
   initScrollReveal();
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
 });
