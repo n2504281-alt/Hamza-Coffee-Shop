@@ -970,10 +970,12 @@
 /* --------------------------------------------------------------------------
    12. MASTER PERFECT FOOTER (CUSTOM DESIGNED & CRAFTED)
    -------------------------------------------------------------------------- */
-.master-footer-ref {
+.master-footer-ref,
+.footer-ref {
   background-color: #1A0E07;
   color: #FAF4EB;
   padding-top: 4rem;
+  padding-bottom: 0;
 
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
