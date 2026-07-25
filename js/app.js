@@ -277,11 +277,43 @@ function initScrollReveal() {
   revealElements.forEach(el => observer.observe(el));
 }
 
+/* --------------------------------------------------------------------------
+   NEWSLETTER SUPABASE SUBMISSION HANDLER
+   -------------------------------------------------------------------------- */
+async function handleNewsletterSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  const emailInput = form.querySelector('input[type="email"]');
+  if (!emailInput || !emailInput.value) return;
+
+  const email = emailInput.value.trim();
+  if (window.subscribeSupabaseNewsletter) {
+    const res = await window.subscribeSupabaseNewsletter(email);
+    if (res && res.alreadySubscribed) {
+      showToast('You are already subscribed to the Coffee Club!', 'info');
+    } else {
+      showToast('Welcome to the Coffee Club! Check your inbox for your 10% discount code.');
+    }
+  } else {
+    showToast('Welcome to the Coffee Club! Check your inbox for your 10% discount code.');
+  }
+
+  form.reset();
+}
+
+window.handleNewsletterSubmit = handleNewsletterSubmit;
+
 document.addEventListener('DOMContentLoaded', () => {
   AppState.updateCartBadges();
   AppState.updateWishlistBadges();
   renderOpenStatusWidgets();
   initScrollReveal();
+
+  // Attach newsletter handlers
+  document.querySelectorAll('.newsletter-form').forEach(form => {
+    form.addEventListener('submit', handleNewsletterSubmit);
+  });
+
   if (typeof lucide !== 'undefined') {
     lucide.createIcons();
   }

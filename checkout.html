@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
@@ -300,25 +302,35 @@
       document.getElementById('coTotal').textContent = `$${AppState.getCartTotal().toFixed(2)}`;
     }
 
-    function handlePlaceOrder(e) {
+    async function handlePlaceOrder(e) {
       e.preventDefault();
-      const orderNumber = `#HCS-${Math.floor(10000 + Math.random() * 90000)}`;
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Processing Order...';
+      }
+      const orderNumber = `HCS-${Math.floor(10000 + Math.random() * 90000)}`;
+      const payMethodInput = document.querySelector('input[name="payMethod"]:checked');
       const activeOrder = {
         orderNumber,
-        customerName: document.getElementById('custName').value,
+        name: document.getElementById('custName').value,
         phone: document.getElementById('custPhone').value,
         email: document.getElementById('custEmail').value,
         branch: document.getElementById('checkoutBranch').value,
         pickupTime: document.getElementById('checkoutTime').value,
-        paymentMethod: document.querySelector('input[name="payMethod"]:checked').value,
+        paymentMethod: payMethodInput ? payMethodInput.value : 'cash',
         items: [...AppState.cart],
         subtotal: AppState.getCartSubtotal(),
         discount: AppState.getCartDiscount(),
         tax: AppState.getCartTax(),
         total: AppState.getCartTotal(),
         createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        status: "Received"
+        status: "Pending"
       };
+
+      if (window.createSupabaseOrder) {
+        await window.createSupabaseOrder(activeOrder);
+      }
 
       AppState.activeOrder = activeOrder;
       localStorage.setItem('hcs_active_order', JSON.stringify(activeOrder));

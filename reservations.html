@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
@@ -324,7 +326,7 @@
       return `${formattedHours}:${minutes} ${ampm}`;
     }
 
-    function handleReservationSubmit(e) {
+    async function handleReservationSubmit(e) {
       e.preventDefault();
       const name = document.getElementById('resName').value.trim();
       const phone = document.getElementById('resPhone').value.trim();
@@ -350,6 +352,10 @@
         adminNotes: '',
         createdAt: new Date().toISOString()
       };
+
+      if (window.createSupabaseReservation) {
+        await window.createSupabaseReservation(newRes);
+      }
 
       AppState.addReservation(newRes);
 
