@@ -146,14 +146,14 @@
   </main>
 
   <!-- Modal Confirmation -->
-  <div id="resModal" class="cart-overlay" style="display:none; align-items:center; justify-content:center;">
-    <div class="form-card-ref" style="max-width:440px; text-align:center;">
-      <div style="width:56px; height:56px; border-radius:50%; background:rgba(46,125,50,0.15); color:#2E7D32; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem auto; font-size:1.8rem;">
+  <div id="resModal" class="modal-overlay">
+    <div class="form-card-ref" style="max-width:460px; text-align:center; width:100%; box-shadow:0 20px 50px rgba(0,0,0,0.4);">
+      <div style="width:60px; height:60px; border-radius:50%; background:rgba(46,125,50,0.15); color:#2E7D32; display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem auto; font-size:2rem; font-weight:800;">
         ✓
       </div>
-      <h2 style="font-family:var(--font-heading); margin-bottom:0.5rem; color:var(--dark-espresso);">Table Reserved!</h2>
-      <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;" id="resModalBody"></p>
-      <button class="btn-brown" onclick="closeResModal()">Done</button>
+      <h2 style="font-family:var(--font-heading); margin-bottom:0.75rem; color:var(--dark-espresso); font-size:1.75rem; font-weight:800;">Table Reserved!</h2>
+      <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6; margin-bottom:1.75rem;" id="resModalBody"></p>
+      <button class="btn-brown" style="width:100%; text-align:center;" onclick="closeResModal()">Done &amp; Close</button>
     </div>
   </div>
 
@@ -235,12 +235,23 @@
       const guests = document.getElementById('resGuests').value;
 
       document.getElementById('resModalBody').textContent = `We look forward to hosting you, ${name}! Your table for ${guests} is confirmed on ${date} at ${time}.`;
-      document.getElementById('resModal').style.display = 'flex';
+      document.getElementById('resModal').classList.add('open');
+      if (typeof showToast === 'function') {
+        showToast('Table Reservation Confirmed!');
+      }
     }
 
     function closeResModal() {
-      document.getElementById('resModal').style.display = 'none';
+      document.getElementById('resModal').classList.remove('open');
       document.getElementById('reservationForm').reset();
+      const dateInput = document.getElementById('resDate');
+      if (dateInput) {
+        dateInput.value = new Date().toISOString().split('T')[0];
+      }
+      const timeInput = document.getElementById('resTime');
+      if (timeInput) {
+        timeInput.value = '14:00';
+      }
     }
   </script>
 </body>
