@@ -108,14 +108,16 @@
               <input type="date" required id="resDate" class="form-input-ref">
             </div>
             <div class="form-group-ref">
-              <label class="form-label-ref">Time *</label>
-              <select id="resTime" required class="form-select-ref">
-                <option value="09:00 AM">09:00 AM</option>
-                <option value="11:30 AM">11:30 AM</option>
-                <option value="02:00 PM">02:00 PM</option>
-                <option value="05:00 PM">05:00 PM</option>
-                <option value="07:30 PM">07:30 PM</option>
-              </select>
+              <label class="form-label-ref">Reservation Time (Select or Type Manually) *</label>
+              <input type="time" required id="resTime" class="form-input-ref" style="margin-bottom:0.4rem;">
+              <div style="display:flex; gap:0.35rem; flex-wrap:wrap; align-items:center;">
+                <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Presets:</span>
+                <button type="button" class="btn-white" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="setPresetTime('09:00')">09:00 AM</button>
+                <button type="button" class="btn-white" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="setPresetTime('11:30')">11:30 AM</button>
+                <button type="button" class="btn-white" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="setPresetTime('14:00')">02:00 PM</button>
+                <button type="button" class="btn-white" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="setPresetTime('17:30')">05:30 PM</button>
+                <button type="button" class="btn-white" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="setPresetTime('20:00')">08:00 PM</button>
+              </div>
             </div>
           </div>
 
@@ -191,16 +193,50 @@
   <script src="js/navbar.js"></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      const dateInput = document.getElementById('resDate');
+      if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.value = today;
+        dateInput.min = today;
+      }
+      const timeInput = document.getElementById('resTime');
+      if (timeInput && !timeInput.value) {
+        timeInput.value = '14:00';
+      }
+    });
+
+    function setPresetTime(val) {
+      const timeInput = document.getElementById('resTime');
+      if (timeInput) timeInput.value = val;
+    }
+
+    function formatTime12h(timeStr) {
+      if (!timeStr) return '';
+      if (timeStr.includes('AM') || timeStr.includes('PM')) return timeStr;
+      const parts = timeStr.split(':');
+      if (parts.length < 2) return timeStr;
+      let hours = parseInt(parts[0], 10);
+      const minutes = parts[1];
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
+      const formattedHours = hours < 10 ? '0' + hours : hours;
+      return `${formattedHours}:${minutes} ${ampm}`;
+    }
+
     function handleReservationSubmit(e) {
       e.preventDefault();
       const name = document.getElementById('resName').value;
       const date = document.getElementById('resDate').value;
-      const time = document.getElementById('resTime').value;
+      const rawTime = document.getElementById('resTime').value;
+      const time = formatTime12h(rawTime);
       const guests = document.getElementById('resGuests').value;
+
       document.getElementById('resModalBody').textContent = `We look forward to hosting you, ${name}! Your table for ${guests} is confirmed on ${date} at ${time}.`;
       document.getElementById('resModal').style.display = 'flex';
     }
+
     function closeResModal() {
       document.getElementById('resModal').style.display = 'none';
       document.getElementById('reservationForm').reset();
