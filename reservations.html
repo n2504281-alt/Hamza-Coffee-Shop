@@ -147,13 +147,9 @@
 
   <!-- Modal Confirmation -->
   <div id="resModal" class="modal-overlay">
-    <div class="form-card-ref" style="max-width:460px; text-align:center; width:100%; box-shadow:0 20px 50px rgba(0,0,0,0.4);">
-      <div style="width:60px; height:60px; border-radius:50%; background:rgba(46,125,50,0.15); color:#2E7D32; display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem auto; font-size:2rem; font-weight:800;">
-        ✓
-      </div>
-      <h2 style="font-family:var(--font-heading); margin-bottom:0.75rem; color:var(--dark-espresso); font-size:1.75rem; font-weight:800;">Table Reserved!</h2>
-      <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6; margin-bottom:1.75rem;" id="resModalBody"></p>
-      <button class="btn-brown" style="width:100%; text-align:center;" onclick="closeResModal()">Done &amp; Close</button>
+    <div class="form-card-ref" style="max-width:520px; text-align:left; width:100%; box-shadow:0 25px 60px rgba(0,0,0,0.5); padding:2rem;">
+      <div id="resModalContent"></div>
+      <button class="btn-brown" style="width:100%; text-align:center; margin-top:1.5rem;" onclick="closeResModal()">Done &amp; Close</button>
     </div>
   </div>
 
@@ -228,16 +224,99 @@
 
     function handleReservationSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('resName').value;
+      const name = document.getElementById('resName').value.trim();
+      const phone = document.getElementById('resPhone').value.trim();
+      const email = document.getElementById('resEmail').value.trim();
       const date = document.getElementById('resDate').value;
       const rawTime = document.getElementById('resTime').value;
       const time = formatTime12h(rawTime);
       const guests = document.getElementById('resGuests').value;
 
-      document.getElementById('resModalBody').textContent = `We look forward to hosting you, ${name}! Your table for ${guests} is confirmed on ${date} at ${time}.`;
+      const refNum = `HCS-${Math.floor(100000 + Math.random() * 900000)}`;
+      const hour = parseInt((rawTime || '14:00').split(':')[0], 10);
+      const isPeakBusy = (hour >= 19 && hour <= 21);
+
+      const modalContent = document.getElementById('resModalContent');
+
+      if (isPeakBusy) {
+        // High Demand Slot Notice + Status Email Sent
+        modalContent.innerHTML = `
+          <div style="text-align:center; margin-bottom:1.25rem;">
+            <div style="width:60px; height:60px; border-radius:50%; background:rgba(184,104,27,0.15); color:var(--caramel-accent); display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem auto;">
+              <i data-lucide="mail-check" style="width:30px; height:30px;"></i>
+            </div>
+            <h2 style="font-family:var(--font-heading); color:var(--dark-espresso); font-size:1.5rem; font-weight:800; margin-bottom:0.3rem;">Slot Busy — Status Email Sent!</h2>
+            <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.5;">Requested time slot (<strong>${time}</strong>) is currently at peak capacity. A status update has been sent to your email.</p>
+          </div>
+
+          <div style="background:var(--bg-cream-light); border:1px solid rgba(184,104,27,0.3); border-radius:14px; padding:1.1rem; font-size:0.86rem; color:var(--dark-espresso);">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:0.6rem; margin-bottom:0.6rem;">
+              <div>
+                <span style="font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; font-weight:700; display:block;">Confirmation Email Sent To</span>
+                <strong style="color:var(--caramel-accent);">${email}</strong>
+              </div>
+              <span style="font-size:0.72rem; background:rgba(184,104,27,0.15); color:var(--caramel-accent); padding:0.2rem 0.5rem; border-radius:6px; font-weight:800;">Ref: #${refNum}</span>
+            </div>
+            <p style="margin-bottom:0.4rem; line-height:1.5;">Dear <strong>${name}</strong>,</p>
+            <p style="margin-bottom:0.6rem; line-height:1.5; color:var(--text-muted);">
+              Thank you for choosing Hamza Coffee Shop. Due to high table occupancy at <strong>${time} on ${date}</strong>, our host team is reviewing table layouts for <strong>${guests}</strong>.
+            </p>
+            <div style="background:#FFF; padding:0.65rem; border-radius:8px; border:1px solid var(--border-light); margin-bottom:0.6rem;">
+              <strong style="display:block; font-size:0.78rem; color:var(--dark-espresso); margin-bottom:0.25rem;">Suggested Instant Alternate Slots:</strong>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <span style="font-size:0.75rem; background:var(--bg-cream); color:var(--dark-espresso); padding:0.18rem 0.45rem; border-radius:4px; font-weight:700;">☕ 06:15 PM (Available)</span>
+                <span style="font-size:0.75rem; background:var(--bg-cream); color:var(--dark-espresso); padding:0.18rem 0.45rem; border-radius:4px; font-weight:700;">☕ 09:30 PM (Available)</span>
+              </div>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted);">Please check your email inbox to confirm your preferred slot or call +1 (555) 234-5678.</p>
+          </div>
+        `;
+      } else {
+        // Table Confirmed + Email Dispatched
+        modalContent.innerHTML = `
+          <div style="text-align:center; margin-bottom:1.25rem;">
+            <div style="width:60px; height:60px; border-radius:50%; background:rgba(46,125,50,0.15); color:#2E7D32; display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem auto;">
+              <i data-lucide="check-circle-2" style="width:32px; height:32px;"></i>
+            </div>
+            <h2 style="font-family:var(--font-heading); color:var(--dark-espresso); font-size:1.5rem; font-weight:800; margin-bottom:0.3rem;">Table Reserved &amp; Email Sent!</h2>
+            <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.5;">Your table booking is confirmed! An official confirmation email has been dispatched to <strong>${email}</strong>.</p>
+          </div>
+
+          <div style="background:var(--bg-cream-light); border:1px solid rgba(46,125,50,0.3); border-radius:14px; padding:1.1rem; font-size:0.86rem; color:var(--dark-espresso);">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:0.6rem; margin-bottom:0.6rem;">
+              <div>
+                <span style="font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; font-weight:700; display:block;">Confirmation Email Dispatched To</span>
+                <strong style="color:#2E7D32;">${email}</strong>
+              </div>
+              <span style="font-size:0.72rem; background:rgba(46,125,50,0.15); color:#2E7D32; padding:0.2rem 0.5rem; border-radius:6px; font-weight:800;">Ref: #${refNum}</span>
+            </div>
+            <p style="margin-bottom:0.4rem; line-height:1.5;">Dear <strong>${name}</strong>,</p>
+            <p style="margin-bottom:0.6rem; line-height:1.5; color:var(--text-muted);">
+              Your table for <strong>${guests}</strong> on <strong>${date} at ${time}</strong> has been locked and reserved at Hamza Coffee Shop.
+            </p>
+            <div style="background:#FFF; padding:0.65rem; border-radius:8px; border:1px solid var(--border-light); margin-bottom:0.6rem;">
+              <div style="display:flex; justify-content:space-between; font-size:0.78rem; margin-bottom:0.25rem;">
+                <span style="color:var(--text-muted);">Guest Name:</span>
+                <strong>${name}</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.78rem; margin-bottom:0.25rem;">
+                <span style="color:var(--text-muted);">Phone Number:</span>
+                <strong>${phone}</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.78rem;">
+                <span style="color:var(--text-muted);">Assigned Area:</span>
+                <strong style="color:var(--caramel-accent);">Table #${Math.floor(1 + Math.random()*20)} (Window Lounge)</strong>
+              </div>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted);">Please present this confirmation email upon arrival. We look forward to serving you!</p>
+          </div>
+        `;
+      }
+
+      lucide.createIcons();
       document.getElementById('resModal').classList.add('open');
       if (typeof showToast === 'function') {
-        showToast('Table Reservation Confirmed!');
+        showToast(`Confirmation email sent to ${email}`);
       }
     }
 
