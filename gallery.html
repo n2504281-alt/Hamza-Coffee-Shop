@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery — Hamza Coffee Shop</title>
+  <title>Gallery Showcase — Hamza Coffee Shop</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -78,56 +78,132 @@
     <!-- PAGE HEADER -->
     <section class="page-header-banner">
       <div class="container">
-        <h1 class="page-header-title">Café Photo Gallery</h1>
-        <p class="page-header-subtitle">A glimpse into our daily coffee crafting, cozy atmosphere, and freshly baked delicacies.</p>
+        <h1 class="page-header-title">Café Gallery Showcase</h1>
+        <p class="page-header-subtitle">Explore 12 signature artisan coffee portraits, fresh French pastries, and cozy café lounge aesthetics.</p>
       </div>
     </section>
 
+    <!-- MAIN GALLERY SECTION WITH SIDEBAR & CAROUSEL TOGGLE -->
     <section class="container" style="padding-bottom:5rem;">
-      <!-- Filter Category Buttons -->
-      <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:2.5rem;">
-        <button class="btn-white active" onclick="filterGallery('all', this)">All Photos</button>
-        <button class="btn-white" onclick="filterGallery('coffee', this)">Coffee Brews</button>
-        <button class="btn-white" onclick="filterGallery('food', this)">French Pastries</button>
-        <button class="btn-white" onclick="filterGallery('cafe', this)">Café Atmosphere</button>
-      </div>
 
-      <!-- Bounded 220px Gallery Grid -->
-      <div id="galleryGrid" class="gallery-grid-ref">
-        <div class="gallery-card-ref" data-cat="coffee" onclick="openLightbox('images/hero_coffee.png', 'Artisan Espresso Latte')">
-          <img src="images/hero_coffee.png" alt="Coffee">
-          <div class="gallery-overlay-ref">
-            <h4 style="font-family:var(--font-heading); font-size:1rem;">Artisan Latte Art</h4>
-            <span style="font-size:0.75rem; color:var(--caramel-accent);">Click to View</span>
-          </div>
+      <!-- TOOLBAR: VIEW MODES & SEARCH -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:2rem; background:#FFFFFF; padding:1.25rem; border-radius:16px; border:1px solid var(--border-light); box-shadow:0 4px 16px rgba(0,0,0,0.04);">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <span style="font-weight:800; color:var(--dark-espresso); font-size:0.95rem;">View Mode:</span>
+          <button id="viewGridBtn" class="btn-white active" onclick="switchViewMode('grid')" style="background:var(--caramel-accent); color:#FFF; border-color:var(--caramel-accent);">
+            <i data-lucide="grid" style="width:16px; vertical-align:middle;"></i> Grid View
+          </button>
+          <button id="viewCarouselBtn" class="btn-white" onclick="switchViewMode('carousel')">
+            <i data-lucide="sliders" style="width:16px; vertical-align:middle;"></i> Carousel Slideshow
+          </button>
         </div>
 
-        <div class="gallery-card-ref" data-cat="coffee" onclick="openLightbox('images/iced_coffee.png', 'Iced Caramel Macchiato')">
-          <img src="images/iced_coffee.png" alt="Iced Coffee">
-          <div class="gallery-overlay-ref">
-            <h4 style="font-family:var(--font-heading); font-size:1rem;">Iced Caramel Macchiato</h4>
-            <span style="font-size:0.75rem; color:var(--caramel-accent);">Click to View</span>
-          </div>
-        </div>
-
-        <div class="gallery-card-ref" data-cat="food" onclick="openLightbox('images/pastry_croissant.png', 'Fresh French Butter Croissants')">
-          <img src="images/pastry_croissant.png" alt="Pastry">
-          <div class="gallery-overlay-ref">
-            <h4 style="font-family:var(--font-heading); font-size:1rem;">Butter Croissants</h4>
-            <span style="font-size:0.75rem; color:var(--caramel-accent);">Click to View</span>
-          </div>
-        </div>
-
-        <div class="gallery-card-ref" data-cat="cafe" onclick="openLightbox('images/cafe_interior.png', 'Luxury Café Interior')">
-          <img src="images/cafe_interior.png" alt="Interior">
-          <div class="gallery-overlay-ref">
-            <h4 style="font-family:var(--font-heading); font-size:1rem;">Luxury Café Interior</h4>
-            <span style="font-size:0.75rem; color:var(--caramel-accent);">Click to View</span>
-          </div>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <span id="galleryCounterBadge" style="font-size:0.82rem; background:var(--bg-cream-light); color:var(--caramel-accent); padding:0.4rem 0.8rem; border-radius:999px; font-weight:800; border:1px solid var(--border-light);">
+            Showing 12 Portraits
+          </span>
         </div>
       </div>
+
+      <!-- CAROUSEL SHOWCASE (VISIBLE IN CAROUSEL MODE OR TOGGLED) -->
+      <div id="carouselSection" class="gallery-carousel-wrap" style="display:none;">
+        <div id="carouselSlideContainer"></div>
+
+        <!-- Carousel Navigation Controls -->
+        <button onclick="prevSlide()" style="position:absolute; left:15px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:#FFF; border:none; width:44px; height:44px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); z-index:10;">
+          <i data-lucide="chevron-left" style="width:24px; height:24px;"></i>
+        </button>
+        <button onclick="nextSlide()" style="position:absolute; right:15px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:#FFF; border:none; width:44px; height:44px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); z-index:10;">
+          <i data-lucide="chevron-right" style="width:24px; height:24px;"></i>
+        </button>
+
+        <!-- Carousel Indicators -->
+        <div id="carouselDots" style="position:absolute; bottom:15px; left:50%; transform:translateX(-50%); display:flex; gap:6px; z-index:10;"></div>
+      </div>
+
+      <!-- MAIN LAYOUT GRID: SIDEBAR FILTERS + PORTRAIT CARDS GRID -->
+      <div class="gallery-layout-grid">
+        
+        <!-- SIDEBAR FILTERS -->
+        <aside class="gallery-sidebar-ref">
+          <h3 class="gallery-sidebar-title">
+            <i data-lucide="filter" style="width:16px; color:var(--caramel-accent); vertical-align:middle;"></i> Categories
+          </h3>
+          <div class="gallery-filter-list">
+            <button class="gallery-filter-item active" onclick="filterGalleryCategory('all', this)">
+              <span>All Items</span>
+              <small style="opacity:0.7;">12</small>
+            </button>
+            <button class="gallery-filter-item" onclick="filterGalleryCategory('coffee', this)">
+              <span>☕ Espresso &amp; Brews</span>
+              <small style="opacity:0.7;">4</small>
+            </button>
+            <button class="gallery-filter-item" onclick="filterGalleryCategory('cold', this)">
+              <span>🥤 Cold Brews &amp; Teas</span>
+              <small style="opacity:0.7;">4</small>
+            </button>
+            <button class="gallery-filter-item" onclick="filterGalleryCategory('pastry', this)">
+              <span>🥐 French Pastries</span>
+              <small style="opacity:0.7;">2</small>
+            </button>
+            <button class="gallery-filter-item" onclick="filterGalleryCategory('cafe', this)">
+              <span>✨ Café Vibe &amp; Roastery</span>
+              <small style="opacity:0.7;">2</small>
+            </button>
+          </div>
+
+          <h3 class="gallery-sidebar-title">
+            <i data-lucide="dollar-sign" style="width:16px; color:var(--caramel-accent); vertical-align:middle;"></i> Price Range
+          </h3>
+          <div class="gallery-filter-list">
+            <button class="gallery-filter-item active" onclick="filterGalleryPrice('all', this)">
+              <span>All Prices</span>
+            </button>
+            <button class="gallery-filter-item" onclick="filterGalleryPrice('under5', this)">
+              <span>Under $5.00</span>
+            </button>
+            <button class="gallery-filter-item" onclick="filterGalleryPrice('5to7', this)">
+              <span>$5.00 — $7.00</span>
+            </button>
+            <button class="gallery-filter-item" onclick="filterGalleryPrice('above7', this)">
+              <span>$7.00+</span>
+            </button>
+          </div>
+
+          <div style="background:var(--bg-cream-light); padding:1rem; border-radius:12px; border:1px solid var(--border-light); text-align:center;">
+            <i data-lucide="coffee" style="color:var(--caramel-accent); margin-bottom:0.4rem;"></i>
+            <h4 style="font-family:var(--font-heading); font-size:0.95rem; margin-bottom:0.25rem;">Fresh Daily Roasted</h4>
+            <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.75rem;">All drinks crafted with 100% organic single-origin Arabica beans.</p>
+            <a href="order.html" class="btn-brown" style="width:100%; display:block; padding:0.5rem; font-size:0.8rem;">Order Ahead</a>
+          </div>
+        </aside>
+
+        <!-- PORTRAIT GALLERY CARDS GRID -->
+        <div>
+          <div id="galleryGrid" class="gallery-grid-ref"></div>
+        </div>
+      </div>
+
     </section>
   </main>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="modal-overlay" onclick="closeLightbox()">
+    <div style="text-align:center; max-width:650px; width:100%; padding:1rem;" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="" style="max-width:100%; max-height:65vh; object-fit:contain; border-radius:16px; box-shadow:0 20px 50px rgba(0,0,0,0.6); margin-bottom:1rem;">
+      <div id="lightboxBody" style="background:#FFF; padding:1.25rem; border-radius:16px; text-align:left; color:var(--dark-espresso);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <h3 id="lightboxTitle" style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--dark-espresso);"></h3>
+          <span id="lightboxPrice" style="font-family:var(--font-heading); font-size:1.2rem; font-weight:800; color:var(--caramel-accent);"></span>
+        </div>
+        <p id="lightboxDesc" style="color:var(--text-muted); font-size:0.88rem; line-height:1.5; margin-bottom:1rem;"></p>
+        <div style="display:flex; gap:0.75rem;">
+          <button id="lightboxOrderBtn" class="btn-brown" style="flex:1; text-align:center;">🛒 Order This Item</button>
+          <button class="btn-white" onclick="closeLightbox()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- UNIFORM FOOTER -->
   <footer class="footer-ref">
@@ -137,75 +213,391 @@
           <h4 class="footer-brand-title">Hamza Coffee Shop</h4>
           <p class="footer-brand-desc">Savor the Perfect Brew. Luxury café experiences, hand-poured lattes, and golden pastries brewed with passion.</p>
         </div>
-
         <div>
           <h4 class="footer-column-title">Quick Links</h4>
           <div class="footer-links-list">
-            <a href="index.html">Home</a>
-            <a href="menu.html">Menu</a>
-            <a href="story.html">Our Story</a>
-            <a href="gallery.html">Gallery</a>
+            <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="story.html">Our Story</a><a href="gallery.html">Gallery</a>
           </div>
         </div>
-
         <div>
           <h4 class="footer-column-title">Customer Care</h4>
           <div class="footer-links-list">
-            <a href="faq.html">FAQ</a>
-            <a href="reservations.html">Book a Table</a>
-            <a href="contact.html">Contact Us</a>
+            <a href="faq.html">FAQ</a><a href="reservations.html">Book a Table</a><a href="contact.html">Contact Us</a>
           </div>
         </div>
-
         <div>
           <h4 class="footer-column-title">Join Coffee Club</h4>
-          <form onsubmit="event.preventDefault(); showToast('Subscribed to Newsletter!');" style="display:flex; gap:0.5rem;">
+          <form onsubmit="event.preventDefault(); showToast('Subscribed!');" style="display:flex; gap:0.5rem;">
             <input type="email" placeholder="Your email" required class="form-input-ref" style="padding:0.5rem; font-size:0.85rem;">
             <button type="submit" class="btn-brown">Join</button>
           </form>
         </div>
       </div>
-
-      <div class="footer-bottom-bar">
-        <p>© 2026 Hamza Coffee Shop. All rights reserved.</p>
-      </div>
+      <div class="footer-bottom-bar"><p>© 2026 Hamza Coffee Shop. All rights reserved.</p></div>
     </div>
   </footer>
-
-  <!-- Lightbox Modal -->
-  <div id="lightbox" class="cart-overlay" style="display:none; align-items:center; justify-content:center;" onclick="closeLightbox()">
-    <div style="text-align:center; max-width:600px;" onclick="event.stopPropagation()">
-      <img id="lightboxImg" src="" style="max-width:90vw; max-height:70vh; border-radius:var(--radius-card); box-shadow:0 10px 40px rgba(0,0,0,0.6);">
-      <div id="lightboxCaption" style="font-family:var(--font-heading); font-size:1.1rem; color:#FFF; margin-top:1rem;"></div>
-    </div>
-  </div>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
   <script src="js/navbar.js"></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
-    function filterGallery(cat, btn) {
-      document.querySelectorAll('section button.btn-white').forEach(b => {
-        b.style.background = '#FFFFFF';
-        b.style.color = 'var(--dark-espresso)';
-        b.style.borderColor = 'rgba(59, 35, 23, 0.15)';
+    // 12 PORTRAIT ITEMS GALLERY DATA
+    const GALLERY_ITEMS = [
+      {
+        id: "prod-1",
+        title: "Artisan Latte Art",
+        category: "coffee",
+        categoryName: "ESPRESSO",
+        price: 5.50,
+        priceStr: "$5.50",
+        rating: "4.9",
+        image: "images/hero_coffee.png",
+        desc: "Hand-poured double espresso with silky microfoam and caramelized honey undertones."
+      },
+      {
+        id: "prod-2",
+        title: "Iced Caramel Macchiato",
+        category: "cold",
+        categoryName: "COLD BREW",
+        price: 6.25,
+        priceStr: "$6.25",
+        rating: "4.8",
+        image: "images/iced_coffee.png",
+        desc: "Fresh espresso over cold velvety whole milk & Madagascar vanilla, drizzled with golden caramel."
+      },
+      {
+        id: "prod-3",
+        title: "French Butter Croissant",
+        category: "pastry",
+        categoryName: "PASTRY",
+        price: 4.50,
+        priceStr: "$4.50",
+        rating: "4.9",
+        image: "images/pastry_croissant.png",
+        desc: "Flaky 81-layer French butter croissant baked fresh every morning at dawn."
+      },
+      {
+        id: "prod-4",
+        title: "Pour-Over Chemex Reserve",
+        category: "coffee",
+        categoryName: "POUR-OVER",
+        price: 5.75,
+        priceStr: "$5.75",
+        rating: "5.0",
+        image: "images/gallery_pour_over.png",
+        desc: "Single-origin Ethiopian Yirgacheffe hand-brewed in glass Chemex with floral jasmine notes."
+      },
+      {
+        id: "prod-5",
+        title: "Ceremonial Uji Matcha Latte",
+        category: "cold",
+        categoryName: "TEA LATTE",
+        price: 6.50,
+        priceStr: "$6.50",
+        rating: "4.9",
+        image: "images/gallery_matcha_latte.png",
+        desc: "First-harvest Uji Matcha whisked with steamed oat milk and vanilla bean extract."
+      },
+      {
+        id: "prod-6",
+        title: "Luxury Café Lounge Vibe",
+        category: "cafe",
+        categoryName: "ATMOSPHERE",
+        price: 0,
+        priceStr: "Experience",
+        rating: "5.0",
+        image: "images/cafe_interior.png",
+        desc: "Cozy plush velvet seating, warm ambient lighting, acoustic jazz melodies, and ultra-fast Wi-Fi."
+      },
+      {
+        id: "prod-7",
+        title: "Salted Caramel Cold Brew",
+        category: "cold",
+        categoryName: "COLD BREW",
+        price: 5.95,
+        priceStr: "$5.95",
+        rating: "4.9",
+        image: "images/iced_coffee.png",
+        desc: "24-hour cold steeped Arabica topped with sweet cream and sea-salt caramel foam."
+      },
+      {
+        id: "prod-8",
+        title: "Valrhona Chocolate Croissant",
+        category: "pastry",
+        categoryName: "PASTRY",
+        price: 5.25,
+        priceStr: "$5.25",
+        rating: "4.8",
+        image: "images/pastry_croissant.png",
+        desc: "Rich double dark Valrhona chocolate enveloped in buttery flaky French pastry dough."
+      },
+      {
+        id: "prod-9",
+        title: "Velvet Flat White",
+        category: "coffee",
+        categoryName: "ESPRESSO",
+        price: 5.25,
+        priceStr: "$5.25",
+        rating: "4.9",
+        image: "images/hero_coffee.png",
+        desc: "Intense double ristretto shot poured into micro-textured steamed milk."
+      },
+      {
+        id: "prod-10",
+        title: "Live Barista Roastery Bar",
+        category: "cafe",
+        categoryName: "CRAFT BAR",
+        price: 0,
+        priceStr: "Live Craft",
+        rating: "5.0",
+        image: "images/gallery_pour_over.png",
+        desc: "Precision 9-bar pressure extraction unleashing dark cocoa and roasted hazelnut aromas."
+      },
+      {
+        id: "prod-11",
+        title: "Iced Minty Green Tea",
+        category: "cold",
+        categoryName: "ICED TEA",
+        price: 4.95,
+        priceStr: "$4.95",
+        rating: "4.7",
+        image: "images/gallery_matcha_latte.png",
+        desc: "Refreshing cold brewed green tea infused with fresh mint leaves and lemon zest."
+      },
+      {
+        id: "prod-12",
+        title: "Artisan Whole Bean Reserve",
+        category: "coffee",
+        categoryName: "BEANS",
+        price: 18.00,
+        priceStr: "$18.00",
+        rating: "5.0",
+        image: "images/hero_coffee.png",
+        desc: "Whole bean Arabica roasted weekly in small batches for peak aromatic notes."
+      }
+    ];
+
+    let currentCategory = 'all';
+    let currentPriceFilter = 'all';
+    let currentSlideIndex = 0;
+    let activeViewMode = 'grid';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderGalleryGrid();
+      renderCarouselSlides();
+    });
+
+    function switchViewMode(mode) {
+      activeViewMode = mode;
+      const gridBtn = document.getElementById('viewGridBtn');
+      const carouselBtn = document.getElementById('viewCarouselBtn');
+      const carouselSection = document.getElementById('carouselSection');
+
+      if (mode === 'carousel') {
+        carouselSection.style.display = 'block';
+        gridBtn.style.background = '#FFF';
+        gridBtn.style.color = 'var(--dark-espresso)';
+        gridBtn.style.borderColor = 'rgba(59,35,23,0.15)';
+
+        carouselBtn.style.background = 'var(--caramel-accent)';
+        carouselBtn.style.color = '#FFF';
+        carouselBtn.style.borderColor = 'var(--caramel-accent)';
+      } else {
+        carouselSection.style.display = 'none';
+        carouselBtn.style.background = '#FFF';
+        carouselBtn.style.color = 'var(--dark-espresso)';
+        carouselBtn.style.borderColor = 'rgba(59,35,23,0.15)';
+
+        gridBtn.style.background = 'var(--caramel-accent)';
+        gridBtn.style.color = '#FFF';
+        gridBtn.style.borderColor = 'var(--caramel-accent)';
+      }
+    }
+
+    function filterGalleryCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.gallery-sidebar-ref .gallery-filter-list:nth-of-type(1) .gallery-filter-item').forEach(b => {
+        b.classList.remove('active');
       });
-      btn.style.background = 'var(--caramel-accent)';
-      btn.style.color = '#FFFFFF';
-      btn.style.borderColor = 'var(--caramel-accent)';
-      document.querySelectorAll('.gallery-card-ref').forEach(item => {
-        item.style.display = (cat === 'all' || item.getAttribute('data-cat') === cat) ? 'block' : 'none';
+      btn.classList.add('active');
+      renderGalleryGrid();
+    }
+
+    function filterGalleryPrice(priceRange, btn) {
+      currentPriceFilter = priceRange;
+      document.querySelectorAll('.gallery-sidebar-ref .gallery-filter-list:nth-of-type(2) .gallery-filter-item').forEach(b => {
+        b.classList.remove('active');
+      });
+      btn.classList.add('active');
+      renderGalleryGrid();
+    }
+
+    function getFilteredItems() {
+      return GALLERY_ITEMS.filter(item => {
+        const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
+        let matchesPrice = true;
+        if (currentPriceFilter === 'under5') matchesPrice = item.price > 0 && item.price < 5.00;
+        else if (currentPriceFilter === '5to7') matchesPrice = item.price >= 5.00 && item.price <= 7.00;
+        else if (currentPriceFilter === 'above7') matchesPrice = item.price > 7.00;
+        return matchesCategory && matchesPrice;
       });
     }
-    function openLightbox(src, cap) {
-      document.getElementById('lightboxImg').src = src;
-      document.getElementById('lightboxCaption').textContent = cap;
-      document.getElementById('lightbox').style.display = 'flex';
+
+    function renderGalleryGrid() {
+      const container = document.getElementById('galleryGrid');
+      const items = getFilteredItems();
+
+      document.getElementById('galleryCounterBadge').textContent = `Showing ${items.length} Portraits`;
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column:1/-1; background:#FFF; border-radius:16px; padding:3rem 1rem; text-align:center; border:1px solid var(--border-light);">
+            <i data-lucide="image-off" style="width:40px; height:40px; opacity:0.3; color:var(--caramel-accent); margin-bottom:0.75rem;"></i>
+            <h3 style="font-family:var(--font-heading); margin-bottom:0.25rem;">No Items Match Your Filters</h3>
+            <p style="color:var(--text-muted); font-size:0.88rem;">Try selecting a different category or price range filter.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div class="gallery-portrait-card">
+          <div class="gallery-portrait-img-wrap" onclick="openLightbox('${item.id}')">
+            <img src="${item.image}" alt="${item.title}">
+            <span class="gallery-portrait-badge">${item.categoryName}</span>
+            <span class="gallery-portrait-rating">★ ${item.rating}</span>
+          </div>
+
+          <div class="gallery-portrait-body">
+            <div>
+              <h3 class="gallery-portrait-title">${item.title}</h3>
+              <p class="gallery-portrait-desc">${item.desc}</p>
+            </div>
+
+            <div class="gallery-portrait-footer">
+              <span class="gallery-portrait-price">${item.priceStr}</span>
+              <div style="display:flex; gap:0.4rem;">
+                <button class="btn-white" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="openLightbox('${item.id}')" title="Quick View">
+                  <i data-lucide="eye" style="width:14px;"></i> View
+                </button>
+                ${item.price > 0 ? `
+                  <button class="btn-brown" style="padding:0.35rem 0.75rem; font-size:0.75rem;" onclick="orderGalleryItem('${item.id}')">
+                    <i data-lucide="shopping-bag" style="width:14px;"></i> Order
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
     }
+
+    /* CAROUSEL SLIDESHOW LOGIC */
+    function renderCarouselSlides() {
+      const container = document.getElementById('carouselSlideContainer');
+      const dotsContainer = document.getElementById('carouselDots');
+
+      container.innerHTML = GALLERY_ITEMS.map((item, idx) => `
+        <div class="gallery-slide-item ${idx === 0 ? 'active' : ''}" id="slide-${idx}">
+          <img src="${item.image}" alt="${item.title}" class="gallery-slide-img">
+          <div class="gallery-slide-content">
+            <span style="font-size:0.78rem; background:rgba(184,104,27,0.2); color:var(--caramel-accent); padding:0.25rem 0.75rem; border-radius:999px; font-weight:800; width:fit-content; margin-bottom:0.75rem;">
+              ${item.categoryName} • ★ ${item.rating}
+            </span>
+            <h2 style="font-family:var(--font-heading); font-size:2rem; font-weight:800; color:#FFF; margin-bottom:0.75rem;">${item.title}</h2>
+            <p style="color:rgba(255,255,255,0.75); font-size:0.95rem; line-height:1.6; margin-bottom:1.5rem; max-width:440px;">${item.desc}</p>
+            <div style="display:flex; align-items:center; gap:1rem;">
+              <span style="font-family:var(--font-heading); font-size:1.8rem; font-weight:800; color:var(--caramel-accent);">${item.priceStr}</span>
+              ${item.price > 0 ? `
+                <button class="btn-brown" style="padding:0.7rem 1.4rem; font-size:0.9rem;" onclick="orderGalleryItem('${item.id}')">
+                  <i data-lucide="shopping-bag" style="width:16px;"></i> Order Ahead Now
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      dotsContainer.innerHTML = GALLERY_ITEMS.map((_, idx) => `
+        <span onclick="goToSlide(${idx})" style="width:${idx === 0 ? '24px' : '8px'}; height:8px; border-radius:4px; background:${idx === 0 ? 'var(--caramel-accent)' : 'rgba(255,255,255,0.4)'}; cursor:pointer; transition:all 0.3s;" id="dot-${idx}"></span>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function goToSlide(idx) {
+      document.querySelectorAll('.gallery-slide-item').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('#carouselDots span').forEach(d => {
+        d.style.width = '8px';
+        d.style.background = 'rgba(255,255,255,0.4)';
+      });
+
+      currentSlideIndex = idx;
+      const targetSlide = document.getElementById(`slide-${idx}`);
+      const targetDot = document.getElementById(`dot-${idx}`);
+
+      if (targetSlide) targetSlide.classList.add('active');
+      if (targetDot) {
+        targetDot.style.width = '24px';
+        targetDot.style.background = 'var(--caramel-accent)';
+      }
+    }
+
+    function nextSlide() {
+      let nextIdx = (currentSlideIndex + 1) % GALLERY_ITEMS.length;
+      goToSlide(nextIdx);
+    }
+
+    function prevSlide() {
+      let prevIdx = (currentSlideIndex - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
+      goToSlide(prevIdx);
+    }
+
+    /* LIGHTBOX & ORDER ACTIONS */
+    function openLightbox(itemId) {
+      const item = GALLERY_ITEMS.find(i => i.id === itemId);
+      if (!item) return;
+
+      document.getElementById('lightboxImg').src = item.image;
+      document.getElementById('lightboxTitle').textContent = item.title;
+      document.getElementById('lightboxPrice').textContent = item.priceStr;
+      document.getElementById('lightboxDesc').textContent = item.desc;
+
+      const orderBtn = document.getElementById('lightboxOrderBtn');
+      if (item.price > 0) {
+        orderBtn.style.display = 'block';
+        orderBtn.onclick = () => {
+          closeLightbox();
+          orderGalleryItem(item.id);
+        };
+      } else {
+        orderBtn.style.display = 'none';
+      }
+
+      document.getElementById('lightbox').classList.add('open');
+    }
+
     function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    function orderGalleryItem(itemId) {
+      const p = PRODUCTS_DATA.find(x => x.id === itemId) || {
+        id: itemId,
+        name: GALLERY_ITEMS.find(i => i.id === itemId)?.title || 'Artisan Drink',
+        price: GALLERY_ITEMS.find(i => i.id === itemId)?.price || 5.50,
+        image: GALLERY_ITEMS.find(i => i.id === itemId)?.image || 'images/hero_coffee.png'
+      };
+
+      AppState.addToCart(p);
+      if (typeof openCartDrawer === 'function') {
+        openCartDrawer();
+      }
     }
   </script>
 </body>
