@@ -108,17 +108,18 @@
               <input type="date" required id="resDate" class="form-input-ref">
             </div>
             <div class="form-group-ref">
-              <label class="form-label-ref">Reservation Time (Select or Type Manually) *</label>
-              <input type="time" required id="resTime" class="form-input-ref" style="margin-bottom:0.4rem;">
-              <div style="display:flex; gap:0.35rem; flex-wrap:wrap; align-items:center;">
-                <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Presets:</span>
-                <button type="button" class="btn-white" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="setPresetTime('09:00')">09:00 AM</button>
-                <button type="button" class="btn-white" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="setPresetTime('11:30')">11:30 AM</button>
-                <button type="button" class="btn-white" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="setPresetTime('14:00')">02:00 PM</button>
-                <button type="button" class="btn-white" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="setPresetTime('17:30')">05:30 PM</button>
-                <button type="button" class="btn-white" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="setPresetTime('20:00')">08:00 PM</button>
-              </div>
+              <label class="form-label-ref">Reservation Time *</label>
+              <input type="time" required id="resTime" class="form-input-ref">
             </div>
+          </div>
+
+          <div style="display:flex; gap:0.4rem; flex-wrap:wrap; align-items:center; margin-bottom:1.5rem; margin-top:-0.5rem;">
+            <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Quick Presets:</span>
+            <button type="button" class="btn-white" style="padding:0.2rem 0.6rem; font-size:0.75rem;" onclick="setPresetTime('09:00')">09:00 AM</button>
+            <button type="button" class="btn-white" style="padding:0.2rem 0.6rem; font-size:0.75rem;" onclick="setPresetTime('11:30')">11:30 AM</button>
+            <button type="button" class="btn-white" style="padding:0.2rem 0.6rem; font-size:0.75rem;" onclick="setPresetTime('14:00')">02:00 PM</button>
+            <button type="button" class="btn-white" style="padding:0.2rem 0.6rem; font-size:0.75rem;" onclick="setPresetTime('17:30')">05:30 PM</button>
+            <button type="button" class="btn-white" style="padding:0.2rem 0.6rem; font-size:0.75rem;" onclick="setPresetTime('20:00')">08:00 PM</button>
           </div>
 
           <div class="form-group-ref">
