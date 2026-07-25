@@ -183,6 +183,22 @@
     </section>
 
     <!-- ======================================================================
+         FEATURED CRAFT MENU ITEMS (DYNAMIC FROM PRODUCTS_DATA)
+         ====================================================================== -->
+    <section class="container" style="padding: 4.5rem 1.5rem;">
+      <div class="section-header-center reveal">
+        <span class="section-eyebrow">Handcrafted Favorites</span>
+        <h2 class="section-title-dark">Featured Menu Items</h2>
+      </div>
+
+      <div id="homeFeaturedMenuGrid" class="grid-container grid-4-cols" style="margin-top:2.5rem;"></div>
+
+      <div style="text-align:center; margin-top:2.5rem;">
+        <a href="menu.html" class="btn-brown">View Full Menu &amp; Customize</a>
+      </div>
+    </section>
+
+    <!-- ======================================================================
          3. SECTION: OUR STORY & CRAFT HERITAGE (#story)
          ====================================================================== -->
     <section id="story" style="scroll-margin-top: 80px;">
@@ -550,8 +566,33 @@
   <script src="js/navbar.js"></script>
 
   <script>
+    function renderHomeFeaturedMenu() {
+      const container = document.getElementById('homeFeaturedMenuGrid');
+      if (!container || typeof PRODUCTS_DATA === 'undefined') return;
+
+      const featured = PRODUCTS_DATA.slice(0, 4);
+      container.innerHTML = featured.map(prod => `
+        <div class="card-ref">
+          <div class="card-img-wrap">
+            <img src="${prod.image}" alt="${prod.name}">
+            ${prod.badge ? `<span class="card-badge-pill">${prod.badge}</span>` : ''}
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">${prod.name}</h3>
+            <p class="card-desc">${prod.description}</p>
+            <div class="card-footer-flex">
+              <span class="card-price">$${prod.price.toFixed(2)}</span>
+              <a href="product.html?id=${prod.id}" class="btn-brown" style="padding:0.4rem 0.9rem; font-size:0.8rem;">Customize</a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      renderHomeFeaturedMenu();
     });
   </script>
 
