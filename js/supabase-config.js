@@ -1,14 +1,12 @@
 /* ==========================================================================
-   HAMZA COFFEE SHOP — Supabase Backend Integration Client
+   HAMZA COFFEE SHOP — Supabase Backend Integration & Auth Client
    ========================================================================== */
 
-// Default configuration placeholders (Vercel automatically injects env variables)
 const SUPABASE_URL = window.SUPABASE_URL || 'https://your-supabase-project.supabase.co';
 const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || 'your-supabase-anon-key';
 
 let supabaseClient = null;
 
-// Initialize Supabase Client if SDK is loaded
 if (typeof supabase !== 'undefined' && supabase.createClient) {
   try {
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -20,19 +18,117 @@ if (typeof supabase !== 'undefined' && supabase.createClient) {
   console.warn('⚠️ Supabase JS SDK not detected on this page.');
 }
 
-/**
- * Helper to check if Supabase is active and properly connected
- */
 function isSupabaseConfigured() {
   return supabaseClient !== null && SUPABASE_URL.indexOf('your-supabase-project') === -1;
 }
 
+/* --------------------------------------------------------------------------
+   USER AUTHENTICATION (Supabase Auth)
+   -------------------------------------------------------------------------- */
+
 /**
- * Save new customer order to Supabase 'orders' table
+ * Sign up a new user with Email, Password and Full Name metadata
  */
+async function signUpUser(email, password, fullName, phone = '') {
+  if (!isSupabaseConfigured()) {
+    // Local storage fallback for demo
+    const mockUser = { id: 'usr_' + Date.now(), email, name: fullName, phone };
+    localStorage.setItem('hcs_session_user', JSON.stringify(mockUser));
+    return { success: true, isFallback: true, user: mockUser };
+  }
+
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+          phone: phone
+        }
+      }
+    });
+
+    if (error) throw error;
+    if (data.user) {
+      localStorage.setItem('hcs_session_user', JSON.stringify({
+        id: data.user.id,
+        email: data.user.email,
+        name: fullName || data.user.email.split('@')[0],
+        phone
+      }));
+    }
+    return { success: true, data };
+  } catch (err) {
+    console.error('❌ Supabase Sign Up Error:', err.message || err);
+    return { success: false, error: err.message };
+  }
+}
+
+/**
+ * Sign in existing user with Email & Password
+ */
+async function signInUser(email, password) {
+  if (!isSupabaseConfigured()) {
+    const mockUser = { id: 'usr_demo', email, name: email.split('@')[0] };
+    localStorage.setItem('hcs_session_user', JSON.stringify(mockUser));
+    return { success: true, isFallback: true, user: mockUser };
+  }
+
+  try {
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) throw error;
+    if (data.user) {
+      const name = data.user.user_metadata?.full_name || data.user.email.split('@')[0];
+      localStorage.setItem('hcs_session_user', JSON.stringify({
+        id: data.user.id,
+        email: data.user.email,
+        name
+      }));
+    }
+    return { success: true, data };
+  } catch (err) {
+    console.error('❌ Supabase Sign In Error:', err.message || err);
+    return { success: false, error: err.message };
+  }
+}
+
+/**
+ * Sign out current user session
+ */
+async function signOutUser() {
+  localStorage.removeItem('hcs_session_user');
+  if (isSupabaseConfigured()) {
+    try {
+      await supabaseClient.auth.signOut();
+    } catch (e) {
+      console.warn('Sign out warning:', e);
+    }
+  }
+  window.location.href = 'index.html';
+}
+
+/**
+ * Get current session user
+ */
+function getCurrentUser() {
+  const local = localStorage.getItem('hcs_session_user');
+  if (local) {
+    try { return JSON.parse(local); } catch(e){}
+  }
+  return null;
+}
+
+/* --------------------------------------------------------------------------
+   DATABASE FUNCTIONS
+   -------------------------------------------------------------------------- */
+
 async function createSupabaseOrder(orderData) {
   if (!isSupabaseConfigured()) {
-    console.log('ℹ️ Supabase not configured with live keys. Saved to local storage fallback.');
     return { success: true, isFallback: true, id: 'ORD-' + Math.floor(100000 + Math.random() * 900000) };
   }
 
@@ -58,17 +154,13 @@ async function createSupabaseOrder(orderData) {
     if (error) throw error;
     return { success: true, data: data[0] };
   } catch (err) {
-    console.error('❌ Supabase Order Insertion Error:', err.message || err);
+    console.error('❌ Supabase Order Error:', err.message || err);
     return { success: false, error: err.message };
   }
 }
 
-/**
- * Save table reservation to Supabase 'reservations' table
- */
 async function createSupabaseReservation(reservationData) {
   if (!isSupabaseConfigured()) {
-    console.log('ℹ️ Supabase not active. Local fallback used.');
     return { success: true, isFallback: true };
   }
 
@@ -97,104 +189,106 @@ async function createSupabaseReservation(reservationData) {
   }
 }
 
-/**
- * Save newsletter subscriber to Supabase 'newsletter_subscribers' table
- */
 async function subscribeSupabaseNewsletter(email) {
-  if (!isSupabaseConfigured()) {
-    return { success: true, isFallback: true };
-  }
-
+  if (!isSupabaseConfigured()) return { success: true, isFallback: true };
   try {
     const { data, error } = await supabaseClient
       .from('newsletter_subscribers')
-      .insert([{ email: email }]);
-
-    if (error) {
-      if (error.code === '23505') {
-        return { success: true, alreadySubscribed: true };
-      }
-      throw error;
-    }
-    return { success: true, data };
-  } catch (err) {
-    console.error('❌ Supabase Newsletter Error:', err.message || err);
-    return { success: false, error: err.message };
-  }
-}
-
-/**
- * Save contact query to Supabase 'contact_messages' table
- */
-async function sendSupabaseContact(contactData) {
-  if (!isSupabaseConfigured()) {
-    return { success: true, isFallback: true };
-  }
-
-  try {
-    const { data, error } = await supabaseClient
-      .from('contact_messages')
-      .insert([
-        {
-          name: contactData.name,
-          email: contactData.email,
-          subject: contactData.subject || '',
-          message: contactData.message
-        }
-      ]);
-
+      .insert([{ email }]);
+    if (error && error.code === '23505') return { success: true, alreadySubscribed: true };
     if (error) throw error;
     return { success: true, data };
   } catch (err) {
-    console.error('❌ Supabase Contact Error:', err.message || err);
     return { success: false, error: err.message };
   }
 }
 
-/**
- * Fetch all orders for Admin Dashboard
- */
+async function sendSupabaseContact(contactData) {
+  if (!isSupabaseConfigured()) return { success: true, isFallback: true };
+  try {
+    const { data, error } = await supabaseClient
+      .from('contact_messages')
+      .insert([{
+        name: contactData.name,
+        email: contactData.email,
+        subject: contactData.subject || '',
+        message: contactData.message
+      }]);
+    if (error) throw error;
+    return { success: true, data };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+
 async function fetchSupabaseOrders() {
   if (!isSupabaseConfigured()) return null;
-
   try {
     const { data, error } = await supabaseClient
       .from('orders')
       .select('*')
       .order('created_at', { ascending: false });
-
     if (error) throw error;
     return data;
   } catch (err) {
-    console.error('❌ Supabase Fetch Orders Error:', err.message || err);
     return null;
   }
 }
 
-/**
- * Update order status in Admin Dashboard
- */
+async function fetchUserOrders(email) {
+  if (!isSupabaseConfigured()) return null;
+  try {
+    const { data, error } = await supabaseClient
+      .from('orders')
+      .select('*')
+      .eq('customer_email', email)
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return data;
+  } catch (err) {
+    return null;
+  }
+}
+
 async function updateSupabaseOrderStatus(orderId, newStatus) {
   if (!isSupabaseConfigured()) return false;
-
   try {
     const { error } = await supabaseClient
       .from('orders')
       .update({ status: newStatus })
       .eq('id', orderId);
-
     if (error) throw error;
     return true;
   } catch (err) {
-    console.error('❌ Supabase Update Order Status Error:', err.message || err);
     return false;
   }
 }
 
-// Make functions available globally
+// Auto update Navbar Account Button Text on Load
+document.addEventListener('DOMContentLoaded', () => {
+  const currentUser = getCurrentUser();
+  const navBtns = document.querySelectorAll('.nav-account-btn');
+  navBtns.forEach(btn => {
+    if (currentUser) {
+      btn.href = 'account.html';
+      btn.innerHTML = `<i data-lucide="user-check" style="width:16px;"></i> ${currentUser.name || 'Account'}`;
+    } else {
+      btn.href = 'login.html';
+      btn.innerHTML = `<i data-lucide="user" style="width:16px;"></i> Sign In`;
+    }
+  });
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+});
+
+// Global exports
+window.signUpUser = signUpUser;
+window.signInUser = signInUser;
+window.signOutUser = signOutUser;
+window.getCurrentUser = getCurrentUser;
 window.createSupabaseOrder = createSupabaseOrder;
 window.createSupabaseReservation = createSupabaseReservation;
 window.subscribeSupabaseNewsletter = subscribeSupabaseNewsletter;
 window.sendSupabaseContact = sendSupabaseContact;
 window.fetchSupabaseOrders = fetchSupabaseOrders;
+window.fetchUserOrders = fetchUserOrders;
 window.updateSupabaseOrderStatus = updateSupabaseOrderStatus;
