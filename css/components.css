@@ -1217,6 +1217,9 @@
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
 /* Blog Article Typography & Lead Formatting */
 .blog-body-content p {
   margin-bottom: 1.4rem;
@@ -1262,13 +1265,13 @@
    -------------------------------------------------------------------------- */
 .master-footer-ref,
 .footer-ref {
-  background-color: #1A0E07;
+  background: linear-gradient(180deg, #1C0F08 0%, #120A05 100%);
   color: #FAF4EB;
-  padding-top: 4rem;
+  padding-top: 4.5rem;
   padding-bottom: 0;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(184, 104, 27, 0.3);
   position: relative;
+  overflow: hidden;
 }
 
 /* Newsletter Section Inside Footer */
